@@ -1,21 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 
-import Header from "../components/base/Header";
-import Footer from "../components/base/Footer";
-import CardList from "../components/template/CardList";
-
-function Main() {
+function HackathonRegist() {
   return (
     <Wrapper>
-      <Header />
-      <CardList></CardList>
-      <Footer />
+      <Title>title</Title>
+      <Img>img</Img>
+      <Contents>
+        <div>모집인원</div>
+        <div>설명</div>
+      </Contents>
     </Wrapper>
   );
 }
 
-export default Main;
+export default HackathonRegist;
 
 const Wrapper = styled.div`
   display: grid;
@@ -24,12 +23,24 @@ const Wrapper = styled.div`
   grid-template-rows: 25px 185px 30px auto 25px 25px;
   grid-template-areas:
     " . . ."
-    "nav nav nav"
+    "title title title"
     " . . . "
-    "sidebar-a main sidebar-b"
+    "img img img"
     " . . . "
     "footer footer footer";
   max-width: 96%;
   min-height: 100vh;
   margin: 0 auto;
+`;
+
+const Contents = styled.div`
+  grid-area: main;
+`;
+
+const Title = styled.div`
+  grid-area: title;
+`;
+
+const Img = styled.div`
+  grid-area: img;
 `;

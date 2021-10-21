@@ -1,21 +1,24 @@
 import React from "react";
 import styled from "styled-components";
 
-import Header from "../components/base/Header";
-import Footer from "../components/base/Footer";
-import CardList from "../components/template/CardList";
-
-function Main() {
+function HackathonRegist() {
   return (
     <Wrapper>
-      <Header />
-      <CardList></CardList>
-      <Footer />
+      <RegistForm>
+        <div>title</div>
+        <input></input>
+        <div>img</div>
+        <input></input>
+        <div>모집인원</div>
+        <input></input>
+        <div>설명</div>
+        <input></input>
+      </RegistForm>
     </Wrapper>
   );
 }
 
-export default Main;
+export default HackathonRegist;
 
 const Wrapper = styled.div`
   display: grid;
@@ -32,4 +35,8 @@ const Wrapper = styled.div`
   max-width: 96%;
   min-height: 100vh;
   margin: 0 auto;
+`;
+
+const RegistForm = styled.div`
+  grid-area: main;
 `;

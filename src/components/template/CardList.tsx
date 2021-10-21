@@ -24,6 +24,8 @@ export default CardList;
 
 const List = styled.div`
   display: flex;
+  grid-area: main;
+  align-content: stretch;
   background-color: #2d3436;
   flex-wrap: wrap;
   & > div {

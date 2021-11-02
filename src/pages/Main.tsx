@@ -1,35 +1,47 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 
 import Header from "../components/base/Header";
 import Footer from "../components/base/Footer";
-import CardList from "../components/template/CardList";
+import Menu from "../components/base/Menu";
+import CardListPersonContainer from "../container/CardListPersonContainer";
+import CardListHackatonContainer from "../container/CardListHackatonContainer";
 
 function Main() {
+  const [Tab, setTab] = useState(0);
+
+  const changeTab = useCallback((id) => {
+    setTab(id);
+  }, []);
+
   return (
-    <Wrapper>
-      <Header />
-      <CardList></CardList>
+    <>
+      <Content>
+        <Header />
+        <Menu activeTab={Tab} onClick={changeTab} />
+        {Tab === 0 && <CardListPersonContainer />}
+        {Tab === 1 && <CardListHackatonContainer />}
+      </Content>
       <Footer />
-    </Wrapper>
+    </>
   );
 }
 
 export default Main;
 
-const Wrapper = styled.div`
+const Content = styled.div`
   display: grid;
   padding: 1rem;
-  grid-template-columns: 17fr minmax(0, 66fr) 17fr;
-  grid-template-rows: 25px 185px 30px auto 25px 25px;
+  grid-template-columns: minmax(0, 66fr);
+  grid-template-rows: 11rem;
   grid-template-areas:
-    " . . ."
     "nav nav nav"
     " . . . "
-    "sidebar-a main sidebar-b"
+    "menu menu menu"
     " . . . "
-    "footer footer footer";
-  max-width: 96%;
+    "main main main"
+    " . . . ";
+  max-width: 90rem;
   min-height: 100vh;
   margin: 0 auto;
 `;

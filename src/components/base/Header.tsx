@@ -4,7 +4,7 @@ import styled from "styled-components";
 function Header() {
   return (
     <Wrapper>
-      <Title>Hong Jung Wan</Title>
+      <Title>Make Team</Title>
     </Wrapper>
   );
 }
@@ -16,6 +16,7 @@ const Wrapper = styled.div`
   grid-area: nav;
   align-items: center;
   justify-content: center;
+  min-width: max-content;
 `;
 
 const Title = styled.span`

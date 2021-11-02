@@ -3,19 +3,22 @@ import styled from "styled-components";
 
 import Card from "../common/Card";
 
-function CardList() {
+export interface PropTypes {
+  items: {
+    id: number;
+    title: string;
+    content: string;
+  }[];
+}
+
+function CardList({ items }: PropTypes) {
   return (
     <List>
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
+      {items.map((item) => (
+        <Card key={item.id}>
+          <div>{item.id}</div>
+        </Card>
+      ))}
     </List>
   );
 }
@@ -25,6 +28,7 @@ export default CardList;
 const List = styled.div`
   display: flex;
   grid-area: main;
+  justify-content: center;
   align-content: stretch;
   background-color: #2d3436;
   flex-wrap: wrap;

@@ -19,7 +19,7 @@ function Radio({ list, name }: PropTypes) {
                 name={name}
                 value={item}
               ></input>
-                <label htmlFor={`${index}`}>{item.values}</label>
+                <label htmlFor={`${index}`}>{Object.values(item[1])}</label>
             </Wrapper>
           );
         })}

@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-import DatePicker from "../common/DatePicker";
+import Radio from "../common/Radio";
+
+import { INTEREST, SKILL } from "../../constant/input";
 import ImgUpload from "../common/ImgUpload";
 
-function HacktonRegist() {
+function PersonRegist() {
   return (
     <div>
       <RegistForm>
@@ -16,15 +18,27 @@ function HacktonRegist() {
         </ImgWrapper>
         <div>
           <InputWrapper>
-            <div>제목 : </div>
+            <div>이름 : </div>
             <input></input>
           </InputWrapper>
           <InputWrapper>
-            <div>기간 : </div>
-            <DatePicker />
+            <div>활동 구역 : </div>
+            <input></input>
           </InputWrapper>
           <InputWrapper>
-            <div>설명 : </div>
+            <div>자기소개 : </div>
+            <input></input>
+          </InputWrapper>
+          <InputWrapper>
+            <div>보유 기술 스택 : </div>
+            <Radio name="SKILL" list={Object.entries(SKILL)} />
+          </InputWrapper>
+          <InputWrapper>
+            <div>관심 분야 : </div>
+            <Radio name="INTEREST" list={Object.entries(INTEREST)} />
+          </InputWrapper>
+          <InputWrapper>
+            <div>연락처(이메일 , 오픈카톡 등등...) : </div>
             <input></input>
           </InputWrapper>
         </div>
@@ -33,11 +47,11 @@ function HacktonRegist() {
   );
 }
 
-export default HacktonRegist;
+export default PersonRegist;
 
 const RegistForm = styled.div`
-  grid-area: main;
   display: flex;
+  grid-area: main;
 `;
 
 const InputWrapper = styled.div`
@@ -48,8 +62,8 @@ const InputWrapper = styled.div`
 
 const ImgWrapper = styled.div`
   & > div:first-child {
-    height: 43.625rem;
-    width: 33.375rem;
+    height: 12.625rem;
+    width: 13.375rem;
     background-color: green;
     margin: 1rem;
   }

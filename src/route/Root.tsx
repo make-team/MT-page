@@ -6,6 +6,8 @@ import HackathonRegist from "../pages/HackathonRegist";
 import HackathonDetail from "../pages/HackathonDetail";
 import PersonDetail from "../pages/PersonDetail";
 import PersonRegist from "../pages/PersonRegist";
+import TeamDetail from "../pages/TeamDetail";
+import TeamRegist from "../pages/TeamRegist";
 
 function Root() {
   return (
@@ -14,8 +16,8 @@ function Root() {
         <Route exact path="/" component={Main} />
         <Route exact path="/hackathon/regist" component={HackathonRegist} />
         <Route exact path="/hackathon/:id" component={HackathonDetail} />
-        <Route exact path="/team/regist" component={HackathonRegist} />
-        <Route exact path="/team/:id" component={HackathonDetail} />
+        <Route exact path="/team/regist" component={TeamRegist} />
+        <Route exact path="/team/:id" component={TeamDetail} />
         <Route exact path="/person/regist" component={PersonRegist} />
         <Route exact path="/person/:id" component={PersonDetail} />
         <Redirect to="/" />

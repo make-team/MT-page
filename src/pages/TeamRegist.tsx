@@ -1,16 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-import PersonContainer from "../container/regist/PersonContainer";
+import TeamRegistContainer from "../container/regist/TeamContainer";
 
-function HackathonRegist() {
+function TeamRegist() {
   return (
     <Wrapper>
-      <PersonContainer />
+      <TeamRegistContainer />
     </Wrapper>
   );
 }
 
-export default HackathonRegist;
+export default TeamRegist;
 
 const Wrapper = styled.div`
   display: grid;

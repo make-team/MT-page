@@ -1,6 +1,6 @@
 import React from "react";
 
-import CardList from "../components/template/CardList";
+import CardList from "../../components/template/CardList";
 
 const MOCK_PERSON_LIST = [
   {
@@ -45,8 +45,12 @@ const MOCK_PERSON_LIST = [
   },
 ];
 
-function CardListPersonContainer() {
-  return <CardList items={MOCK_PERSON_LIST} />;
+interface PropTypes {
+  toUrl: string;
+}
+
+function CardListPersonContainer({ toUrl }: PropTypes) {
+  return <CardList items={MOCK_PERSON_LIST} add={true} toUrl={toUrl} />;
 }
 
 export default CardListPersonContainer;

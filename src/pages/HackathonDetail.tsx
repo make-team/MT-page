@@ -1,46 +1,55 @@
 import React from "react";
 import styled from "styled-components";
 
-function HackathonRegist() {
+function HackathonDetail() {
   return (
     <Wrapper>
       <Title>title</Title>
-      <Img>img</Img>
       <Contents>
-        <div>모집인원</div>
-        <div>설명</div>
+        <img src="" alt="postImg" />
+        <div>
+          <div>모집 인원 :</div>
+          <div>요구 기술 스택 :</div>
+          <div>설명 :</div>
+          <div>참가 문의:</div>
+        </div>
       </Contents>
     </Wrapper>
   );
 }
 
-export default HackathonRegist;
+export default HackathonDetail;
 
 const Wrapper = styled.div`
   display: grid;
   padding: 1rem;
   grid-template-columns: 17fr minmax(0, 66fr) 17fr;
-  grid-template-rows: 25px 185px 30px auto 25px 25px;
+  grid-template-rows: 3rem auto 25px;
   grid-template-areas:
-    " . . ."
-    "title title title"
-    " . . . "
-    "img img img"
-    " . . . "
-    "footer footer footer";
+    " . title ."
+    " . content ."
+    " . . . ";
   max-width: 96%;
   min-height: 100vh;
   margin: 0 auto;
 `;
 
 const Contents = styled.div`
-  grid-area: main;
+  grid-area: content;
+  display: flex;
+  padding: 1.5rem;
+  & > img {
+    height: 100%;
+    width: 50%;
+  }
+  & > div {
+    flex: 1;
+  }
 `;
 
 const Title = styled.div`
+  display: flex;
   grid-area: title;
-`;
-
-const Img = styled.div`
-  grid-area: img;
+  align-items: center;
+  justify-content: center;
 `;

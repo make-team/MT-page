@@ -9,16 +9,23 @@ export interface PropTypes {
     title: string;
     content: string;
   }[];
+  add?: boolean;
+  toUrl?: string;
 }
 
-function CardList({ items }: PropTypes) {
+function CardList({ items, add, toUrl }: PropTypes) {
   return (
     <List>
       {items.map((item) => (
-        <Card key={item.id}>
+        <Card toUrl={`${toUrl}/${item.id}`} key={item.id}>
           <div>{item.id}</div>
         </Card>
       ))}
+      {add && (
+        <Card toUrl={`${toUrl}/regist`}>
+          <div> 등록하기 </div>
+        </Card>
+      )}
     </List>
   );
 }

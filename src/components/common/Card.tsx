@@ -4,15 +4,12 @@ import styled from "styled-components";
 
 export interface PropTypes {
   children: JSX.Element;
+  toUrl?: string;
 }
 
-function Card({ children }: PropTypes) {
+function Card({ children, toUrl }: PropTypes) {
   const history = useHistory();
-  return (
-    <Wrapper onClick={() => history.push("/Hackathon/Detail")}>
-      {children}
-    </Wrapper>
-  );
+  return <Wrapper onClick={() => history.push(`${toUrl}`)}>{children}</Wrapper>;
 }
 
 export default Card;

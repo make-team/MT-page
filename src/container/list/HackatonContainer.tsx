@@ -1,6 +1,6 @@
 import React from "react";
 
-import CardList from "../components/template/CardList";
+import CardList from "../../components/template/CardList";
 
 const MOCK_HACHATHON_LIST = [
   {
@@ -40,8 +40,12 @@ const MOCK_HACHATHON_LIST = [
   },
 ];
 
-function CardListPersonContainer() {
-  return <CardList items={MOCK_HACHATHON_LIST} />;
+interface PropTypes {
+  toUrl: string;
 }
 
-export default CardListPersonContainer;
+function CardListHackatonContainer({ toUrl }: PropTypes) {
+  return <CardList items={MOCK_HACHATHON_LIST} add={true} toUrl={toUrl} />;
+}
+
+export default CardListHackatonContainer;

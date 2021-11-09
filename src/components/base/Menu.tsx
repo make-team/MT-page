@@ -6,6 +6,9 @@ const MENU = [
     title: "해커톤 목록",
   },
   {
+    title: "팀 목록",
+  },
+  {
     title: "인재 목록",
   },
 ];
@@ -20,7 +23,7 @@ function Menu({ activeTab, onClick }: PropTypes) {
     <Wrapper>
       {MENU.map((item, index) => (
         <ListItem
-          active={activeTab === index ? true : false}
+          data-active={activeTab === index}
           key={item.title}
           onClick={() => onClick(index)}
         >
@@ -42,18 +45,24 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
-const ListItem = styled.div<{ active: boolean }>`
+const ListItem = styled.div`
   flex: 1;
   display: flex;
+  position: relative;
   background-color: black;
   justify-content: center;
   align-items: center;
   height: 100%;
-  position: sticky;
-  top: 0;
   cursor: pointer;
-  &[active="true"] {
-    border-bottom: 1px solid green;
-    font-size: 2rem;
+  &[data-active="true"] {
+    &::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      left: 0;
+      bottom: 0;
+      height: 0.5em;
+      background: #bada55;
+    }
   }
 `;

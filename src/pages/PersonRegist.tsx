@@ -1,24 +1,25 @@
 import React from "react";
 import styled from "styled-components";
 
-function PersonRegist() {
+function HackathonRegist() {
   return (
     <Wrapper>
       <RegistForm>
         <div>이름</div>
         <input></input>
-        <div>나이</div>
+        <div>사용 기술 스택</div>
         <input></input>
-        <div>기술 스택</div>
+        <div>자기소개( 200 자이내)</div>
         <input></input>
-        <div>소개</div>
+        <div>연락처(필수입력)</div>
         <input></input>
       </RegistForm>
+      <button>등록하기</button>
     </Wrapper>
   );
 }
 
-export default PersonRegist;
+export default HackathonRegist;
 
 const Wrapper = styled.div`
   display: grid;

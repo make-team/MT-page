@@ -16,7 +16,7 @@ function CardListHackatonContainer({ toUrl }: PropTypes) {
     const { data } = await list();
     setDataList(
       data.map((item) => ({
-        id: item.id,
+        id: item._id,
         title: item.title,
         description: item.description,
         contact: item.contact,

@@ -8,10 +8,10 @@ function HackathonDetail() {
       <Contents>
         <img src="" alt="postImg" />
         <div>
-          <div>모집 인원 :</div>
-          <div>요구 기술 스택 :</div>
-          <div>설명 :</div>
-          <div>참가 문의:</div>
+          <div>해커톤 제목</div>
+          <div>기간</div>
+          <div>설명</div>
+          <div>담당자 연락처</div>
         </div>
       </Contents>
     </Wrapper>

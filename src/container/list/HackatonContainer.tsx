@@ -1,51 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-import CardList from "../../components/template/CardList";
-
-const MOCK_HACHATHON_LIST = [
-  {
-    id: 1,
-    title: "제목1",
-    content: "내용1",
-  },
-  {
-    id: 2,
-    title: "제목1",
-    content: "내용1",
-  },
-  {
-    id: 3,
-    title: "제목1",
-    content: "내용1",
-  },
-  {
-    id: 4,
-    title: "제목1",
-    content: "내용1",
-  },
-  {
-    id: 5,
-    title: "제목1",
-    content: "내용1",
-  },
-  {
-    id: 6,
-    title: "제목1",
-    content: "내용1",
-  },
-  {
-    id: 7,
-    title: "제목1",
-    content: "내용1",
-  },
-];
+import { list } from "../../api/hackathon";
+import HackathonCard, {
+  Hackathon,
+  PropTypes as CardPropTypes,
+} from "../../components/template/HackathonCard";
 
 interface PropTypes {
   toUrl: string;
 }
 
 function CardListHackatonContainer({ toUrl }: PropTypes) {
-  return <CardList items={MOCK_HACHATHON_LIST} add={true} toUrl={toUrl} />;
+  const [dataList, setDataList] = useState<Hackathon[]>();
+  const updateList = async () => {
+    const { data } = await list();
+    setDataList(
+      data.map((item) => ({
+        id: item.id,
+        title: item.title,
+        description: item.description,
+        contact: item.contact,
+        endTime: new Date(item.end_time),
+        startTime: new Date(item.start_time),
+      }))
+    );
+  };
+
+  console.log(dataList);
+  useEffect(() => {
+    updateList();
+  }, []);
+  return <HackathonCard items={dataList} add={true} toUrl={toUrl} />;
 }
 
 export default CardListHackatonContainer;

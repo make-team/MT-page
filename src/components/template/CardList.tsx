@@ -17,7 +17,7 @@ function CardList({ items, add, toUrl }: PropTypes) {
   return (
     <List>
       {items.map((item) => (
-        <Card toUrl={`${toUrl}/${item.id}`} key={item.id}>
+        <Card toUrl={`${toUrl}/{item.id}`} key={item.id}>
           <div>{item.id}</div>
         </Card>
       ))}

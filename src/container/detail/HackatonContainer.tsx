@@ -45,7 +45,7 @@ interface PropTypes {
 }
 
 function CardListHackatonContainer({ toUrl }: PropTypes) {
-  return <CardList items={MOCK_HACHATHON_LIST} add={true} toUrl={toUrl} />;
+  return <></>;
 }
 
 export default CardListHackatonContainer;

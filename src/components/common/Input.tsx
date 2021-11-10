@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import styled, { css } from "styled-components";
 
-interface Props {}
-
-function Input() {
-  const [value, setValue] = useState("");
-  return <div></div>;
+interface InputStyleTypes {
+  width?: string;
+  height?: string;
+  margin?: string;
 }
 
-export default Input;
+export const Input = styled.input<InputStyleTypes>`
+  ${({ width, height, margin }) => css`
+    width: ${width ?? "100%"};
+    height: ${height ?? "3.25rem"};
+    ${margin && `margin: ${margin};`}
+  `}
+`;

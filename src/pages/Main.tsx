@@ -10,7 +10,6 @@ import CardListTeamContainer from "../container/list/TeamContainer";
 
 function Main() {
   const [Tab, setTab] = useState(0);
-
   const changeTab = useCallback((id) => {
     setTab(id);
   }, []);

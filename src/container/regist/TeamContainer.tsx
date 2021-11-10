@@ -9,7 +9,7 @@ function TeamContainer() {
       <Content>
         <TeamRegist />
       </Content>
-      <SubmitButton />
+      <SubmitButton onCancel={() => {}} onSubmit={() => {}} />
     </Wrapper>
   );
 }

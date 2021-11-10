@@ -16,7 +16,11 @@ function TeamRegist() {
         </InputWrapper>
         <InputWrapper>
           <div>모집 기간 : </div>
-          <DatePicker />
+          <DatePicker
+            endTime={new Date()}
+            startTime={new Date()}
+            onChange={() => {}}
+          />
         </InputWrapper>
         <InputWrapper>
           <div>활동 구역 : </div>

@@ -6,12 +6,16 @@ function PersonDetail() {
     <Wrapper>
       <Title>이름</Title>
       <Contents>
-        <img src="" alt="넣고싶은 이미지" />
+        <img src="" alt="본인 이미지" />
         <div>
           <div>사는 곳 :</div>
+          <div></div>
           <div>사용 기술 :</div>
+          <div></div>
           <div>자기 소개 :</div>
+          <div></div>
           <div>연락처 :</div>
+          <div></div>
         </div>
       </Contents>
     </Wrapper>

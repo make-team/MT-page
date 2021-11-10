@@ -9,7 +9,7 @@ function PersonContainer() {
       <Content>
         <PersonRegist />
       </Content>
-      <SubmitButton />
+      <SubmitButton onCancel={() => {}} onSubmit={() => {}} />
     </Wrapper>
   );
 }

@@ -5,33 +5,36 @@ import { ko } from "date-fns/esm/locale";
 import "react-datepicker/dist/react-datepicker.css";
 import styled from "styled-components";
 
-function DatePicker() {
-  const [startDate, setStartDate] = useState<Date>(new Date());
-  const [endDate, setEndDate] = useState<Date>(new Date());
+export interface PropTypes {
+  onChange: ({ name, value }: { name: string; value: string | Date }) => void;
+  startTime: Date;
+  endTime: Date;
+}
 
-  const changeStartDate = (date: Date) => {
-    setStartDate(date);
+function DatePicker({ startTime, endTime, onChange }: PropTypes) {
+  const changeStartDate = (date: Date, name: string) => {
+    onChange({ name: name, value: date });
   };
 
-  const changeEndDate = (date: Date) => {
-    setEndDate(date);
+  const changeEndDate = (date: Date, name: string) => {
+    onChange({ name: name, value: date });
   };
 
   return (
     <Wrapper>
       <Picker
         dateFormat="yyyy년 MM월 dd일"
-        selected={startDate}
+        selected={startTime}
         locale={ko}
-        onChange={changeStartDate}
+        onChange={(date) => changeStartDate(date as Date, "startTime")}
       />
       ~
       <Picker
         dateFormat="yyyy년 MM월 dd일"
-        selected={endDate}
+        selected={endTime}
         locale={ko}
-        minDate={startDate}
-        onChange={changeEndDate}
+        minDate={startTime}
+        onChange={(date) => changeEndDate(date as Date, "endTime")}
       />
     </Wrapper>
   );

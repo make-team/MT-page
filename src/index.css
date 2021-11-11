@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #2d3436;
+  animation: backgroundC 2s linear infinite Alternate;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -12,4 +12,70 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+@keyframes backgroundC {
+  0% {
+    background: linear-gradient(to right, #192a56, 1%, #130f40);
+  }
+  5% {
+    background: linear-gradient(to right, #192a56, 5%, #130f40);
+  }
+  10% {
+    background: linear-gradient(to right, #192a56, 10%, #130f40);
+  }
+  15% {
+    background: linear-gradient(to right, #192a56, 15%, #130f40);
+  }
+  20% {
+    background: linear-gradient(to right, #192a56, 20%, #130f40);
+  }
+  25% {
+    background: linear-gradient(to right, #192a56, 25%, #130f40);
+  }
+  30% {
+    background: linear-gradient(to right, #192a56, 30%, #130f40);
+  }
+  35% {
+    background: linear-gradient(to right, #192a56, 35%, #130f40);
+  }
+  40% {
+    background: linear-gradient(to right, #192a56, 40%, #130f40);
+  }
+  45% {
+    background: linear-gradient(to right, #192a56, 45%, #130f40);
+  }
+  50% {
+    background: linear-gradient(to right, #192a56, 50%, #130f40);
+  }
+  55% {
+    background: linear-gradient(to right, #192a56, 55%, #130f40);
+  }
+  60% {
+    background: linear-gradient(to right, #192a56, 60%, #130f40);
+  }
+  65% {
+    background: linear-gradient(to right, #192a56, 65%, #130f40);
+  }
+  70% {
+    background: linear-gradient(to right, #192a56, 70%, #130f40);
+  }
+  75% {
+    background: linear-gradient(to right, #192a56, 75%, #130f40);
+  }
+  80% {
+    background: linear-gradient(to right, #192a56, 80%, #130f40);
+  }
+  85% {
+    background: linear-gradient(to right, #192a56, 85%, #130f40);
+  }
+  90% {
+    background: linear-gradient(to right, #192a56, 90%, #130f40);
+  }
+  95% {
+    background: linear-gradient(to right, #192a56, 95%, #130f40);
+  }
+  100% {
+    background: linear-gradient(to right, #192a56, 100%, #130f40);
+  }
 }

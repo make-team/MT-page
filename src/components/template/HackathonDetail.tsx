@@ -2,23 +2,23 @@ import React from "react";
 import styled from "styled-components";
 
 import DatePicker from "../common/DatePicker";
-import ImgUpload from "../common/ImgUpload";
 import { Input } from "../common/Input";
 
-export interface HackathonRegist {
+export interface Hackathon {
   title: string;
   description: string;
   contact: string;
   endTime: Date;
   startTime: Date;
+  hit: number;
 }
 
 export interface PropTypes {
-  contents: HackathonRegist;
+  contents: Hackathon;
   onChange: ({ name, value }: { name: string; value: string | Date }) => void;
 }
 
-function HacktonRegist({ contents, onChange }: PropTypes) {
+function HackathonDetail({ contents, onChange }: PropTypes) {
   const contentsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     onChange({ name, value });
@@ -28,21 +28,10 @@ function HacktonRegist({ contents, onChange }: PropTypes) {
     <RegistForm>
       <ImgWrapper>
         <div>img</div>
-        <InputWrapper>
-          <ImgUpload onChange={() => {}} />
-        </InputWrapper>
       </ImgWrapper>
       <div>
         <InputWrapper>
-          <div>제목 : </div>
-          <Input
-            name="title"
-            value={contents.title}
-            onChange={contentsChange}
-          ></Input>
-        </InputWrapper>
-        <InputWrapper>
-          <div>기간 : </div>
+          <div>모집 기간 : </div>
           <DatePicker
             onChange={onChange}
             endTime={contents.endTime}
@@ -70,11 +59,13 @@ function HacktonRegist({ contents, onChange }: PropTypes) {
   );
 }
 
-export default HacktonRegist;
+export default HackathonDetail;
 
 const RegistForm = styled.div`
   grid-area: main;
   display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const InputWrapper = styled.div`
@@ -84,10 +75,8 @@ const InputWrapper = styled.div`
 `;
 
 const ImgWrapper = styled.div`
-  & > div:first-child {
-    height: 50vh;
-    width: 40vh;
-    background-color: green;
-    margin: 1rem;
-  }
+  height: 50vh;
+  width: 40vh;
+  background-color: green;
+  margin: 1rem;
 `;

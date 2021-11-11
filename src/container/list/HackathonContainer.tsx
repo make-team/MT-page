@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { list } from "../../api/hackathon";
 import HackathonCard, {
   Hackathon,
-  PropTypes as CardPropTypes,
 } from "../../components/template/HackathonCard";
 
 interface PropTypes {
@@ -26,7 +25,6 @@ function CardListHackatonContainer({ toUrl }: PropTypes) {
     );
   };
 
-  console.log(dataList);
   useEffect(() => {
     updateList();
   }, []);

@@ -1,11 +1,17 @@
 import React from "react";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
+
 import HacktonContainer from "../container/regist/HacktonContainer";
 
 function HackathonRegist() {
+  const history = useHistory();
+  const goBackClick = () => {
+    history.goBack();
+  };
   return (
     <Wrapper>
-      <HacktonContainer />
+      <HacktonContainer onCancel={goBackClick} />
     </Wrapper>
   );
 }

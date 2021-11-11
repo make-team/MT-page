@@ -8,8 +8,12 @@ import SubmitButton from "../../components/template/SubmitButton";
 
 import { regist } from "../../api/hackathon";
 
-function HacktonContainer() {
-  const [contents, setContents] = useState({
+export interface PropTypes {
+  onCancel: () => void;
+}
+
+function HacktonContainer({ onCancel }: PropTypes) {
+  const [contents, setContents] = useState<HackathonRegist>({
     title: "",
     description: "",
     contact: "",
@@ -32,13 +36,14 @@ function HacktonContainer() {
     bodyData.append("end_time", `${contents.endTime.getTime()}`);
     bodyData.append("start_time", `${contents.startTime.getTime()}`);
     await regist({ bodyData });
+    onCancel();
   };
   return (
     <Wrapper>
       <Content>
         <HacktonRegist contents={contents} onChange={changeContents} />
       </Content>
-      <SubmitButton onCancel={() => {}} onSubmit={onRegist} />
+      <SubmitButton onCancel={onCancel} onSubmit={onRegist} />
     </Wrapper>
   );
 }
@@ -51,4 +56,6 @@ const Wrapper = styled.div`
 
 const Content = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
 `;

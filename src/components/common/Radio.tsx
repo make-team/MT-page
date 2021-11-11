@@ -4,9 +4,10 @@ import styled from "styled-components";
 interface PropTypes {
   name: "INTEREST" | "SKILL" | "JOB";
   list: [string, string][];
+  onChange: (value: number) => void;
 }
 
-function Radio({ list, name }: PropTypes) {
+function Radio({ list, name, onChange }: PropTypes) {
   return (
     <>
       {list &&
@@ -18,6 +19,7 @@ function Radio({ list, name }: PropTypes) {
                 id={`${index}`}
                 name={name}
                 value={item}
+                onChange={() => onChange(index)}
               ></input>
                 <label htmlFor={`${index}`}>{Object.values(item[1])}</label>
             </Wrapper>

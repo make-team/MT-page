@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Header from "../components/base/Header";
 import Footer from "../components/base/Footer";
 import Menu from "../components/base/Menu";
-import CardListHackatonContainer from "../container/list/HackatonContainer";
+import CardListHackatonContainer from "../container/list/HackathonContainer";
 import CardListPersonContainer from "../container/list/PersonContainer";
 import CardListTeamContainer from "../container/list/TeamContainer";
 

@@ -31,11 +31,19 @@ function PersonRegist() {
           </InputWrapper>
           <InputWrapper>
             <div>보유 기술 스택 : </div>
-            <Radio name="SKILL" list={Object.entries(SKILL)} />
+            <Radio
+              name="SKILL"
+              list={Object.entries(SKILL)}
+              onChange={() => {}}
+            />
           </InputWrapper>
           <InputWrapper>
             <div>관심 분야 : </div>
-            <Radio name="INTEREST" list={Object.entries(INTEREST)} />
+            <Radio
+              name="INTEREST"
+              list={Object.entries(INTEREST)}
+              onChange={() => {}}
+            />
           </InputWrapper>
           <InputWrapper>
             <div>연락처(이메일 , 오픈카톡 등등...) : </div>

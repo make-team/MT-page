@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import DatePicker from "../common/DatePicker";
 import { Input } from "../common/Input";
@@ -15,17 +15,18 @@ export interface Hackathon {
 
 export interface PropTypes {
   contents: Hackathon;
+  modifyStatus: boolean;
   onChange: ({ name, value }: { name: string; value: string | Date }) => void;
 }
 
-function HackathonDetail({ contents, onChange }: PropTypes) {
+function HackathonDetail({ contents, modifyStatus, onChange }: PropTypes) {
   const contentsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     onChange({ name, value });
   };
 
   return (
-    <RegistForm>
+    <RegistForm modifyStatus={modifyStatus}>
       <ImgWrapper>
         <div>img</div>
       </ImgWrapper>
@@ -61,11 +62,14 @@ function HackathonDetail({ contents, onChange }: PropTypes) {
 
 export default HackathonDetail;
 
-const RegistForm = styled.div`
-  grid-area: main;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+const RegistForm = styled.div<{ modifyStatus: boolean }>`
+  ${({ modifyStatus }) => css`
+    grid-area: main;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: ${modifyStatus ? "auto" : "none"};
+  `}
 `;
 
 const InputWrapper = styled.div`

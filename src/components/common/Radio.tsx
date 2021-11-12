@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 
 interface PropTypes {
-  name: "INTEREST" | "SKILL" | "JOB";
+  name: string;
   list: [string, string][];
-  onChange: (value: number) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 function Radio({ list, name, onChange }: PropTypes) {
@@ -19,7 +19,7 @@ function Radio({ list, name, onChange }: PropTypes) {
                 id={`${index}`}
                 name={name}
                 value={item}
-                onChange={() => onChange(index)}
+                onChange={onChange}
               ></input>
                 <label htmlFor={`${index}`}>{Object.values(item[1])}</label>
             </Wrapper>

@@ -1,4 +1,4 @@
-export const SKILL = {
+export const FIELD = {
   0: "프론트 엔드",
   1: "백 엔드",
   2: "전략 기획",

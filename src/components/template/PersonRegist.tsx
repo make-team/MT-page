@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import Radio from "../common/Radio";
 
-import { INTEREST, SKILL } from "../../constant/input";
+import { INTEREST, FIELD } from "../../constant/input";
 import ImgUpload from "../common/ImgUpload";
 
 function PersonRegist() {
@@ -32,8 +32,8 @@ function PersonRegist() {
           <InputWrapper>
             <div>보유 기술 스택 : </div>
             <Radio
-              name="SKILL"
-              list={Object.entries(SKILL)}
+              name="FIELD"
+              list={Object.entries(FIELD)}
               onChange={() => {}}
             />
           </InputWrapper>

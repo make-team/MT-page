@@ -33,3 +33,10 @@ export const regist = ({ bodyData }: { bodyData: FormData }) =>
 
 export const remove = (id: number) =>
   axios.delete(`${BASE_URL}/hackathon/${id}`);
+
+export const modify = ({ bodyData }: { bodyData: FormData }, id: number) =>
+  axios.put(`${BASE_URL}/hackathon/${id}`, bodyData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });

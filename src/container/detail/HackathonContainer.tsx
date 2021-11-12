@@ -1,16 +1,20 @@
 import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 
-import { detail } from "../../api/hackathon";
+import { detail, remove, modify } from "../../api/hackathon";
+import StickyMenu from "../../components/common/StickyMenu";
 import HackathonDetail, {
   Hackathon,
+  PropTypes as HackathonPropTypes,
 } from "../../components/template/HackathonDetail";
 
 interface PropTypes {
   id: string;
+  onBack: () => void;
 }
 
-function HackathonContainer({ id }: PropTypes) {
+function HackathonContainer({ id, onBack }: PropTypes) {
+  const [modifyStatus, setModifyStatus] = useState<boolean>(false);
   const [detailData, setDetailData] = useState<Hackathon>({
     title: "",
     description: "",
@@ -19,6 +23,31 @@ function HackathonContainer({ id }: PropTypes) {
     startTime: new Date(),
     hit: 0,
   });
+
+  const deleteHackathon = () => {
+    remove(+id);
+  };
+
+  const modifyHackathon = () => {
+    setModifyStatus((prev) => !prev);
+  };
+
+  const changeContents = useCallback<HackathonPropTypes["onChange"]>(
+    ({ name, value }) => {
+      setDetailData({ ...detailData, [name]: value });
+    },
+    [detailData]
+  );
+
+  const onModify = async () => {
+    let bodyData = new FormData();
+    bodyData.append("title", detailData.title);
+    bodyData.append("description", detailData.description);
+    bodyData.append("contact", detailData.contact);
+    bodyData.append("end_time", `${detailData.endTime.getTime()}`);
+    bodyData.append("start_time", `${detailData.startTime.getTime()}`);
+    await modify({ bodyData }, +id);
+  };
 
   const updateDetail = useCallback(async () => {
     const { data } = await detail(+id);
@@ -39,7 +68,18 @@ function HackathonContainer({ id }: PropTypes) {
   return (
     <Contents>
       <Title>{detailData.title}</Title>
-      <HackathonDetail contents={detailData} onChange={() => {}} />
+      <HackathonDetail
+        contents={detailData}
+        onChange={changeContents}
+        modifyStatus={modifyStatus}
+      />
+      <StickyMenu
+        onBack={onBack}
+        onDelete={deleteHackathon}
+        onModify={modifyHackathon}
+        onSubmitModify={onModify}
+        modifyStatus={modifyStatus}
+      />
     </Contents>
   );
 }

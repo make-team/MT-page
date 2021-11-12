@@ -4,43 +4,37 @@ import styled from "styled-components";
 import DatePicker from "../common/DatePicker";
 import Radio from "../common/Radio";
 
-import { SKILL, JOB, INTEREST } from "../../constant/input";
+import { FIELD } from "../../constant/input";
 
 function TeamRegist() {
   const [addActive, setAddActive] = useState<Boolean>(false);
   const [team, setTeam] = useState([{}]);
-  const [job, setJob] = useState<number>(0);
-  const [skill, setSkill] = useState<number>(0);
-  const [interest, setInterest] = useState<number>(0);
+  const [teamContents, setTeamContents] = useState({
+    field: 0,
+    skill: "",
+    count: 0,
+  });
 
   const ClickTeamAdd = () => {
     setAddActive((prev) => !prev);
   };
 
   const submitAddTeam = ({
-    job,
+    field,
     skill,
-    interest,
+    count,
   }: {
-    job?: keyof typeof JOB;
-    skill?: keyof typeof SKILL;
-    interest?: keyof typeof INTEREST;
+    field: number;
+    skill: string;
+    count: number;
   }) => {
-    setTeam((prev) => [
-      ...prev,
-      { job: typeof JOB, skill: typeof SKILL, interest: typeof INTEREST },
-    ]);
+    setTeam((prev) => [...prev, { skill, field, count }]);
     setAddActive(false);
   };
 
-  const changeSkill = (value: number) => {
-    setJob(value);
-  };
-  const changeJob = (value: number) => {
-    setSkill(value);
-  };
-  const changeInterest = (value: number) => {
-    setInterest(value);
+  const changeTeamContents = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setTeamContents(prev => ...prev, [name]: value);
   };
   return (
     <div>
@@ -64,36 +58,32 @@ function TeamRegist() {
         {addActive && (
           <AddTeamWrapper>
             <InputWrapper>
-              <div>직업 : </div>
+              <div> 모집 분야 : </div>
               <Radio
-                name="JOB"
-                list={Object.entries(JOB)}
-                onChange={changeJob}
+                name="field"
+                list={Object.entries(FIELD)}
+                onChange={changeTeamContents}
               />
             </InputWrapper>
             <InputWrapper>
-              <div>요구 기술 스택 : </div>
-              <Radio
-                name="SKILL"
-                list={Object.entries(SKILL)}
-                onChange={changeSkill}
-              />
+              <div>요구 기술 : </div>
+              <input
+                name="skill"
+                onChange={changeTeamContents}
+                placeholder="ex) java, react"
+              ></input>
             </InputWrapper>
             <InputWrapper>
-              <div>관심사 : </div>
-              <Radio
-                name="INTEREST"
-                list={Object.entries(INTEREST)}
-                onChange={changeInterest}
-              />
+              <div>모집 인원 : </div>
+              <input
+                name="count"
+                onChange={changeTeamContents}
+                placeholder="숫자만 입력 가능합니다"
+              ></input>
             </InputWrapper>
             <button
               onClick={() =>
-                submitAddTeam({
-                  job: 1,
-                  skill: 1,
-                  interest: 1,
-                })
+                submitAddTeam(teamContents)
               }
             >
               추가하기
@@ -135,4 +125,5 @@ const AddTeamWrapper = styled.div`
   background-color: black;
   border: 1px solid greenyellow;
   margin-bottom: 1rem;
+  padding: 1rem;
 `;

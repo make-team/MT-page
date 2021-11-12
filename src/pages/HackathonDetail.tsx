@@ -2,9 +2,9 @@ import React from "react";
 import { useLocation } from "react-router";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import StickyMenu from "../components/common/StickyMenu";
 
 import HackathonContainer from "../container/detail/HackathonContainer";
+import HackathonTeamContainer from "../container/detail/HackathonTeamContainer";
 
 function HackathonDetail() {
   const location = useLocation();
@@ -17,8 +17,8 @@ function HackathonDetail() {
 
   return (
     <Wrapper>
-      <HackathonContainer id={id[2]} />
-      <StickyMenu onBack={goBackClick} />
+      <HackathonContainer id={id[2]} onBack={goBackClick} />
+      <HackathonTeamContainer toUrl={" "} />
     </Wrapper>
   );
 }
@@ -29,11 +29,11 @@ const Wrapper = styled.div`
   display: grid;
   padding: 1rem;
   grid-template-columns: 17fr minmax(0, 66fr) 17fr;
-  grid-template-rows: 3rem auto 25px;
+  grid-template-rows: 3rem auto auto;
   grid-template-areas:
     " . title ."
     " side content ."
-    " . . . ";
+    " . list . ";
   max-width: 96%;
   min-height: 100vh;
   margin: 0 auto;

@@ -1,19 +1,22 @@
 import React from "react";
 import styled from "styled-components";
+import { FIELD } from "../../constant/input";
 
 import Card from "../common/Card";
 
-export interface Hackathon {
+export interface Team {
   id: number;
-  title: string;
+  hackathonId: number;
+  name: string;
   description: string;
   contact: string;
   startTime: Date;
   endTime: Date;
+  recruiment: { field: keyof typeof FIELD; skill: string; count: number }[];
 }
 
 export interface PropTypes {
-  items?: Hackathon[];
+  items?: Team[];
   add?: boolean;
   toUrl?: string;
 }
@@ -33,7 +36,7 @@ function TeamCard({ items, add, toUrl }: PropTypes) {
               <Contents>
                 <div>
                   <h3>참여 해커톤 : </h3>
-                  <h3>{item.title}</h3>
+                  <h3>{item.name}</h3>
                 </div>
                 <div>
                   <div>팀 설명 : </div>
@@ -51,26 +54,16 @@ function TeamCard({ items, add, toUrl }: PropTypes) {
                 </div>
                 <div>모집 팀원 : </div>
                 <PersonList>
-                  <div>
-                    <div>프론트</div>
-                    <div>2명</div>
-                    <div>react</div>
-                  </div>
-                  <div>
-                    <div>백</div>
-                    <div>2명</div>
-                    <div>pyhon</div>
-                  </div>
-                  <div>
-                    <div>디자이너</div>
-                    <div>2명</div>
-                    <div>디자인툴</div>
-                  </div>
-                  <div>
-                    <div>기획자</div>
-                    <div>2명</div>
-                    <div>기획기획</div>
-                  </div>
+                  {item.recruiment &&
+                    item.recruiment.map((item) => {
+                      return (
+                        <div>
+                          <div>모집 분야 : {FIELD[item.field]}</div>
+                          <div>요구 기술 : {item.skill}</div>
+                          <div>요구 인원 : {item.count}</div>
+                        </div>
+                      );
+                    })}
                 </PersonList>
               </Contents>
             </CardContentWrapper>
@@ -123,7 +116,7 @@ const PersonList = styled.div`
   & > div {
     border: 1px solid greenyellow;
     height: 4rem;
-    width: 7rem;
+    width: 12rem;
     margin-right: 0.5rem;
   }
 `;

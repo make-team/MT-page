@@ -1,56 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-import TeamCard from "../../components/template/TeamCard";
+import TeamCard, { Team } from "../../components/template/TeamCard";
 
-const MOCK_HACHATHON_LIST = [
-  {
-    id: 1,
-    title: "1",
-    description: "설명",
-    contact: "연ㄹ갗",
-    startTime: new Date(),
-    endTime: new Date(),
-  },
-  {
-    id: 2,
-    title: "2",
-    description: "설명",
-    contact: "연ㄹ갗",
-    startTime: new Date(),
-    endTime: new Date(),
-  },
-  {
-    id: 3,
-    title: "3",
-    description: "설명",
-    contact: "연ㄹ갗",
-    startTime: new Date(),
-    endTime: new Date(),
-  },
-  {
-    id: 4,
-    title: "4",
-    description: "설명",
-    contact: "연ㄹ갗",
-    startTime: new Date(),
-    endTime: new Date(),
-  },
-  {
-    id: 5,
-    title: "5",
-    description: "설명",
-    contact: "연ㄹ갗",
-    startTime: new Date(),
-    endTime: new Date(),
-  },
-];
+import { list } from "../../api/team";
 
-interface PropTypes {
-  toUrl: string;
-}
+function CardListTeamContainer() {
+  const [dataList, setDataList] = useState<Team[]>();
+  const updateList = async () => {
+    const { data } = await list();
+    setDataList(
+      data.map((item) => ({
+        id: item._id,
+        hackathonId: item.hackathon_id,
+        name: item.name,
+        description: item.description,
+        contact: item.contact,
+        endTime: new Date(item.end_time),
+        startTime: new Date(item.start_time),
+        recruiment: item.recruiment.map((team) => ({
+          field: team.field,
+          skill: team.skill,
+          count: team.count,
+        })),
+      }))
+    );
+  };
 
-function CardListTeamContainer({ toUrl }: PropTypes) {
-  return <TeamCard items={MOCK_HACHATHON_LIST} add={true} toUrl={toUrl} />;
+  useEffect(() => {
+    updateList();
+  }, []);
+
+  return <TeamCard items={dataList} add={true} toUrl="/team" />;
 }
 
 export default CardListTeamContainer;

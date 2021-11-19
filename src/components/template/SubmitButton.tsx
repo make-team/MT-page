@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Button from "../common/Button";
 
 export interface PropTypes {
   onCancel?: () => void;
@@ -10,8 +11,8 @@ export interface PropTypes {
 function SubmitButton({ onCancel, onSubmit }: PropTypes) {
   return (
     <Wrapper>
-      <button onClick={onCancel}> 취소 </button>
-      <button onClick={onSubmit}> 확인 </button>
+      <Button onClick={onCancel}> 취소 </Button>
+      <Button onClick={onSubmit}> 확인 </Button>
     </Wrapper>
   );
 }

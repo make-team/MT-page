@@ -1,11 +1,17 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
+
 import TeamRegistContainer from "../container/regist/TeamContainer";
 
 function TeamRegist() {
+  const history = useHistory();
+  const goBackClick = () => {
+    history.goBack();
+  };
   return (
     <Wrapper>
-      <TeamRegistContainer />
+      <TeamRegistContainer onCancel={goBackClick} />
     </Wrapper>
   );
 }

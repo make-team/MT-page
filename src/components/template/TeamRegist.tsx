@@ -6,14 +6,44 @@ import Radio from "../common/Radio";
 
 import { FIELD } from "../../constant/input";
 
-function TeamRegist() {
+export interface Team {
+  id: number;
+  hackathonId: number;
+  name: string;
+  description: string;
+  recruiment: { field?: keyof typeof FIELD; skill?: string; count?: number }[];
+  contact: string;
+  endTime: Date;
+  startTime: Date;
+}
+
+export interface PropTypes {
+  contents: Team;
+  recruiment: Team["recruiment"];
+  onChange: ({ name, value }: { name: string; value: string | Date }) => void;
+  onAddRecruiment: ({
+    field,
+    skill,
+    count,
+  }: {
+    field?: keyof typeof FIELD;
+    skill?: string;
+    count?: number;
+  }) => void;
+}
+
+function TeamRegist({
+  contents,
+  recruiment,
+  onChange,
+  onAddRecruiment,
+}: PropTypes) {
   const [addActive, setAddActive] = useState<Boolean>(false);
-  const [team, setTeam] = useState([{}]);
-  const [teamContents, setTeamContents] = useState({
-    field: 0,
-    skill: "",
-    count: 0,
-  });
+  const [teamContents, setTeamContents] = useState<{
+    field?: keyof typeof FIELD;
+    skill?: string;
+    count?: number;
+  }>();
 
   const ClickTeamAdd = () => {
     setAddActive((prev) => !prev);
@@ -24,100 +54,107 @@ function TeamRegist() {
     skill,
     count,
   }: {
-    field: number;
-    skill: string;
-    count: number;
+    field?: keyof typeof FIELD;
+    skill?: string;
+    count?: number;
   }) => {
-    setTeam((prev) => [...prev, { skill, field, count }]);
+    onAddRecruiment({ field, skill, count });
     setAddActive(false);
   };
 
-  const changeTeamContents = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const teamContentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setTeamContents(prev => ...prev, [name]: value);
+    setTeamContents((prev) => ({ ...prev, [name]: value }));
   };
+
+  const contentsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    onChange({ name, value });
+  };
+
   return (
-    <div>
-      <RegistForm>
-        <InputWrapper>
-          <div>팀 소개 : </div>
-          <input></input>
-        </InputWrapper>
-        <InputWrapper>
-          <div>모집 기간 : </div>
-          <DatePicker
-            endTime={new Date()}
-            startTime={new Date()}
-            onChange={() => {}}
-          />
-        </InputWrapper>
-        <InputWrapper>
-          <div>모집 팀원 등록하기</div> :
-          <button onClick={ClickTeamAdd}>추가하기</button>
-        </InputWrapper>
-        {addActive && (
-          <AddTeamWrapper>
-            <InputWrapper>
-              <div> 모집 분야 : </div>
-              <Radio
-                name="field"
-                list={Object.entries(FIELD)}
-                onChange={changeTeamContents}
-              />
-            </InputWrapper>
-            <InputWrapper>
-              <div>요구 기술 : </div>
-              <input
-                name="skill"
-                onChange={changeTeamContents}
-                placeholder="ex) java, react"
-              ></input>
-            </InputWrapper>
-            <InputWrapper>
-              <div>모집 인원 : </div>
-              <input
-                name="count"
-                onChange={changeTeamContents}
-                placeholder="숫자만 입력 가능합니다"
-              ></input>
-            </InputWrapper>
-            <button
-              onClick={() =>
-                submitAddTeam(teamContents)
-              }
-            >
-              추가하기
-            </button>
-          </AddTeamWrapper>
-        )}
-        {team && (
-          <div>
-            {team.map((item, index) => (
-              <div key={index}>
-                {Object.entries(item).map((content) => (
-                  <div key={index}>{content}</div>
-                ))}
-              </div>
-            ))}
-          </div>
-        )}
-        <InputWrapper>
-          <div>연락처(이메일 , 오픈카톡 등등...)</div>
-          <input></input>
-        </InputWrapper>
-      </RegistForm>
-    </div>
+    <Wrapper>
+      <InputWrapper>
+        <div>팀 명 : </div>
+        <input name="name" onChange={contentsChange}></input>
+      </InputWrapper>
+      <InputWrapper>
+        <div>팀 소개 : </div>
+        <input name="description" onChange={contentsChange}></input>
+      </InputWrapper>
+      <InputWrapper>
+        <div>모집 기간 : </div>
+        <DatePicker
+          endTime={new Date()}
+          startTime={new Date()}
+          onChange={onChange}
+        />
+      </InputWrapper>
+      <InputWrapper>
+        <div>모집 팀원 등록하기</div> :
+        <button onClick={ClickTeamAdd}>추가하기</button>
+      </InputWrapper>
+      {addActive && (
+        <AddTeamWrapper>
+          <InputWrapper>
+            <div> 모집 분야 : </div>
+            <Radio
+              name="field"
+              list={Object.entries(FIELD)}
+              onChange={teamContentChange}
+            />
+          </InputWrapper>
+          <InputWrapper>
+            <div>요구 기술 : </div>
+            <input
+              name="skill"
+              onChange={teamContentChange}
+              placeholder="ex) java, react"
+            ></input>
+          </InputWrapper>
+          <InputWrapper>
+            <div>모집 인원 : </div>
+            <input
+              name="count"
+              onChange={teamContentChange}
+              placeholder="숫자만 입력 가능합니다"
+            ></input>
+          </InputWrapper>
+          <button onClick={() => teamContents && submitAddTeam(teamContents)}>
+            추가하기
+          </button>
+        </AddTeamWrapper>
+      )}
+      {contents.recruiment && (
+        <TeamRecruitmentCard>
+          {recruiment.map(({ field, count, skill }, index) => (
+            <div key={index}>
+              <div>분야 : {field && FIELD[field]}</div>
+              <div>기술 : {skill}</div>
+              <div>인원 : {count}</div>
+              <button> 삭제 </button>
+            </div>
+          ))}
+        </TeamRecruitmentCard>
+      )}
+      <InputWrapper>
+        <div>연락처(이메일 , 오픈카톡 등등...)</div>
+        <input name="contact" onChange={contentsChange}></input>
+      </InputWrapper>
+    </Wrapper>
   );
 }
 
 export default TeamRegist;
 
-const RegistForm = styled.div`
-  grid-area: main;
+const Wrapper = styled.div`
+  align-content: center;
+  margin: 0 auto;
 `;
 
 const InputWrapper = styled.div`
   display: flex;
+  width: auto;
   margin-bottom: 2rem;
 `;
 
@@ -126,4 +163,24 @@ const AddTeamWrapper = styled.div`
   border: 1px solid greenyellow;
   margin-bottom: 1rem;
   padding: 1rem;
+`;
+
+const TeamRecruitmentCard = styled.div`
+  display: flex;
+  background-color: brown;
+  text-align: left;
+  margin: 1rem;
+  width: min-content;
+  & > div {
+    width: 15rem;
+    border: 1px solid black;
+    margin: 0.5rem;
+    & > div {
+      padding: 1rem;
+    }
+    & > button {
+      width: 5rem;
+      margin-left: 10rem;
+    }
+  }
 `;

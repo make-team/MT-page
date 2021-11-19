@@ -1,36 +1,42 @@
 import React from "react";
+import { NavLink, Route, Switch } from "react-router-dom";
 import styled from "styled-components";
+import CardListHackatonContainer from "../../container/list/HackathonContainer";
+import CardListPersonContainer from "../../container/list/PersonContainer";
+import CardListTeamContainer from "../../container/list/TeamContainer";
 
 const MENU = [
   {
     title: "해커톤 목록",
+    url: "hackathon",
   },
   {
     title: "팀 목록",
+    url: "team",
   },
   {
     title: "인재 목록",
+    url: "person",
   },
 ];
 
-interface PropTypes {
-  activeTab: number;
-  onClick: (id: number) => void;
-}
-
-function Menu({ activeTab, onClick }: PropTypes) {
+function Menu() {
   return (
-    <Wrapper>
-      {MENU.map((item, index) => (
-        <ListItem
-          data-active={activeTab === index}
-          key={item.title}
-          onClick={() => onClick(index)}
-        >
-          {item.title}
-        </ListItem>
-      ))}
-    </Wrapper>
+    <>
+      <Wrapper>
+        {MENU.map((item) => (
+          <ListLink exact to={item.url} activeClassName="selected">
+            <div key={item.url}>{item.title}</div>
+          </ListLink>
+        ))}
+      </Wrapper>
+
+      <Switch>
+        <Route exact path="/hackathon" component={CardListHackatonContainer} />
+        <Route exact path="/team" component={CardListTeamContainer} />
+        <Route exact path="/person" component={CardListPersonContainer} />
+      </Switch>
+    </>
   );
 }
 
@@ -45,7 +51,7 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
-const ListItem = styled.div`
+const ListLink = styled(NavLink)`
   flex: 1;
   display: flex;
   position: relative;
@@ -54,7 +60,14 @@ const ListItem = styled.div`
   align-items: center;
   height: 100%;
   cursor: pointer;
-  &[data-active="true"] {
+  text-decoration: none;
+  &:visited {
+    color: white;
+  }
+  &:link {
+    color: white;
+  }
+  &.selected {
     &::after {
       content: "";
       position: absolute;

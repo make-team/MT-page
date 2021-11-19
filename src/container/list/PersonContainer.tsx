@@ -45,12 +45,8 @@ const MOCK_PERSON_LIST = [
   },
 ];
 
-interface PropTypes {
-  toUrl: string;
-}
-
-function CardListPersonContainer({ toUrl }: PropTypes) {
-  return <CardList items={MOCK_PERSON_LIST} add={true} toUrl={toUrl} />;
+function CardListPersonContainer() {
+  return <CardList items={MOCK_PERSON_LIST} add={true} toUrl="/person" />;
 }
 
 export default CardListPersonContainer;

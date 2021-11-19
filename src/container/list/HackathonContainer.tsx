@@ -5,11 +5,7 @@ import HackathonCard, {
   Hackathon,
 } from "../../components/template/HackathonCard";
 
-interface PropTypes {
-  toUrl: string;
-}
-
-function CardListHackatonContainer({ toUrl }: PropTypes) {
+function CardListHackatonContainer() {
   const [dataList, setDataList] = useState<Hackathon[]>();
   const updateList = async () => {
     const { data } = await list();
@@ -28,7 +24,7 @@ function CardListHackatonContainer({ toUrl }: PropTypes) {
   useEffect(() => {
     updateList();
   }, []);
-  return <HackathonCard items={dataList} add={true} toUrl={toUrl} />;
+  return <HackathonCard items={dataList} add={true} toUrl="/hackathon" />;
 }
 
 export default CardListHackatonContainer;

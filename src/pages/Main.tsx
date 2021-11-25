@@ -29,7 +29,6 @@ const Content = styled.div`
     "menu menu menu"
     "main main main"
     " . . . ";
-  max-width: 90rem;
   min-height: 100vh;
   margin: 0 auto;
 `;

@@ -1,6 +1,9 @@
 .Main {
   min-height: 100vh;
-  color: white;
+  margin: 0;
+  padding: 0;
+  color: #262220;
+  background-color: #f7f1f0;
   text-align: center;
   overflow: hidden;
 }

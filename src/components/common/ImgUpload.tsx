@@ -2,13 +2,13 @@ import React from "react";
 import styled from "styled-components";
 
 export interface PropTypes {
-  onChange: (file: File) => void;
+  onChange: ({ name, value }: { name: string; value: File }) => void;
 }
 
 function ImgUpload({ onChange }: PropTypes) {
   const imgUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { files } = e.target;
-    if (files) onChange(files[0]);
+    const { name, files } = e.target;
+    if (files) onChange({ name, value: files[0] });
   };
 
   return (
@@ -17,9 +17,10 @@ function ImgUpload({ onChange }: PropTypes) {
       <input
         type="file"
         id="chooseFile"
+        name="attachment"
         accept="'.png, .jpg, .jpeg, .pdf"
         placeholder=".png, .jpg, .jpeg, .pdf"
-        onChange={(img) => imgUpload(img)}
+        onChange={imgUpload}
       />
     </Wrapper>
   );

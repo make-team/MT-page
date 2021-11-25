@@ -3,6 +3,8 @@ import styled from "styled-components";
 
 import Card from "../common/Card";
 
+import emptyImg from "../../../src/assets/emptyImg.png";
+
 export interface Hackathon {
   id: number;
   title: string;
@@ -10,6 +12,13 @@ export interface Hackathon {
   contact: string;
   startTime: Date;
   endTime: Date;
+  attachment: {
+    imgUrl: string;
+    uuid: string;
+    name: string;
+    size: number;
+    contentType: string;
+  }[];
 }
 
 export interface PropTypes {
@@ -24,15 +33,21 @@ function HackathonCard({ items, add, toUrl }: PropTypes) {
       {items &&
         items.map((item) => (
           <Card
-            height="20rem"
-            width="35rem"
+            height="35rem"
+            width="20rem"
             toUrl={`${toUrl}/${item.id}`}
             key={item.id}
           >
             <CardContentWrapper>
-              <ImgWrapper>
-                <img src="" alt="post" />
-              </ImgWrapper>
+              {item.attachment.length > 0 ? (
+                item.attachment.map(
+                  (item) =>
+                    item && <ImgWrapper key={item.uuid} imgUrl={item.imgUrl} />
+                )
+              ) : (
+                <img src={emptyImg} alt="empty" width="100%" height="65%" />
+              )}
+
               <Contents>
                 <div>
                   <h3>제목 : </h3>
@@ -48,9 +63,28 @@ function HackathonCard({ items, add, toUrl }: PropTypes) {
                 </div>
                 <div>
                   <div>기간 : </div>
-                  <div>{item.startTime.getFullYear()}</div>
-                  <div>~</div>
-                  <div>{item.endTime.getFullYear()}</div>
+                  <div>
+                    {`${item.startTime.getFullYear()}년` +
+                      `${item.startTime.getMonth()}월` +
+                      `${item.startTime.getDay()}일`}
+                  </div>
+                  <div> ~ </div>
+                  <div>
+                    {`${item.endTime.getFullYear()}년` +
+                      `${item.endTime.getMonth()}월` +
+                      `${item.endTime.getDay()}일`}
+                  </div>
+                  <div>
+                    {"(" +
+                      parseInt(
+                        `${
+                          (item.endTime.getTime() - item.startTime.getTime()) /
+                          (24 * 60 * 60 * 1000)
+                        }`
+                      ) +
+                      "일간" +
+                      ")"}
+                  </div>
                 </div>
               </Contents>
             </CardContentWrapper>
@@ -72,31 +106,35 @@ const List = styled.div`
   grid-area: main;
   justify-content: center;
   align-content: stretch;
-  background-color: #2d3436;
   flex-wrap: wrap;
+  background-color: #f7f1f0;
   & > div {
     margin: 1rem 1rem;
   }
 `;
 
 const CardContentWrapper = styled.div`
-  display: flex;
   height: 100%;
   & > div {
     flex: 1;
   }
 `;
 
-const ImgWrapper = styled.div`
-  margin-right: 1rem;
-  background-color: whitesmoke;
+const ImgWrapper = styled.div<{ imgUrl: string }>`
+  margin-bottom: 1rem;
+  width: 20rem;
+  height: 22rem;
+  background-image: url(${({ imgUrl }) => imgUrl});
+  background-repeat: no-repeat;
+  background-size: cover;
 `;
 
 const Contents = styled.div`
-  background-color: black;
-  padding: 1rem 0;
+  padding: 0.5rem 0;
+  height: 35%;
   & > div {
     display: flex;
+    color: black;
     align-items: center;
     margin-bottom: 1rem;
   }

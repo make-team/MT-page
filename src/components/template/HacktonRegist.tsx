@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import styled from "styled-components";
 
 import DatePicker from "../common/DatePicker";
@@ -11,26 +11,48 @@ export interface HackathonRegist {
   contact: string;
   endTime: Date;
   startTime: Date;
+  attachment?: File;
 }
 
 export interface PropTypes {
   contents: HackathonRegist;
-  onChange: ({ name, value }: { name: string; value: string | Date }) => void;
+  onChange: ({
+    name,
+    value,
+  }: {
+    name: string;
+    value: string | Date | File;
+  }) => void;
 }
 
 function HacktonRegist({ contents, onChange }: PropTypes) {
+  const post = useRef<HTMLImageElement>(null);
+
   const contentsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     onChange({ name, value });
   };
 
+  const preview = useCallback(() => {
+    if (contents.attachment && post.current) {
+      post.current.src = URL.createObjectURL(contents.attachment);
+      post.current.onload = () => {
+        URL.revokeObjectURL(
+          post.current ? post.current.src : "삭제가 안된거같다..."
+        );
+      };
+    }
+  }, [contents.attachment]);
+
+  useEffect(() => {
+    preview();
+  }, [preview]);
+
   return (
     <RegistForm>
       <ImgWrapper>
-        <div>img</div>
-        <InputWrapper>
-          <ImgUpload onChange={() => {}} />
-        </InputWrapper>
+        <PostImg ref={post} />
+        <ImgUpload onChange={onChange} />
       </ImgWrapper>
       <div>
         <InputWrapper>
@@ -83,11 +105,11 @@ const InputWrapper = styled.div`
   margin-bottom: 2rem;
 `;
 
-const ImgWrapper = styled.div`
-  & > div:first-child {
-    height: 50vh;
-    width: 40vh;
-    background-color: green;
-    margin: 1rem;
-  }
+const ImgWrapper = styled.div``;
+
+const PostImg = styled.img`
+  height: 50vh;
+  width: 40vh;
+  margin: 1rem;
+  background-size: cover;
 `;

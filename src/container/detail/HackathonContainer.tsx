@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { detail, remove, modify } from "../../api/hackathon";
+import Popup from "../../components/base/Popup";
 import StickyMenu from "../../components/common/StickyMenu";
 import HackathonDetail, {
   Hackathon,
@@ -22,14 +23,26 @@ function HackathonContainer({ id, onBack }: PropTypes) {
     endTime: new Date(),
     startTime: new Date(),
     hit: 0,
+    attachment: undefined,
   });
+
+  const [popup, setPopup] = useState<boolean>(false);
+
+  const popupClose = () => {
+    setPopup((prev) => !prev);
+  };
 
   const deleteHackathon = () => {
     remove(+id);
+    onBack();
   };
 
   const modifyHackathon = () => {
     setModifyStatus((prev) => !prev);
+  };
+
+  const confirmModify = () => {
+    setPopup((prev) => !prev);
   };
 
   const changeContents = useCallback<HackathonPropTypes["onChange"]>(
@@ -47,6 +60,7 @@ function HackathonContainer({ id, onBack }: PropTypes) {
     bodyData.append("end_time", `${detailData.endTime.getTime()}`);
     bodyData.append("start_time", `${detailData.startTime.getTime()}`);
     await modify({ bodyData }, +id);
+    setPopup((prev) => !prev);
   };
 
   const updateDetail = useCallback(async () => {
@@ -58,6 +72,13 @@ function HackathonContainer({ id, onBack }: PropTypes) {
       endTime: new Date(data.end_time),
       startTime: new Date(data.start_time),
       hit: data.hit,
+      attachment: data.attachment.map((imgItem) => ({
+        imgUrl: imgItem.s3,
+        uuid: imgItem.uuid,
+        name: imgItem.name,
+        size: imgItem.size,
+        contentType: imgItem.content_type,
+      })),
     });
   }, [id]);
 
@@ -77,8 +98,14 @@ function HackathonContainer({ id, onBack }: PropTypes) {
         onBack={onBack}
         onDelete={deleteHackathon}
         onModify={modifyHackathon}
-        onSubmitModify={onModify}
+        onSubmitModify={confirmModify}
         modifyStatus={modifyStatus}
+      />
+      <Popup
+        text="수정하시겠습니까?"
+        status={popup ? "open" : "close"}
+        onCancel={popupClose}
+        onModify={onModify}
       />
     </Contents>
   );

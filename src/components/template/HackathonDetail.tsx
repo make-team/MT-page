@@ -11,6 +11,13 @@ export interface Hackathon {
   endTime: Date;
   startTime: Date;
   hit: number;
+  attachment?: {
+    imgUrl: string;
+    uuid: string;
+    name: string;
+    size: number;
+    contentType: string;
+  }[];
 }
 
 export interface PropTypes {
@@ -27,9 +34,13 @@ function HackathonDetail({ contents, modifyStatus, onChange }: PropTypes) {
 
   return (
     <RegistForm modifyStatus={modifyStatus}>
-      <ImgWrapper>
-        <div>img</div>
-      </ImgWrapper>
+      <ImgWrapper
+        postImg={
+          contents.attachment
+            ? `${contents.attachment.map((item) => item.imgUrl)}`
+            : ""
+        }
+      ></ImgWrapper>
       <div>
         <InputWrapper>
           <div>모집 기간 : </div>
@@ -78,9 +89,10 @@ const InputWrapper = styled.div`
   margin-bottom: 2rem;
 `;
 
-const ImgWrapper = styled.div`
+const ImgWrapper = styled.div<{ postImg: string }>`
   height: 50vh;
   width: 40vh;
-  background-color: green;
+  background-image: url(${({ postImg }) => postImg});
+  background-size: cover;
   margin: 1rem;
 `;

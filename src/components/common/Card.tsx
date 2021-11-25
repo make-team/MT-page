@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import styled, { css, keyframes } from "styled-components";
+import styled, { css } from "styled-components";
 
 export interface PropTypes {
   children: JSX.Element;
@@ -24,31 +24,14 @@ function Card({ children, toUrl, width, height }: PropTypes) {
 
 export default Card;
 
-const background = keyframes`
-      0% {background-color: #39f;}
-     15% {background-color: #8bc5d1;}
-     30% {background-color: #f8cb4a;}
-     45% {background-color: #95b850;}
-     60% {background-color: #944893;}
-     75% {background-color: #c71f00;}
-     90% {background-color: #bdb280;}
-    100% {background-color: #39f;}
-`;
-
 const Wrapper = styled.div<{ width?: string; height?: string }>`
   ${({ width, height }) => css`
+    cursor: pointer;
     width: ${width ?? "15rem"};
     height: ${height ?? "25rem"};
-    padding: 1rem;
+    padding: 0.5rem;
     margin-bottom: 1rem;
-    background-color: #636e72;
-    color: white;
-    padding: 2rem;
-    &:hover {
-      animation-name: ${background};
-      animation-duration: 1s;
-      animation-iteration-count: infinite;
-      animation-timing-function: linear;
-    }
+    background-color: #c3a6a0;
+    border-radius: 8px;
   `}
 `;

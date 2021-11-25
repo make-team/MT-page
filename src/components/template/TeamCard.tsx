@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { FIELD } from "../../constant/input";
+import { FIELD } from "../../constant/checkItems";
 
 import Card from "../common/Card";
 
@@ -27,35 +27,54 @@ function TeamCard({ items, add, toUrl }: PropTypes) {
       {items &&
         items.map((item) => (
           <Card
-            height="20rem"
-            width="35rem"
-            toUrl={`${toUrl}/${item.id}`}
             key={item.id}
+            height="15rem"
+            width="80rem"
+            toUrl={`${toUrl}/${item.id}`}
           >
-            <CardContentWrapper>
+            <Wrapper>
               <Contents>
                 <div>
-                  <h3>참여 해커톤 : </h3>
-                  <h3>{item.name}</h3>
+                  <div>- 팀 명 -</div>
+                  <div>{item.name}</div>
                 </div>
                 <div>
-                  <div>팀 설명 : </div>
-                  <div>{item.description}</div>
-                </div>
-                <div>
-                  <div>연락처 : </div>
+                  <div>- 연락처 -</div>
                   <div>{item.contact}</div>
                 </div>
                 <div>
-                  <div>기간 : </div>
-                  <div>{item.startTime.getFullYear()}</div>
-                  <div>~</div>
-                  <div>{item.endTime.getFullYear()}</div>
+                  <div>- 모집 기간 -</div>
+                  <div>
+                    {`${item.startTime.getFullYear()}년` +
+                      `${item.startTime.getMonth()}월` +
+                      `${item.startTime.getDay()}일`}{" "}
+                    ~{" "}
+                    {`${item.endTime.getFullYear()}년` +
+                      `${item.endTime.getMonth()}월` +
+                      `${item.endTime.getDay()}일`}
+                    {"(" +
+                      parseInt(
+                        `${
+                          (item.endTime.getTime() - item.startTime.getTime()) /
+                          (24 * 60 * 60 * 1000)
+                        }`
+                      ) +
+                      "일간" +
+                      ")"}
+                  </div>
                 </div>
-                <div>모집 팀원 : </div>
-                <PersonList>
-                  {item.recruiment &&
-                    item.recruiment.map((item) => {
+              </Contents>
+              <div>- 팀 설명 -</div>
+              <TeamDescription>
+                <div>{item.description}</div>
+              </TeamDescription>
+              <div>
+                {item.recruiment && item.recruiment.length > 0 && (
+                  <div> - 모집 공고 -</div>
+                )}
+                {item.recruiment && item.recruiment.length > 0 && (
+                  <PersonList>
+                    {item.recruiment.map((item) => {
                       return (
                         <div>
                           <div>모집 분야 : {FIELD[item.field]}</div>
@@ -64,9 +83,10 @@ function TeamCard({ items, add, toUrl }: PropTypes) {
                         </div>
                       );
                     })}
-                </PersonList>
-              </Contents>
-            </CardContentWrapper>
+                  </PersonList>
+                )}
+              </div>
+            </Wrapper>
           </Card>
         ))}
       {add && (
@@ -84,39 +104,41 @@ const List = styled.div`
   display: flex;
   grid-area: main;
   justify-content: center;
-  align-content: stretch;
-  background-color: #2d3436;
+  background-color: #f7f1f0;
   flex-wrap: wrap;
   & > div {
-    margin: 1rem 1rem;
+    margin: 2rem;
   }
 `;
 
-const CardContentWrapper = styled.div`
-  display: flex;
-  height: 100%;
-  & > div {
-    flex: 1;
-  }
-`;
+const Wrapper = styled.div``;
 
 const Contents = styled.div`
-  background-color: black;
+  display: flex;
   padding: 1rem 0;
+  margin-bottom: 0.5rem;
   & > div {
     display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
+    flex: 1;
+    flex-direction: column;
   }
 `;
+const TeamDescription = styled.div`
+  border: 0.1rem solid #262220;
+  padding: 1rem;
+  height: 3rem;
+  text-align: left;
+  word-break: break-all;
+  margin-bottom: 0.5rem;
+`;
+
 const PersonList = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
   & > div {
-    border: 1px solid greenyellow;
+    border: 0.25rem solid #262220;
     height: 4rem;
     width: 12rem;
     margin-right: 0.5rem;
+    background-color: white;
   }
 `;

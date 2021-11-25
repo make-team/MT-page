@@ -6,6 +6,7 @@ import TeamDetail, {
 } from "../../components/template/TeamDetail";
 import { detail } from "../../api/team";
 import SubmitButton from "../../components/template/SubmitButton";
+import styled from "styled-components";
 
 interface PropTypes {
   id: string;
@@ -54,11 +55,21 @@ function CardListTeamContainer({ id, onBack }: PropTypes) {
   }, [updateDetail]);
 
   return (
-    <>
+    <Wrapper>
       <TeamDetail contents={detailData} onChange={changeContents} />
-      <SubmitButton onCancel={onBack} />
-    </>
+      <ButtonWrapper>
+        <SubmitButton onCancel={onBack} />
+      </ButtonWrapper>
+    </Wrapper>
   );
 }
 
 export default CardListTeamContainer;
+const Wrapper = styled.div`
+  background-color: #f7f1f0;
+  padding: 2rem;
+`;
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: right;
+`;

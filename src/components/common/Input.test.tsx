@@ -1,11 +1,11 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import Button from "./Button";
+import { Input } from "./Input";
 import "jest-styled-components";
 
-describe("<Button />", () => {
+describe("<Input />", () => {
   it("랜더링된 버튼의 동작확인", () => {
-    const { container } = render(<Button>test</Button>);
+    const { container } = render(<Input />);
     const label = screen.getByText("test");
     expect(label).toBeInTheDocument();
 

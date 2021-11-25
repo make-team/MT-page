@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FIELD } from "../constant/input";
+import { FIELD } from "../constant/checkItems";
 import { BASE_URL } from "./baseUrl";
 
 export const list = () =>

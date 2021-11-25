@@ -26,6 +26,7 @@ function DatePicker({ startTime, endTime, onChange }: PropTypes) {
         dateFormat="yyyy년 MM월 dd일"
         selected={startTime}
         locale={ko}
+        minDate={new Date()}
         onChange={(date) => changeStartDate(date as Date, "startTime")}
       />
       ~

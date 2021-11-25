@@ -8,6 +8,13 @@ export const list = () =>
       title: string;
       description: string;
       contact: string;
+      attachment: {
+        s3: string;
+        uuid: string;
+        name: string;
+        size: number;
+        content_type: string;
+      }[];
       start_time: number;
       end_time: number;
     }[]
@@ -22,6 +29,13 @@ export const detail = (id: number) =>
     start_time: number;
     end_time: number;
     hit: number;
+    attachment: {
+      s3: string;
+      uuid: string;
+      name: string;
+      size: number;
+      content_type: string;
+    }[];
   }>(`${BASE_URL}/hackathon/${id}`);
 
 export const regist = ({ bodyData }: { bodyData: FormData }) =>

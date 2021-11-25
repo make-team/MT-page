@@ -4,7 +4,7 @@ import styled from "styled-components";
 import DatePicker from "../common/DatePicker";
 import Radio from "../common/Radio";
 
-import { FIELD } from "../../constant/input";
+import { FIELD } from "../../constant/checkItems";
 
 export interface Team {
   id: number;
@@ -74,6 +74,7 @@ function TeamRegist({
 
   return (
     <Wrapper>
+      <h1>팀 등록하기</h1>
       <InputWrapper>
         <div>팀 명 : </div>
         <input name="name" onChange={contentsChange}></input>
@@ -159,15 +160,14 @@ const InputWrapper = styled.div`
 `;
 
 const AddTeamWrapper = styled.div`
-  background-color: black;
-  border: 1px solid greenyellow;
+  border: 1px solid #262220;
   margin-bottom: 1rem;
   padding: 1rem;
 `;
 
 const TeamRecruitmentCard = styled.div`
   display: flex;
-  background-color: brown;
+  background-color: #c3a6a0;
   text-align: left;
   margin: 1rem;
   width: min-content;

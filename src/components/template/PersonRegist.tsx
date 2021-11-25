@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import Radio from "../common/Radio";
 
-import { INTEREST, FIELD } from "../../constant/input";
+import { INTEREST, FIELD } from "../../constant/checkItems";
 import ImgUpload from "../common/ImgUpload";
 
 function PersonRegist() {

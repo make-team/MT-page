@@ -18,7 +18,7 @@ function HackathonDetail() {
   return (
     <Wrapper>
       <HackathonContainer id={id[2]} onBack={goBackClick} />
-      <HackathonTeamContainer toUrl={" "} />
+      <HackathonTeamContainer />
     </Wrapper>
   );
 }

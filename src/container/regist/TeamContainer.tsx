@@ -7,7 +7,7 @@ import TeamRegist, {
 import SubmitButton from "../../components/template/SubmitButton";
 
 import { regist } from "../../api/team";
-import { FIELD } from "../../constant/input";
+import { FIELD } from "../../constant/checkItems";
 
 export interface PropTypes {
   onCancel: () => void;
@@ -48,9 +48,7 @@ function TeamContainer({ onCancel }: PropTypes) {
     bodyData.append("contact", contents.contact);
     bodyData.append("end_time", `${contents.endTime.getTime()}`);
     bodyData.append("start_time", `${contents.startTime.getTime()}`);
-
     bodyData.append("recruiment", `${JSON.stringify(recruiment)}`);
-
     await regist({ bodyData });
     onCancel();
   };
@@ -64,15 +62,15 @@ function TeamContainer({ onCancel }: PropTypes) {
 
   return (
     <Wrapper>
-      <Content>
-        <TeamRegist
-          contents={contents}
-          recruiment={recruiment}
-          onChange={changeContents}
-          onAddRecruiment={addRecuiment}
-        />
-      </Content>
-      <SubmitButton onCancel={onCancel} onSubmit={onRegist} />
+      <TeamRegist
+        contents={contents}
+        recruiment={recruiment}
+        onChange={changeContents}
+        onAddRecruiment={addRecuiment}
+      />
+      <ButtonWrapper>
+        <SubmitButton onCancel={onCancel} onSubmit={onRegist} />
+      </ButtonWrapper>
     </Wrapper>
   );
 }
@@ -81,9 +79,11 @@ export default TeamContainer;
 
 const Wrapper = styled.div`
   grid-area: main;
+  background-color: #f7f1f0;
+  padding: 2rem;
 `;
 
-const Content = styled.div`
+const ButtonWrapper = styled.div`
   display: flex;
-  width: 100%;
+  justify-content: right;
 `;

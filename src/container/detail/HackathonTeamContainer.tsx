@@ -3,14 +3,10 @@ import styled from "styled-components";
 
 import TeamCard from "../../components/template/TeamCard";
 
-interface PropTypes {
-  toUrl: string;
-}
-
-function HackathonTeamContainer({ toUrl }: PropTypes) {
+function HackathonTeamContainer() {
   return (
     <Wrapper>
-      <TeamCard items={[]} add={true} toUrl={toUrl} />
+      <TeamCard items={[]} add={true} />
     </Wrapper>
   );
 }

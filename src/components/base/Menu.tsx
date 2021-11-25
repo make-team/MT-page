@@ -25,7 +25,12 @@ function Menu() {
     <>
       <Wrapper>
         {MENU.map((item) => (
-          <ListLink exact to={item.url} activeClassName="selected">
+          <ListLink
+            key={item.url}
+            exact
+            to={item.url}
+            activeClassName="selected"
+          >
             <div key={item.url}>{item.title}</div>
           </ListLink>
         ))}
@@ -46,7 +51,7 @@ const Wrapper = styled.div`
   grid-area: menu;
   display: flex;
   height: 4rem;
-  background-color: #3c6382;
+  background-color: #100c0d;
   min-width: max-content;
   align-items: center;
 `;
@@ -55,11 +60,13 @@ const ListLink = styled(NavLink)`
   flex: 1;
   display: flex;
   position: relative;
-  background-color: black;
+  background-color: #a15c38;
   justify-content: center;
   align-items: center;
   height: 100%;
   cursor: pointer;
+  font-weight: bolder;
+  font-size: 1rem;
   text-decoration: none;
   &:visited {
     color: white;
@@ -68,14 +75,6 @@ const ListLink = styled(NavLink)`
     color: white;
   }
   &.selected {
-    &::after {
-      content: "";
-      position: absolute;
-      width: 100%;
-      left: 0;
-      bottom: 0;
-      height: 0.5em;
-      background: #bada55;
-    }
+    background-color: #f7f1f0;
   }
 `;

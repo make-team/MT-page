@@ -8,11 +8,15 @@ export interface PropTypes {
   onModify?: () => void;
 }
 
-function SubmitButton({ onCancel, onSubmit }: PropTypes) {
+function SubmitButton({ onCancel, onSubmit, onModify }: PropTypes) {
   return (
     <Wrapper>
       <Button onClick={onCancel}> 취소 </Button>
-      <Button onClick={onSubmit}> 확인 </Button>
+      {onModify ? (
+        <Button onClick={onModify}> 수정 </Button>
+      ) : (
+        <Button onClick={onSubmit}> 확인 </Button>
+      )}
     </Wrapper>
   );
 }
@@ -21,7 +25,6 @@ export default SubmitButton;
 
 const Wrapper = styled.div`
   display: flex;
-  justify-content: end;
   & > button {
     width: 8rem;
     height: 3rem;

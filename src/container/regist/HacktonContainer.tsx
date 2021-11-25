@@ -19,6 +19,7 @@ function HacktonContainer({ onCancel }: PropTypes) {
     contact: "",
     endTime: new Date(),
     startTime: new Date(),
+    attachment: undefined,
   });
 
   const changeContents = useCallback<RegistPropTypes["onChange"]>(
@@ -35,6 +36,9 @@ function HacktonContainer({ onCancel }: PropTypes) {
     bodyData.append("contact", contents.contact);
     bodyData.append("end_time", `${contents.endTime.getTime()}`);
     bodyData.append("start_time", `${contents.startTime.getTime()}`);
+    if (contents.attachment) {
+      bodyData.append("attachment", contents.attachment);
+    }
     await regist({ bodyData });
     onCancel();
   };
@@ -43,7 +47,9 @@ function HacktonContainer({ onCancel }: PropTypes) {
       <Content>
         <HacktonRegist contents={contents} onChange={changeContents} />
       </Content>
-      <SubmitButton onCancel={onCancel} onSubmit={onRegist} />
+      <ButtonWrapper>
+        <SubmitButton onCancel={onCancel} onSubmit={onRegist} />
+      </ButtonWrapper>
     </Wrapper>
   );
 }
@@ -58,4 +64,10 @@ const Content = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: right;
 `;

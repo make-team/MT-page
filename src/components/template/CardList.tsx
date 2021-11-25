@@ -22,7 +22,7 @@ function CardList({ items, add, toUrl }: PropTypes) {
         </Card>
       ))}
       {add && (
-        <Card toUrl={`${toUrl}/regist`}>
+        <Card key="0" toUrl={`${toUrl}/regist`}>
           <div> 등록하기 </div>
         </Card>
       )}

@@ -15,6 +15,13 @@ function CardListHackatonContainer() {
         title: item.title,
         description: item.description,
         contact: item.contact,
+        attachment: item.attachment.map((imgItem) => ({
+          imgUrl: imgItem.s3,
+          uuid: imgItem.uuid,
+          name: imgItem.name,
+          size: imgItem.size,
+          contentType: imgItem.content_type,
+        })),
         endTime: new Date(item.end_time),
         startTime: new Date(item.start_time),
       }))

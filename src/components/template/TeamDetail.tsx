@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 import DatePicker from "../common/DatePicker";
 import { Input } from "../common/Input";
 
-import { FIELD } from "../../constant/input";
+import { FIELD } from "../../constant/checkItems";
 
 export interface Team {
   id: number;
@@ -32,6 +32,7 @@ function HackathonDetail({ contents, modifyStatus, onChange }: PropTypes) {
   return (
     <RegistForm modifyStatus={false}>
       <div>
+        <h1>팀원 모집</h1>
         <InputWrapper>
           <div>팀명 : </div>
           <Input
@@ -56,6 +57,7 @@ function HackathonDetail({ contents, modifyStatus, onChange }: PropTypes) {
             onChange={contentsChange}
           ></Input>
         </InputWrapper>
+        <div>- 모집 팀원 -</div>
         {contents.recruiment && (
           <RecruimentCard>
             {contents.recruiment.map((item) => {
@@ -106,6 +108,7 @@ const RecruimentCard = styled.div`
 
 const CardContents = styled.div`
   margin: 0.5rem;
-  border: 1px white solid;
+  background-color: #c3a6a0;
+  border: 1px solid #262220;
   padding: 1rem;
 `;

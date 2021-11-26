@@ -12,9 +12,10 @@ import HackathonDetail, {
 interface PropTypes {
   id: string;
   onBack: () => void;
+  onRegist: () => void;
 }
 
-function HackathonContainer({ id, onBack }: PropTypes) {
+function HackathonContainer({ id, onBack, onRegist }: PropTypes) {
   const [modifyStatus, setModifyStatus] = useState<boolean>(false);
   const [detailData, setDetailData] = useState<Hackathon>({
     title: "",
@@ -30,6 +31,10 @@ function HackathonContainer({ id, onBack }: PropTypes) {
 
   const popupClose = () => {
     setPopup((prev) => !prev);
+  };
+
+  const registTeam = () => {
+    onRegist();
   };
 
   const deleteHackathon = () => {
@@ -98,6 +103,7 @@ function HackathonContainer({ id, onBack }: PropTypes) {
         onBack={onBack}
         onDelete={deleteHackathon}
         onModify={modifyHackathon}
+        onTeamRegist={registTeam}
         onSubmitModify={confirmModify}
         modifyStatus={modifyStatus}
       />

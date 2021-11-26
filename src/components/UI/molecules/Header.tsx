@@ -5,9 +5,7 @@ import { Div } from "../atoms/Div";
 function Header() {
   return (
     <Wrapper>
-      <Div fontSize="8rem" height="12rem">
-        Make Team
-      </Div>
+      <Div height="12rem">Make Team</Div>
     </Wrapper>
   );
 }
@@ -20,4 +18,5 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   min-width: max-content;
+  font-size: 8rem;
 `;

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BASE_URL } from "./baseUrl";
+import URL from "./baseUrl";
 
 export const list = () =>
   axios.get<
@@ -18,7 +18,7 @@ export const list = () =>
       start_time: number;
       end_time: number;
     }[]
-  >(`${BASE_URL}/hackathon`);
+  >(`${URL}/hackathon`);
 
 export const detail = (id: number) =>
   axios.get<{
@@ -36,20 +36,19 @@ export const detail = (id: number) =>
       size: number;
       content_type: string;
     }[];
-  }>(`${BASE_URL}/hackathon/${id}`);
+  }>(`${URL}/hackathon/${id}`);
 
 export const regist = ({ bodyData }: { bodyData: FormData }) =>
-  axios.post(`${BASE_URL}/hackathon`, bodyData, {
+  axios.post(`${URL}/hackathon`, bodyData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
   });
 
-export const remove = (id: number) =>
-  axios.delete(`${BASE_URL}/hackathon/${id}`);
+export const remove = (id: number) => axios.delete(`${URL}/hackathon/${id}`);
 
 export const modify = ({ bodyData }: { bodyData: FormData }, id: number) =>
-  axios.put(`${BASE_URL}/hackathon/${id}`, bodyData, {
+  axios.put(`${URL}/hackathon/${id}`, bodyData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },

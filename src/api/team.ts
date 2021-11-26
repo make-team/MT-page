@@ -1,6 +1,6 @@
 import axios from "axios";
 import { FIELD } from "../constant/checkItems";
-import { BASE_URL } from "./baseUrl";
+import URL from "./baseUrl";
 
 export const list = () =>
   axios.get<
@@ -18,7 +18,7 @@ export const list = () =>
         count: number;
       }[];
     }[]
-  >(`${BASE_URL}/team`);
+  >(`${URL}/team`);
 
 export const inHackathon = (id: number) =>
   axios.get<
@@ -36,10 +36,10 @@ export const inHackathon = (id: number) =>
         count: number;
       }[];
     }[]
-  >(`${BASE_URL}/team/hackathon/${id}`);
+  >(`${URL}/team/hackathon/${id}`);
 
 export const regist = ({ bodyData }: { bodyData: FormData }) =>
-  axios.post(`${BASE_URL}/team`, bodyData, {
+  axios.post(`${URL}/team`, bodyData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
@@ -59,4 +59,4 @@ export const detail = (id: number) =>
       skill: string;
       count: number;
     }[];
-  }>(`${BASE_URL}/team/${id}`);
+  }>(`${URL}/team/${id}`);

@@ -7,6 +7,7 @@ interface PropTypes {
   onDelete: () => void;
   onModify: () => void;
   onSubmitModify: () => void;
+  onTeamRegist: () => void;
   modifyStatus: boolean;
 }
 
@@ -16,6 +17,7 @@ function StickyMenu({
   onDelete,
   onModify,
   onSubmitModify,
+  onTeamRegist,
 }: PropTypes) {
   const deleteClick = () => {
     onDelete();
@@ -34,6 +36,7 @@ function StickyMenu({
     <Menu>
       <Div onClick={onBack}> 뒤로가기 </Div>
       <Div onClick={deleteClick}> 삭제하기 </Div>
+      <Div onClick={onTeamRegist}> 팀원 모집글 등록하기 </Div>
       {modifyStatus ? (
         <>
           <Div onClick={submitModiy}> 수정완료 </Div>

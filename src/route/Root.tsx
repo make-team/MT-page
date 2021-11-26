@@ -20,7 +20,7 @@ function Root() {
         />
         <Route exact path="/hackathon/regist" component={HackathonRegist} />
         <Route exact path="/hackathon/:id" component={HackathonDetail} />
-        <Route exact path="/team/regist" component={TeamRegist} />
+        <Route exact path="/hackathon/:id/team/regist" component={TeamRegist} />
         <Route exact path="/team/:id" component={TeamDetail} />
         <Route exact path="/person/regist" component={PersonRegist} />
         <Route exact path="/person/:id" component={PersonDetail} />

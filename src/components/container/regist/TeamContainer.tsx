@@ -10,10 +10,11 @@ import { regist } from "api/team";
 import { FIELD } from "constant/checkItems";
 
 export interface PropTypes {
+  id: string;
   onCancel: () => void;
 }
 
-function TeamContainer({ onCancel }: PropTypes) {
+function TeamContainer({ id, onCancel }: PropTypes) {
   const [contents, setContents] = useState<Team>({
     id: 0,
     name: "",
@@ -43,7 +44,7 @@ function TeamContainer({ onCancel }: PropTypes) {
   const onRegist = async () => {
     let bodyData = new FormData();
     bodyData.append("name", contents.name);
-    bodyData.append("hackathon_id", `${"0"}`);
+    bodyData.append("hackathon_id", `${id}`);
     bodyData.append("description", contents.description);
     bodyData.append("contact", contents.contact);
     bodyData.append("end_time", `${contents.endTime.getTime()}`);

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { FIELD } from "constant/checkItems";
 
-import Card from "components/UI/molecules/layout/Card";
+import Card from "components/template/layout/Card";
 
 export interface Team {
   id: number;
@@ -89,11 +89,6 @@ function TeamCard({ items, add, toUrl }: PropTypes) {
             </Wrapper>
           </Card>
         ))}
-      {add && (
-        <Card toUrl={`${toUrl}/regist`}>
-          <div> 등록하기 </div>
-        </Card>
-      )}
     </List>
   );
 }

@@ -1,13 +1,13 @@
 import React from "react";
 import { Switch, Route, Redirect, BrowserRouter } from "react-router-dom";
 
-import Main from "../pages/Main";
-import HackathonRegist from "../pages/HackathonRegist";
-import HackathonDetail from "../pages/HackathonDetail";
-import PersonDetail from "../pages/PersonDetail";
-import PersonRegist from "../pages/PersonRegist";
-import TeamDetail from "../pages/TeamDetail";
-import TeamRegist from "../pages/TeamRegist";
+import Main from "components/pages/Main";
+import HackathonRegist from "components/pages/HackathonRegist";
+import HackathonDetail from "components/pages/HackathonDetail";
+import PersonDetail from "components/pages/PersonDetail";
+import PersonRegist from "components/pages/PersonRegist";
+import TeamDetail from "components/pages/TeamDetail";
+import TeamRegist from "components/pages/TeamRegist";
 
 function Root() {
   return (

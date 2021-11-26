@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import styled from "styled-components";
 
-import DatePicker from "../common/DatePicker";
-import ImgUpload from "../common/ImgUpload";
-import { Input } from "../common/Input";
+import DatePicker from "components/UI/molecules/form/StartEndPicker";
+import ImgUpload from "components/UI/molecules/form/ImgUpload";
+import { Input } from "components/UI/atoms/Input";
 
 export interface HackathonRegist {
   title: string;

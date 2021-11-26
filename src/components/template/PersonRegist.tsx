@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-import Radio from "../common/Radio";
+import Radio from "components/UI/molecules/RadioList";
 
-import { INTEREST, FIELD } from "../../constant/checkItems";
-import ImgUpload from "../common/ImgUpload";
+import { INTEREST, FIELD } from "constant/checkItems";
+import ImgUpload from "components/UI/molecules/form/ImgUpload";
 
 function PersonRegist() {
   return (

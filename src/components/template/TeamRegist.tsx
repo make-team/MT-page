@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import DatePicker from "../common/DatePicker";
-import Radio from "../common/Radio";
+import DatePicker from "components/UI/molecules/form/StartEndPicker";
+import Radio from "components/UI/molecules/RadioList";
 
-import { FIELD } from "../../constant/checkItems";
+import { FIELD } from "constant/checkItems";
 
 export interface Team {
   id: number;

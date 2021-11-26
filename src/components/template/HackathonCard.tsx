@@ -1,9 +1,8 @@
 import React from "react";
+import Card from "components/UI/molecules/layout/Card";
 import styled from "styled-components";
 
-import Card from "../common/Card";
-
-import emptyImg from "../../../src/assets/emptyImg.png";
+import emptyImg from "image/emptyImg.png";
 
 export interface Hackathon {
   id: number;
@@ -45,7 +44,7 @@ function HackathonCard({ items, add, toUrl }: PropTypes) {
                     item && <ImgWrapper key={item.uuid} imgUrl={item.imgUrl} />
                 )
               ) : (
-                <img src={emptyImg} alt="empty" width="100%" height="65%" />
+                <img src={emptyImg} alt="empty" width="100%" height="62.75%" />
               )}
 
               <Contents>

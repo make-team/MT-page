@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Button from "components/UI/atoms/Button";
+import Button from "../atoms/Button";
 
 export interface PropTypes {
   onCancel?: () => void;

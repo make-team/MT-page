@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { FIELD } from "../../constant/checkItems";
+import { FIELD } from "constant/checkItems";
 
-import Card from "../common/Card";
+import Card from "components/UI/molecules/layout/Card";
 
 export interface Team {
   id: number;
@@ -74,9 +74,9 @@ function TeamCard({ items, add, toUrl }: PropTypes) {
                 )}
                 {item.recruiment && item.recruiment.length > 0 && (
                   <PersonList>
-                    {item.recruiment.map((item) => {
+                    {item.recruiment.map((item, index) => {
                       return (
-                        <div>
+                        <div key={index}>
                           <div>모집 분야 : {FIELD[item.field]}</div>
                           <div>요구 기술 : {item.skill}</div>
                           <div>요구 인원 : {item.count}</div>

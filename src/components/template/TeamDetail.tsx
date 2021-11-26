@@ -1,8 +1,8 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-import DatePicker from "../common/DatePicker";
-import { Input } from "../common/Input";
+import DatePicker from "components/UI/molecules/form/StartEndPicker";
+import { Input } from "components/UI/atoms/Input";
 
 import { FIELD } from "../../constant/checkItems";
 

@@ -3,8 +3,8 @@ import styled from "styled-components";
 import TeamRegist, {
   Team,
   PropTypes as TeamPropTypes,
-} from "components/template/TeamRegist";
-import SubmitButton from "components/template/SubmitButton";
+} from "template/TeamRegist";
+import SubmitButton from "template/SubmitButton";
 
 import { regist } from "api/team";
 import { FIELD } from "constant/checkItems";

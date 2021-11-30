@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { list } from "api/hackathon";
-import HackathonCard, { Hackathon } from "components/template/HackathonCard";
+import HackathonCard, { Hackathon } from "template/HackathonCard";
 
 function CardListHackatonContainer() {
   const [dataList, setDataList] = useState<Hackathon[]>();

@@ -3,9 +3,9 @@ import React, { useCallback, useEffect, useState } from "react";
 import TeamDetail, {
   PropTypes as TeamPropTypes,
   Team,
-} from "components/template/TeamDetail";
+} from "template/TeamDetail";
 import { detail } from "api/team";
-import SubmitButton from "components/template/SubmitButton";
+import SubmitButton from "template/SubmitButton";
 import styled from "styled-components";
 
 interface PropTypes {

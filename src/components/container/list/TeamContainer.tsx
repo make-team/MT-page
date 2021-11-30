@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import TeamCard, { Team } from "components/template/TeamCard";
+import TeamCard, { Team } from "template/TeamCard";
 
 import { list } from "api/team";
 

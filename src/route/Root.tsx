@@ -1,31 +1,38 @@
 import React from "react";
-import { Switch, Route, Redirect, BrowserRouter } from "react-router-dom";
+import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
 
-import Main from "components/pages/Main";
-import HackathonRegist from "components/pages/HackathonRegist";
-import HackathonDetail from "components/pages/HackathonDetail";
-import PersonDetail from "components/pages/PersonDetail";
-import PersonRegist from "components/pages/PersonRegist";
-import TeamDetail from "components/pages/TeamDetail";
-import TeamRegist from "components/pages/TeamRegist";
+import Main from "pages/Main";
+import HackathonRegist from "pages/HackathonRegist";
+import HackathonDetail from "pages/HackathonDetail";
+import PersonDetail from "pages/PersonDetail";
+import PersonRegist from "pages/PersonRegist";
+import TeamDetail from "pages/TeamDetail";
+import TeamRegist from "pages/TeamRegist";
+
+import CardListHackatonContainer from "components/container/list/HackathonContainer";
+import CardListPersonContainer from "components/container/list/PersonContainer";
+import CardListTeamContainer from "components/container/list/TeamContainer";
 
 function Root() {
   return (
     <BrowserRouter>
-      <Switch>
+      <Routes>
+        <Route path="/" element={<Main />}>
+          <Route path="hackathon" element={<CardListHackatonContainer />} />
+          <Route path="team" element={<CardListTeamContainer />} />
+          <Route path="person" element={<CardListPersonContainer />} />
+        </Route>
+        <Route path="/hackathon/regist" element={<HackathonRegist />} />
+        <Route path="/hackathon/:id" element={<HackathonDetail />} />
+        <Route path="/hackathon/:id/team/regist" element={<TeamRegist />} />
+        <Route path="/team/:id" element={<TeamDetail />} />
+        <Route path="/person/regist" element={<PersonRegist />} />
+        <Route path="/person/:id" element={<PersonDetail />} />
         <Route
-          exact
-          path={["/hackathon", "/team", "/person"]}
-          component={Main}
+          path="*"
+          element={<Navigate to="/" state={{ test: "test" }} />}
         />
-        <Route exact path="/hackathon/regist" component={HackathonRegist} />
-        <Route exact path="/hackathon/:id" component={HackathonDetail} />
-        <Route exact path="/hackathon/:id/team/regist" component={TeamRegist} />
-        <Route exact path="/team/:id" component={TeamDetail} />
-        <Route exact path="/person/regist" component={PersonRegist} />
-        <Route exact path="/person/:id" component={PersonDetail} />
-        <Redirect to="/hackathon" />
-      </Switch>
+      </Routes>
     </BrowserRouter>
   );
 }

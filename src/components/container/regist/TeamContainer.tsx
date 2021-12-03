@@ -9,12 +9,17 @@ import SubmitButton from "template/SubmitButton";
 import { regist } from "api/team";
 import { FIELD } from "constant/checkItems";
 
+import { RootState } from "store/reducers";
+import { addRecruiment } from "store/reducers/recruiment";
+import { useDispatch, useSelector } from "react-redux";
 export interface PropTypes {
   id: string;
   onCancel: () => void;
 }
 
 function TeamContainer({ id, onCancel }: PropTypes) {
+  const teamRecruiment = useSelector((state: RootState) => state.recruiment);
+  const dispatch = useDispatch();
   const [contents, setContents] = useState<Team>({
     id: 0,
     name: "",
@@ -25,14 +30,6 @@ function TeamContainer({ id, onCancel }: PropTypes) {
     endTime: new Date(),
     startTime: new Date(),
   });
-
-  const [recruiment, setRecruiment] = useState<
-    Array<{
-      field?: keyof typeof FIELD;
-      skill?: string;
-      count?: number;
-    }>
-  >([]);
 
   const changeContents = useCallback<TeamPropTypes["onChange"]>(
     ({ name, value }) => {
@@ -49,23 +46,28 @@ function TeamContainer({ id, onCancel }: PropTypes) {
     bodyData.append("contact", contents.contact);
     bodyData.append("end_time", `${contents.endTime.getTime()}`);
     bodyData.append("start_time", `${contents.startTime.getTime()}`);
-    bodyData.append("recruiment", `${JSON.stringify(recruiment)}`);
+    bodyData.append("recruiment", `${JSON.stringify(teamRecruiment)}`);
     await regist({ bodyData });
     onCancel();
   };
 
-  const addRecuiment = useCallback<TeamPropTypes["onAddRecruiment"]>(
-    ({ field, skill, count }) => {
-      setRecruiment((prev) => [...prev, { field, skill, count }]);
-    },
-    []
-  );
+  const addRecuiment = ({
+    field,
+    skill,
+    count,
+  }: {
+    field: keyof typeof FIELD;
+    skill: string;
+    count: number;
+  }) => {
+    dispatch(addRecruiment(field, skill, count));
+  };
 
   return (
     <Wrapper>
       <TeamRegist
         contents={contents}
-        recruiment={recruiment}
+        recruiment={teamRecruiment}
         onChange={changeContents}
         onAddRecruiment={addRecuiment}
       />

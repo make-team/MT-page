@@ -1,11 +1,11 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
 
 import HackathonDetailContents, {
   PropTypes as DetailContentsPropTypes,
 } from "components/organisms/HackathonDetailContents";
-import Popup from "components/organisms/Popup";
-import StickyMenu from "components/molecules/StickyMenu";
+
+import CardImg from "components/molecules/ImgBox";
 
 export interface Hackathon {
   title: string;
@@ -25,23 +25,11 @@ export interface Hackathon {
 
 export interface PropTypes {
   contents: Hackathon;
-  onBack: () => void;
-  onRegist: () => void;
-  onModify: () => void;
-  onDelete: () => void;
+  modifyStatus: boolean;
   onChange: ({ name, value }: { name: string; value: string | Date }) => void;
 }
 
-function HackathonDetail({
-  contents,
-  onChange,
-  onRegist,
-  onModify,
-  onDelete,
-  onBack,
-}: PropTypes) {
-  const [modifyStatus, setModifyStatus] = useState<boolean>(false);
-  const [popup, setPopup] = useState<boolean>(false);
+function HackathonDetail({ contents, modifyStatus, onChange }: PropTypes) {
   const contentsChange = useCallback<
     Exclude<DetailContentsPropTypes["onChange"], undefined>
   >(
@@ -50,47 +38,15 @@ function HackathonDetail({
     },
     [onChange]
   );
-
-  const modifyHackathon = () => {
-    setModifyStatus((prev) => !prev);
-  };
-
-  const confirmModify = () => {
-    onModify();
-    setPopup((prev) => !prev);
-  };
-
-  const registTeam = () => {
-    onRegist();
-  };
-
-  const popupClose = () => {
-    setPopup((prev) => !prev);
-  };
-
   return (
     <Wrapper>
+      <CardImg attachment={contents.attachment} height="50rem" width="30rem" />
       <HackathonDetailContents
         description={contents.description}
         contact={contents.contact}
         startTime={contents.startTime}
         endTime={contents.endTime}
-        attachment={contents.attachment}
         onChange={modifyStatus ? undefined : contentsChange}
-      />
-      <StickyMenu
-        onBack={onBack}
-        onDelete={onDelete}
-        onModify={modifyHackathon}
-        onTeamRegist={registTeam}
-        onSubmitModify={confirmModify}
-        modifyStatus={modifyStatus}
-      />
-      <Popup
-        text="수정하시겠습니까?"
-        status={popup ? "open" : "close"}
-        onCancel={popupClose}
-        onModify={onModify}
       />
     </Wrapper>
   );
@@ -99,5 +55,8 @@ function HackathonDetail({
 export default HackathonDetail;
 
 const Wrapper = styled.div`
-  grid-area: main;
+  display: flex;
+  & > div {
+    flex: 1;
+  }
 `;

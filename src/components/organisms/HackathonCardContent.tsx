@@ -24,7 +24,7 @@ function HackathonCardContent({
 }: PropTypes) {
   return (
     <Wrapper>
-      <CardImg attachment={cardImg} />
+      <CardImg attachment={cardImg} height="27rem" />
       <CardItem contentTitle="공모전 명 : " content={title} />
       <CardItem contentTitle="상세 설명 : " content={description} />
       <CardItem contentTitle="연 락 처 : " content={contact} />
@@ -41,6 +41,6 @@ export default HackathonCardContent;
 const Wrapper = styled.div`
   text-align: left;
   & > div {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
   }
 `;

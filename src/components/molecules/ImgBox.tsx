@@ -13,11 +13,13 @@ export interface Img {
 
 interface PropTypes {
   attachment?: Img[];
+  width?: string;
+  height?: string;
 }
 
-function CardImg({ attachment }: PropTypes) {
+function CardImg({ attachment, width, height }: PropTypes) {
   return (
-    <Wrapper>
+    <Wrapper width={width ?? "100%"} height={height ?? "100%"}>
       {attachment && attachment.length > 0 ? (
         attachment.map(
           (attachment) =>
@@ -40,7 +42,7 @@ function CardImg({ attachment }: PropTypes) {
 
 export default CardImg;
 
-const Wrapper = styled.div`
-  width: auto;
-  height: 25rem;
+const Wrapper = styled.div<{ width: string; height: string }>`
+  width: ${({ width }) => width};
+  height: ${({ height }) => height};
 `;

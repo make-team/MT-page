@@ -11,7 +11,7 @@ export interface Team {
   hackathonId: number;
   name: string;
   description: string;
-  recruiment: { field?: keyof typeof FIELD; skill?: string; count?: number }[];
+  recruiment: { field: keyof typeof FIELD; skill: string; count: number }[];
   contact: string;
   endTime: Date;
   startTime: Date;
@@ -26,9 +26,9 @@ export interface PropTypes {
     skill,
     count,
   }: {
-    field?: keyof typeof FIELD;
-    skill?: string;
-    count?: number;
+    field: keyof typeof FIELD;
+    skill: string;
+    count: number;
   }) => void;
 }
 
@@ -39,11 +39,16 @@ function TeamRegist({
   onAddRecruiment,
 }: PropTypes) {
   const [addActive, setAddActive] = useState<Boolean>(false);
+
   const [teamContents, setTeamContents] = useState<{
-    field?: keyof typeof FIELD;
-    skill?: string;
-    count?: number;
-  }>();
+    field: keyof typeof FIELD;
+    skill: string;
+    count: number;
+  }>({
+    field: 0,
+    skill: "",
+    count: 0,
+  });
 
   const ClickTeamAdd = () => {
     setAddActive((prev) => !prev);
@@ -54,9 +59,9 @@ function TeamRegist({
     skill,
     count,
   }: {
-    field?: keyof typeof FIELD;
-    skill?: string;
-    count?: number;
+    field: keyof typeof FIELD;
+    skill: string;
+    count: number;
   }) => {
     onAddRecruiment({ field, skill, count });
     setAddActive(false);

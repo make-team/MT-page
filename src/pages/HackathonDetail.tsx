@@ -9,6 +9,9 @@ import HackathonDetailTamplate, {
 } from "template/HackathonDetail";
 import HackathonTeamCard, { Team } from "template/HackathonTeamCard";
 
+import Popup from "components/organisms/Popup";
+import StickyMenu from "components/molecules/StickyMenu";
+
 import { detail, remove, modify } from "api/hackathon";
 import { inHackathon } from "api/team";
 
@@ -16,6 +19,9 @@ function HackathonDetail() {
   const location = useLocation();
   const history = useNavigate();
   let id = location.pathname.split("/")[2];
+
+  const [modifyStatus, setModifyStatus] = useState<boolean>(false);
+  const [popup, setPopup] = useState<boolean>(false);
 
   const [detailData, setDetailData] = useState<Hackathon>({
     title: "",
@@ -98,6 +104,19 @@ function HackathonDetail() {
     goBackClick();
   };
 
+  const modifyHackathon = () => {
+    setModifyStatus((prev) => !prev);
+  };
+
+  const confirmModify = () => {
+    onModify();
+    setPopup((prev) => !prev);
+  };
+
+  const popupClose = () => {
+    setPopup((prev) => !prev);
+  };
+
   useEffect(() => {
     updateDetail();
     TeamList();
@@ -107,17 +126,32 @@ function HackathonDetail() {
     <Wrapper>
       <HackathonDetailTamplate
         contents={detailData}
-        onBack={goBackClick}
-        onRegist={registTeam}
-        onModify={onModify}
-        onDelete={deleteHackathon}
+        modifyStatus={modifyStatus}
         onChange={changeContents}
       />
       <HackathonTeamCard items={dataList} />
+      <StickyMenu
+        onBack={goBackClick}
+        onDelete={deleteHackathon}
+        onModify={modifyHackathon}
+        onTeamRegist={registTeam}
+        onSubmitModify={confirmModify}
+        modifyStatus={modifyStatus}
+      />
+      <Popup
+        text="수정하시겠습니까?"
+        status={popup ? "open" : "close"}
+        onCancel={popupClose}
+        onModify={onModify}
+      />
     </Wrapper>
   );
 }
 
 export default HackathonDetail;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  padding: 1rem;
+  max-width: 90rem;
+  margin: 1rem auto;
+`;

@@ -18,5 +18,7 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   min-width: max-content;
-  font-size: 8rem;
+  & > div {
+    font-size: 8rem;
+  }
 `;

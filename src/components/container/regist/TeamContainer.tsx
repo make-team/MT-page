@@ -9,17 +9,17 @@ import SubmitButton from "template/SubmitButton";
 import { regist } from "api/team";
 import { FIELD } from "constant/checkItems";
 
-import { RootState } from "store/reducers";
-import { addRecruiment } from "store/reducers/recruiment";
-import { useDispatch, useSelector } from "react-redux";
+// import { RootState } from "store/reducers";
+// import { addRecruiment } from "store/reducers/recruiment";
+// import { useDispatch, useSelector } from "react-redux";
 export interface PropTypes {
   id: string;
   onCancel: () => void;
 }
 
 function TeamContainer({ id, onCancel }: PropTypes) {
-  const teamRecruiment = useSelector((state: RootState) => state.recruiment);
-  const dispatch = useDispatch();
+  // const teamRecruiment = useSelector((state: RootState) => state.recruiment);
+  // const dispatch = useDispatch();
   const [contents, setContents] = useState<Team>({
     id: 0,
     name: "",
@@ -46,30 +46,38 @@ function TeamContainer({ id, onCancel }: PropTypes) {
     bodyData.append("contact", contents.contact);
     bodyData.append("end_time", `${contents.endTime.getTime()}`);
     bodyData.append("start_time", `${contents.startTime.getTime()}`);
-    bodyData.append("recruiment", `${JSON.stringify(teamRecruiment)}`);
+    bodyData.append("recruiment", `${JSON.stringify(contents.recruiment)}`);
     await regist({ bodyData });
     onCancel();
   };
 
-  const addRecuiment = ({
-    field,
-    skill,
-    count,
-  }: {
-    field: keyof typeof FIELD;
-    skill: string;
-    count: number;
-  }) => {
-    dispatch(addRecruiment(field, skill, count));
-  };
+  const [recruiment, setRecruiment] = useState<
+    Array<{
+      id: number;
+      field: keyof typeof FIELD;
+      skill: string;
+      count: number;
+    }>
+  >([]);
+
+  const addRecuiment = useCallback<TeamPropTypes["onAddRecruiment"]>(
+    ({ id, field, skill, count }) => {
+      setRecruiment((prev) => [...prev, { id, field, skill, count }]);
+    },
+    []
+  );
+  const removeRecuiment = useCallback<TeamPropTypes["onDelete"]>((id) => {
+    setRecruiment((prev) => prev.filter((item) => item.id !== id));
+  }, []);
 
   return (
     <Wrapper>
       <TeamRegist
         contents={contents}
-        recruiment={teamRecruiment}
+        recruiment={recruiment}
         onChange={changeContents}
         onAddRecruiment={addRecuiment}
+        onDelete={removeRecuiment}
       />
       <ButtonWrapper>
         <SubmitButton onCancel={onCancel} onSubmit={onRegist} />

@@ -6,7 +6,10 @@ export const list = () =>
   axios.get<
     {
       _id: number;
-      hackathon_id: number;
+      hackathon: {
+        _id: number;
+        title: string;
+      };
       name: string;
       description: string;
       contact: string;

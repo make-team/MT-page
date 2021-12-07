@@ -1,8 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
 
 import HackathonCardContent from "components/organisms/HackathonCardContent";
+
+import { boardListSelector } from "store/hackathonList";
 
 export interface Hackathon {
   id: number;
@@ -20,19 +23,14 @@ export interface Hackathon {
   }[];
 }
 
-export interface PropTypes {
-  items?: Hackathon[];
-  add?: boolean;
-  toUrl?: string;
-}
-
-function HackathonCard({ items, add, toUrl }: PropTypes) {
+function HackathonCard() {
+  const data = useRecoilValue(boardListSelector);
   const history = useNavigate();
   return (
     <List>
-      {items &&
-        items.map((item) => (
-          <Card key={item.id} onClick={() => history(`${toUrl}/${item.id}`)}>
+      {data &&
+        data.map((item) => (
+          <Card key={item.id} onClick={() => history(`/hackathon/${item.id}`)}>
             <HackathonCardContent
               cardImg={item.attachment}
               endTime={item.endTime}
@@ -63,8 +61,8 @@ const List = styled.div`
 
 const Card = styled.div`
   cursor: pointer;
-  height: 40rem;
-  width: 25rem;
+  height: 25rem;
+  width: 16rem;
   padding: 0.5rem;
   margin-bottom: 1rem;
   border-radius: 8px;

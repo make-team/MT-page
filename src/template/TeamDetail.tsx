@@ -5,6 +5,7 @@ import DatePicker from "components/molecules/form/StartEndPicker";
 import { Input } from "components/atoms/Input";
 
 import { FIELD } from "constant/checkItems";
+import SubmitButton from "./SubmitButton";
 
 export interface Team {
   id: number;
@@ -21,9 +22,15 @@ export interface PropTypes {
   contents: Team;
   modifyStatus?: boolean;
   onChange: ({ name, value }: { name: string; value: string | Date }) => void;
+  onBack: () => void;
 }
 
-function HackathonDetail({ contents, modifyStatus, onChange }: PropTypes) {
+function HackathonDetail({
+  contents,
+  modifyStatus,
+  onChange,
+  onBack,
+}: PropTypes) {
   const contentsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     onChange({ name, value });
@@ -80,6 +87,9 @@ function HackathonDetail({ contents, modifyStatus, onChange }: PropTypes) {
           ></Input>
         </InputWrapper>
       </div>
+      <ButtonWrapper>
+        <SubmitButton onCancel={onBack} />
+      </ButtonWrapper>
     </RegistForm>
   );
 }
@@ -111,4 +121,9 @@ const CardContents = styled.div`
   background-color: #c3a6a0;
   border: 1px solid #262220;
   padding: 1rem;
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: right;
 `;

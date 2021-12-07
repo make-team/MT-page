@@ -30,7 +30,6 @@ function StickyMenu({
 
   const submitModiy = () => {
     onSubmitModify();
-    onModify();
   };
   return (
     <Wrapper>

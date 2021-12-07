@@ -1,9 +1,10 @@
-import React from "react";
+import React, { Suspense } from "react";
 import styled from "styled-components";
 import { NavLink, Outlet } from "react-router-dom";
 
 import Header from "components/molecules/Header";
 import Footer from "components/molecules/Footer";
+import Loading from "components/atoms/Loading";
 
 const MENU = [
   {
@@ -32,9 +33,12 @@ function Main() {
             </ListLink>
           ))}
         </Menu>
-        <Outlet />
+        <Suspense fallback={<Loading />}>
+          <Outlet />
+        </Suspense>
       </Content>
       <Footer />
+      <Loading />
     </>
   );
 }
@@ -58,7 +62,7 @@ const Content = styled.div`
 const Menu = styled.div`
   grid-area: menu;
   display: flex;
-  height: 4rem;
+  height: 2.5rem;
   background-color: #100c0d;
   min-width: max-content;
   align-items: center;
@@ -74,7 +78,7 @@ const ListLink = styled(NavLink)`
   height: 100%;
   cursor: pointer;
   font-weight: bolder;
-  font-size: 1rem;
+  font-size: 0.75rem;
   text-decoration: none;
   &:visited {
     color: white;

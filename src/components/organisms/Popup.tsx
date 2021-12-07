@@ -8,25 +8,14 @@ export interface PropTypes {
   status: "open" | "close";
   onSubmit?: () => void;
   onCancel?: () => void;
-  onModify?: () => void;
 }
 
-function Popup({
-  text,
-  status = "close",
-  onSubmit,
-  onCancel,
-  onModify,
-}: PropTypes) {
+function Popup({ text, status = "close", onSubmit, onCancel }: PropTypes) {
   return (
     <Wrapper data-open={status === "open"}>
       <PopupWindow>
         <Div fontSize="1.3rem">{text}</Div>
-        <SubmitButton
-          onSubmit={onSubmit}
-          onCancel={onCancel}
-          onModify={onModify}
-        />
+        <SubmitButton onSubmit={onSubmit} onCancel={onCancel} />
       </PopupWindow>
     </Wrapper>
   );

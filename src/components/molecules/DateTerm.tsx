@@ -10,15 +10,15 @@ function DateTerm({ startTime, endTime }: PropTypes) {
   return (
     <Wrapper>
       <div>
-        {`${startTime.getFullYear().toString().substr(-2)}년` +
-          `${startTime.getMonth()}월` +
-          `${startTime.getDay()}일`}
+        {`${startTime.getFullYear().toString().substr(-2)}.` +
+          `${startTime.getMonth()}.` +
+          `${startTime.getDay()}`}
       </div>
       <div>~</div>
       <div>
-        {`${endTime.getFullYear()}년` +
-          `${endTime.getMonth()}월` +
-          `${endTime.getDay()}일`}
+        {`${endTime.getFullYear().toString().substr(-2)}.` +
+          `${endTime.getMonth()}.` +
+          `${endTime.getDay()}`}
       </div>
       <div>
         {"(" +
@@ -38,7 +38,6 @@ export default DateTerm;
 
 const Wrapper = styled.div`
   display: flex;
-  text-overflow: ellipsis;
   & > div {
     margin-right: 0.5rem;
     &:last-child {

@@ -1,17 +1,22 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import DatePicker from "components/molecules/form/StartEndPicker";
 import Radio from "components/molecules/RadioList";
 
 import { FIELD } from "constant/checkItems";
+import StartEndPicker from "components/molecules/form/StartEndPicker";
 
 export interface Team {
   id: number;
   hackathonId: number;
   name: string;
   description: string;
-  recruiment: { field: keyof typeof FIELD; skill: string; count: number }[];
+  recruiment: {
+    id: number;
+    field: keyof typeof FIELD;
+    skill: string;
+    count: number;
+  }[];
   contact: string;
   endTime: Date;
   startTime: Date;
@@ -22,14 +27,17 @@ export interface PropTypes {
   recruiment: Team["recruiment"];
   onChange: ({ name, value }: { name: string; value: string | Date }) => void;
   onAddRecruiment: ({
+    id,
     field,
     skill,
     count,
   }: {
+    id: number;
     field: keyof typeof FIELD;
     skill: string;
     count: number;
   }) => void;
+  onDelete: (id: number) => void;
 }
 
 function TeamRegist({
@@ -37,14 +45,17 @@ function TeamRegist({
   recruiment,
   onChange,
   onAddRecruiment,
+  onDelete,
 }: PropTypes) {
   const [addActive, setAddActive] = useState<Boolean>(false);
-
+  const [recruimentId, setRecruimentId] = useState<number>(0);
   const [teamContents, setTeamContents] = useState<{
+    id: number;
     field: keyof typeof FIELD;
     skill: string;
     count: number;
   }>({
+    id: 0,
     field: 0,
     skill: "",
     count: 0,
@@ -55,15 +66,18 @@ function TeamRegist({
   };
 
   const submitAddTeam = ({
+    id,
     field,
     skill,
     count,
   }: {
+    id: number;
     field: keyof typeof FIELD;
     skill: string;
     count: number;
   }) => {
-    onAddRecruiment({ field, skill, count });
+    onAddRecruiment({ id: recruimentId, field, skill, count });
+    setRecruimentId((prev) => prev + 1);
     setAddActive(false);
   };
 
@@ -81,29 +95,29 @@ function TeamRegist({
     <Wrapper>
       <h1>팀 등록하기</h1>
       <InputWrapper>
-        <div>팀 명 : </div>
+        <div>팀 명</div>
         <input name="name" onChange={contentsChange}></input>
       </InputWrapper>
       <InputWrapper>
-        <div>팀 소개 : </div>
+        <div>팀 소개</div>
         <input name="description" onChange={contentsChange}></input>
       </InputWrapper>
       <InputWrapper>
-        <div>모집 기간 : </div>
-        <DatePicker
+        <div>모집 기간</div>
+        <StartEndPicker
           endTime={new Date()}
           startTime={new Date()}
           onChange={onChange}
         />
       </InputWrapper>
       <InputWrapper>
-        <div>모집 팀원 등록하기</div> :
+        <div>모집 팀원 등록하기</div>
         <button onClick={ClickTeamAdd}>추가하기</button>
       </InputWrapper>
       {addActive && (
         <AddTeamWrapper>
           <InputWrapper>
-            <div> 모집 분야 : </div>
+            <div> 모집 분야 </div>
             <Radio
               name="field"
               list={Object.entries(FIELD)}
@@ -111,7 +125,7 @@ function TeamRegist({
             />
           </InputWrapper>
           <InputWrapper>
-            <div>요구 기술 : </div>
+            <div>요구 기술 </div>
             <input
               name="skill"
               onChange={teamContentChange}
@@ -119,7 +133,7 @@ function TeamRegist({
             ></input>
           </InputWrapper>
           <InputWrapper>
-            <div>모집 인원 : </div>
+            <div>모집 인원 </div>
             <input
               name="count"
               onChange={teamContentChange}
@@ -133,12 +147,12 @@ function TeamRegist({
       )}
       {contents.recruiment && (
         <TeamRecruitmentCard>
-          {recruiment.map(({ field, count, skill }, index) => (
-            <div key={index}>
-              <div>분야 : {field && FIELD[field]}</div>
-              <div>기술 : {skill}</div>
-              <div>인원 : {count}</div>
-              <button> 삭제 </button>
+          {recruiment.map(({ id, field, count, skill }) => (
+            <div key={id}>
+              <div>분야 - {field && FIELD[field]}</div>
+              <div>기술 - {skill}</div>
+              <div>인원 - {count}</div>
+              <button onClick={() => onDelete(id)}> 삭제 </button>
             </div>
           ))}
         </TeamRecruitmentCard>
@@ -154,14 +168,22 @@ function TeamRegist({
 export default TeamRegist;
 
 const Wrapper = styled.div`
-  align-content: center;
   margin: 0 auto;
+  border: 1px solid black;
 `;
 
 const InputWrapper = styled.div`
   display: flex;
-  width: auto;
-  margin-bottom: 2rem;
+  padding: 1rem;
+  height: 2rem;
+  & > div {
+    &:first-child {
+      background-color: #a15c38;
+      color: white;
+      padding: 0.25rem 1rem 1rem 1rem;
+      margin-right: 1rem;
+    }
+  }
 `;
 
 const AddTeamWrapper = styled.div`
@@ -172,13 +194,13 @@ const AddTeamWrapper = styled.div`
 
 const TeamRecruitmentCard = styled.div`
   display: flex;
-  background-color: #c3a6a0;
   text-align: left;
-  margin: 1rem;
   width: min-content;
+  margin: 1rem;
   & > div {
+    background-color: #c3a6a0;
+    border: 3px solid black;
     width: 15rem;
-    border: 1px solid black;
     margin: 0.5rem;
     & > div {
       padding: 1rem;

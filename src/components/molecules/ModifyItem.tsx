@@ -7,12 +7,14 @@ import { Input } from "components/atoms/Input";
 export interface PropTypes {
   title: string;
   content: string;
+  name: string;
   onChange?: ({ name, value }: { name: string; value: string | Date }) => void;
 }
 
-function HackathonDetail({ title, content, onChange }: PropTypes) {
+function HackathonDetail({ title, content, name, onChange }: PropTypes) {
   const contentsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    console.log(value);
     onChange && onChange({ name, value });
   };
 
@@ -20,9 +22,13 @@ function HackathonDetail({ title, content, onChange }: PropTypes) {
     <InputWrapper>
       <Div>{title}</Div>
       {onChange ? (
-        <Div>{content}</Div>
+        <Input
+          name={name}
+          defaultValue={content}
+          onChange={contentsChange}
+        ></Input>
       ) : (
-        <Input value={content} onChange={contentsChange}></Input>
+        <Div>{content}</Div>
       )}
     </InputWrapper>
   );

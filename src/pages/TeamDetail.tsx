@@ -1,24 +1,73 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import TeamContainer from "components/container/detail/TeamContainer";
+import TeamDetail, {
+  PropTypes as TeamPropTypes,
+  Team,
+} from "template/TeamDetail";
+
+import { detail } from "api/team";
 
 function PersonDetail() {
   const location = useLocation();
   const history = useNavigate();
   let id = location.pathname.split("/");
 
+  const [detailData, setDetailData] = useState<Team>({
+    id: 0,
+    hackathonId: 0,
+    name: "",
+    description: "",
+    contact: "",
+    startTime: new Date(),
+    endTime: new Date(),
+    recruiment: [],
+  });
+
   const goBackClick = () => {
     history(-1);
   };
+
+  const updateDetail = useCallback(async () => {
+    const { data } = await detail(+id);
+    setDetailData({
+      id: data._id,
+      hackathonId: data.hackathon_id,
+      name: data.name,
+      description: data.description,
+      contact: data.contact,
+      startTime: new Date(data.start_time),
+      endTime: new Date(data.end_time),
+      recruiment: data.recruiment.map((item) => ({
+        field: item.field,
+        count: item.count,
+        skill: item.skill,
+      })),
+    });
+  }, [id]);
+
+  const changeContents = useCallback<TeamPropTypes["onChange"]>(
+    ({ name, value }) => {
+      setDetailData({ ...detailData, [name]: value });
+    },
+    [detailData]
+  );
+
+  useEffect(() => {
+    updateDetail();
+  }, [updateDetail]);
 
   return (
     <Wrapper>
       <Title></Title>
       <Contents>
-        <TeamContainer id={id[2]} onBack={goBackClick} />
+        <TeamDetail
+          contents={detailData}
+          onChange={changeContents}
+          onBack={goBackClick}
+        />
       </Contents>
     </Wrapper>
   );

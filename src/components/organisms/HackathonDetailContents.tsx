@@ -26,8 +26,18 @@ function HackathonDetailContents({
         endTime={endTime}
         onChange={onChange}
       />
-      <DetailItem title="설명 : " content={description} onChange={onChange} />
-      <DetailItem title="연락처 : " content={contact} onChange={onChange} />
+      <DetailItem
+        name="description"
+        title="설명 : "
+        content={description}
+        onChange={onChange}
+      />
+      <DetailItem
+        name="contact"
+        title="연락처 : "
+        content={contact}
+        onChange={onChange}
+      />
     </Wrapper>
   );
 }

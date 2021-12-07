@@ -14,22 +14,24 @@ export interface Hackathon {
   endTime: Date;
   startTime: Date;
   hit: number;
-  attachment?: {
-    imgUrl: string;
-    uuid: string;
-    name: string;
-    size: number;
-    contentType: string;
-  }[];
+}
+
+export interface Attachment {
+  imgUrl: string;
+  uuid: string;
+  name: string;
+  size: number;
+  contentType: string;
 }
 
 export interface PropTypes {
   contents: Hackathon;
+  img?: Attachment[];
   modifyStatus: boolean;
   onChange: ({ name, value }: { name: string; value: string | Date }) => void;
 }
 
-function HackathonDetail({ contents, modifyStatus, onChange }: PropTypes) {
+function HackathonDetail({ contents, img, modifyStatus, onChange }: PropTypes) {
   const contentsChange = useCallback<
     Exclude<DetailContentsPropTypes["onChange"], undefined>
   >(
@@ -40,13 +42,15 @@ function HackathonDetail({ contents, modifyStatus, onChange }: PropTypes) {
   );
   return (
     <Wrapper>
-      <CardImg attachment={contents.attachment} height="50rem" width="30rem" />
+      <ImgBox>
+        <CardImg attachment={img} height="100%" width="100%" />
+      </ImgBox>
       <HackathonDetailContents
         description={contents.description}
         contact={contents.contact}
         startTime={contents.startTime}
         endTime={contents.endTime}
-        onChange={modifyStatus ? undefined : contentsChange}
+        onChange={modifyStatus ? contentsChange : undefined}
       />
     </Wrapper>
   );
@@ -59,4 +63,10 @@ const Wrapper = styled.div`
   & > div {
     flex: 1;
   }
+`;
+
+const ImgBox = styled.div`
+  padding: 2rem;
+  max-width: 35rem;
+  height: 40rem;
 `;

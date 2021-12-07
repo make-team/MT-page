@@ -9,18 +9,21 @@ import PersonRegist from "pages/PersonRegist";
 import TeamDetail from "pages/TeamDetail";
 import TeamRegist from "pages/TeamRegist";
 
-import CardListHackatonContainer from "components/container/list/HackathonContainer";
-import CardListPersonContainer from "components/container/list/PersonContainer";
-import CardListTeamContainer from "components/container/list/TeamContainer";
+import HackathonCardList from "template/HackathonCard";
+import CardListTeamContainer from "template/TeamCard";
 
 function Root() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Main />}>
-          <Route path="hackathon" element={<CardListHackatonContainer />} />
+          <Route path="hackathon" element={<HackathonCardList />} />
           <Route path="team" element={<CardListTeamContainer />} />
-          <Route path="person" element={<CardListPersonContainer />} />
+          <Route path="person" element={<></>} />
+          <Route
+            path="/"
+            element={<Navigate to="/hackathon" state={{ test: "test" }} />}
+          />
         </Route>
         <Route path="/hackathon/regist" element={<HackathonRegist />} />
         <Route path="/hackathon/:id" element={<HackathonDetail />} />
@@ -30,7 +33,7 @@ function Root() {
         <Route path="/person/:id" element={<PersonDetail />} />
         <Route
           path="*"
-          element={<Navigate to="/" state={{ test: "test" }} />}
+          element={<Navigate to="/hackathon" state={{ test: "test" }} />}
         />
       </Routes>
     </BrowserRouter>

@@ -15,6 +15,9 @@ import StickyMenu from "components/molecules/StickyMenu";
 import { detail, remove, modify } from "api/hackathon";
 import { inHackathon } from "api/team";
 
+import { useRecoilState } from "recoil";
+import { ImgType, ImgState } from "recoil/hackathonImg";
+
 function HackathonDetail() {
   const location = useLocation();
   const history = useNavigate();
@@ -23,6 +26,7 @@ function HackathonDetail() {
   const [modifyStatus, setModifyStatus] = useState<boolean>(false);
   const [popup, setPopup] = useState<boolean>(false);
 
+  const [img, setImg] = useRecoilState<ImgType>(ImgState);
   const [detailData, setDetailData] = useState<Hackathon>({
     title: "",
     description: "",
@@ -30,7 +34,6 @@ function HackathonDetail() {
     endTime: new Date(),
     startTime: new Date(),
     hit: 0,
-    attachment: undefined,
   });
 
   const [dataList, setDataList] = useState<Team[]>();
@@ -69,6 +72,9 @@ function HackathonDetail() {
       endTime: new Date(data.end_time),
       startTime: new Date(data.start_time),
       hit: data.hit,
+    });
+    setImg({
+      hackathonId: +id,
       attachment: data.attachment.map((imgItem) => ({
         imgUrl: imgItem.s3,
         uuid: imgItem.uuid,
@@ -77,7 +83,7 @@ function HackathonDetail() {
         contentType: imgItem.content_type,
       })),
     });
-  }, [id]);
+  }, [id, setImg]);
 
   const TeamList = useCallback(async () => {
     const { data } = await inHackathon(+id);
@@ -109,8 +115,8 @@ function HackathonDetail() {
   };
 
   const confirmModify = () => {
-    onModify();
     setPopup((prev) => !prev);
+    onModify();
   };
 
   const popupClose = () => {
@@ -126,6 +132,7 @@ function HackathonDetail() {
     <Wrapper>
       <HackathonDetailTamplate
         contents={detailData}
+        img={img.attachment}
         modifyStatus={modifyStatus}
         onChange={changeContents}
       />
@@ -142,7 +149,7 @@ function HackathonDetail() {
         text="수정하시겠습니까?"
         status={popup ? "open" : "close"}
         onCancel={popupClose}
-        onModify={onModify}
+        onSubmit={confirmModify}
       />
     </Wrapper>
   );

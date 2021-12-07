@@ -13,7 +13,6 @@ export interface PropTypes {
 function StartEndPicker({ startTime, endTime, onChange }: PropTypes) {
   return (
     <Wrapper>
-      <span>모집기간</span>
       <div>
         <DatePicker
           pickerName="startTime"

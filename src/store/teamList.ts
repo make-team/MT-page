@@ -1,20 +1,6 @@
-import { atom, selector } from "recoil";
-import { FIELD } from "constant/checkItems";
+import { selector } from "recoil";
 
 import { list } from "api/team";
-interface Team {
-  id: number;
-  hackathon: {
-    id: number;
-    title: string;
-  };
-  name: string;
-  description: string;
-  contact: string;
-  startTime: Date;
-  endTime: Date;
-  recruiment: { field: keyof typeof FIELD; skill: string; count: number }[];
-}
 
 export const teamListSelector = selector({
   key: "teamListSelector",
@@ -38,23 +24,4 @@ export const teamListSelector = selector({
       })),
     }));
   },
-});
-
-export const teamListState = atom<Array<Team>>({
-  key: "item",
-  default: [
-    {
-      id: 0,
-      hackathon: {
-        id: 0,
-        title: "",
-      },
-      name: "",
-      description: "",
-      contact: "",
-      startTime: new Date(),
-      endTime: new Date(),
-      recruiment: [],
-    },
-  ],
 });

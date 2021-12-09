@@ -3,21 +3,22 @@ import { useLocation } from "react-router";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import TeamDetail, {
+import TeamDetailTemplate, {
   PropTypes as TeamPropTypes,
   Team,
 } from "template/TeamDetail";
 
 import { detail } from "api/team";
 
-function PersonDetail() {
+function TeamDetail() {
   const location = useLocation();
   const history = useNavigate();
-  let id = location.pathname.split("/");
+  let id = location.pathname.split("/")[2];
 
+  const [modifyStatus, setModifyStatus] = useState<boolean>(false);
   const [detailData, setDetailData] = useState<Team>({
     id: 0,
-    hackathonId: 0,
+    hackathon: [],
     name: "",
     description: "",
     contact: "",
@@ -34,7 +35,10 @@ function PersonDetail() {
     const { data } = await detail(+id);
     setDetailData({
       id: data._id,
-      hackathonId: data.hackathon_id,
+      hackathon: data.hackathon.map((item) => ({
+        id: item._id,
+        title: item.name,
+      })),
       name: data.name,
       description: data.description,
       contact: data.contact,
@@ -61,49 +65,32 @@ function PersonDetail() {
 
   return (
     <Wrapper>
-      <Title></Title>
-      <Contents>
-        <TeamDetail
-          contents={detailData}
-          onChange={changeContents}
-          onBack={goBackClick}
-        />
-      </Contents>
+      <Title>팀 상세보기</Title>
+      <TeamDetailTemplate
+        contents={detailData}
+        onChange={changeContents}
+        onBack={goBackClick}
+        modifyStatus={modifyStatus}
+      />
     </Wrapper>
   );
 }
 
-export default PersonDetail;
+export default TeamDetail;
 
 const Wrapper = styled.div`
   display: grid;
   padding: 1rem;
   grid-template-columns: 17fr minmax(0, 66fr) 17fr;
-  grid-template-rows: 3rem auto 25px;
+  grid-template-rows: 3rem auto 3rem;
   grid-template-areas:
     " . title ."
     " . content ."
     " . . . ";
-  max-width: 96%;
-  min-height: 100vh;
   margin: 0 auto;
 `;
 
-const Contents = styled.div`
-  grid-area: content;
-  padding: 1.5rem;
-  & > img {
-    height: 100%;
-    width: 50%;
-  }
-  & > div {
-    flex: 1;
-  }
-`;
-
 const Title = styled.div`
-  display: flex;
   grid-area: title;
-  align-items: center;
-  justify-content: center;
+  font-size: 2rem;
 `;

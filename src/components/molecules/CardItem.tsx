@@ -11,8 +11,8 @@ export interface PropTypes {
 function CardItem({ contentTitle, content }: PropTypes) {
   return (
     <Wrapper>
-      <Div flex="1.2">{contentTitle}</Div>
-      <Div flex="3.5">{content}</Div>
+      <Div flex="1">{contentTitle}</Div>
+      <Div flex="2">{content}</Div>
     </Wrapper>
   );
 }
@@ -21,6 +21,7 @@ export default CardItem;
 
 const Wrapper = styled.div`
   display: flex;
+  width: 100%;
   height: 1rem;
   & > div {
     font-size: 0.7rem;

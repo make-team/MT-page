@@ -4,7 +4,7 @@ import TeamRegist, {
   Team,
   PropTypes as TeamPropTypes,
 } from "template/TeamRegist";
-import SubmitButton from "template/SubmitButton";
+import SubmitButton from "components/molecules/SubmitButton";
 
 import { regist } from "api/team";
 import { FIELD } from "constant/checkItems";
@@ -41,12 +41,21 @@ function TeamContainer({ id, onCancel }: PropTypes) {
   const onRegist = async () => {
     let bodyData = new FormData();
     bodyData.append("name", contents.name);
-    bodyData.append("hackathon_id", `${id}`);
+    bodyData.append("hackathon_id", id);
     bodyData.append("description", contents.description);
     bodyData.append("contact", contents.contact);
     bodyData.append("end_time", `${contents.endTime.getTime()}`);
     bodyData.append("start_time", `${contents.startTime.getTime()}`);
-    bodyData.append("recruiment", `${JSON.stringify(contents.recruiment)}`);
+    bodyData.append(
+      "recruiment",
+      `${JSON.stringify(
+        recruiment.map((item) => ({
+          field: item.field,
+          skill: item.skill,
+          count: item.count,
+        }))
+      )}`
+    );
     await regist({ bodyData });
     onCancel();
   };

@@ -14,7 +14,6 @@ export interface PropTypes {
 function HackathonDetail({ title, content, name, onChange }: PropTypes) {
   const contentsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    console.log(value);
     onChange && onChange({ name, value });
   };
 

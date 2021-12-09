@@ -8,7 +8,7 @@ import Loading from "components/atoms/Loading";
 
 const MENU = [
   {
-    title: "해커톤 목록",
+    title: "공모전 목록",
     url: "/hackathon",
   },
   {
@@ -34,7 +34,9 @@ function Main() {
           ))}
         </Menu>
         <Suspense fallback={<Loading />}>
-          <Outlet />
+          <TabContents>
+            <Outlet />
+          </TabContents>
         </Suspense>
       </Content>
       <Footer />
@@ -47,9 +49,8 @@ export default Main;
 
 const Content = styled.div`
   display: grid;
-  padding: 1rem;
   grid-template-columns: minmax(0, 66fr);
-  grid-template-rows: 11rem 4rem auto 2rem;
+  grid-template-rows: 5rem 4rem auto 2rem;
   grid-template-areas:
     "nav nav nav"
     "menu menu menu"
@@ -89,4 +90,9 @@ const ListLink = styled(NavLink)`
   &.active {
     color: black;
   }
+`;
+
+const TabContents = styled.div`
+  grid-area: main;
+  margin: 0 auto;
 `;

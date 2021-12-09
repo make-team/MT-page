@@ -3,7 +3,9 @@ import styled from "styled-components";
 
 import { FIELD } from "constant/checkItems";
 
-import HackathonTeamCardContents from "components/organisms/HackathonTeamCardContents";
+import TeamCardContents from "components/organisms/TeamCardContents";
+import TeamRecruimentCardList from "components/organisms/TeamRecruimentCardList";
+import { useNavigate } from "react-router-dom";
 
 export interface Team {
   id: number;
@@ -18,30 +20,25 @@ export interface Team {
 
 export interface PropTypes {
   items?: Team[];
-  add?: boolean;
 }
 
-function HackathonCard({ items, add }: PropTypes) {
+function HackathonCard({ items }: PropTypes) {
+  const history = useNavigate();
   return (
-    <>
-      <Title>팀원 모집</Title>
-      <List>
-        {items &&
-          items.map((item) => (
-            <HackathonTeamCardContents
-              key={item.id}
-              toUrl={`/team/${item.id}`}
+    <List>
+      {items &&
+        items.map((item) => (
+          <Card onClick={() => history(`/team/${item.id}`)}>
+            <TeamCardContents
               name={item.name}
-              description={item.description}
-              recruiment={item.recruiment}
               contact={item.contact}
               startTime={item.startTime}
               endTime={item.endTime}
-              add={add}
             />
-          ))}
-      </List>
-    </>
+            <TeamRecruimentCardList recruiment={item.recruiment} />
+          </Card>
+        ))}
+    </List>
   );
 }
 
@@ -54,7 +51,7 @@ const List = styled.div`
   background-color: #f7f1f0;
 `;
 
-const Title = styled.div`
-  font-size: 1.5rem;
-  margin-top: 1rem;
+const Card = styled.div`
+  border: 1px solid black;
+  width: 100%;
 `;

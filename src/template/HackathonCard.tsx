@@ -49,14 +49,9 @@ export default HackathonCard;
 
 const List = styled.div`
   display: flex;
-  grid-area: main;
-  justify-content: center;
-  align-content: stretch;
   flex-wrap: wrap;
+  justify-content: center;
   background-color: #f7f1f0;
-  & > div {
-    margin: 1rem 1rem;
-  }
 `;
 
 const Card = styled.div`
@@ -64,7 +59,7 @@ const Card = styled.div`
   height: 25rem;
   width: 16rem;
   padding: 0.5rem;
-  margin-bottom: 1rem;
+  margin: 1rem 1rem;
   border-radius: 8px;
   background-color: #c3a6a0;
   &:hover {

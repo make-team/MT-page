@@ -5,8 +5,7 @@ import CardItem from "components/molecules/CardItem";
 import DateTerm from "components/molecules/DateTerm";
 
 export interface TeamCard {
-  id: number;
-  hackathon: {
+  hackathon?: {
     id: number;
     title: string;
   };
@@ -25,8 +24,11 @@ function TeamCardContents({
 }: TeamCard) {
   return (
     <Wrapper>
-      <CardItem contentTitle="공모전 명 : " content={hackathon.title} />
+      {hackathon && (
+        <CardItem contentTitle="공모전 명 : " content={hackathon.title} />
+      )}
       <CardItem contentTitle="팀 명  : " content={name} />
+
       <CardItem contentTitle="연 락 처 : " content={contact} />
       <CardItem
         contentTitle="기간 : "

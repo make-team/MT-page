@@ -48,10 +48,17 @@ export const regist = ({ bodyData }: { bodyData: FormData }) =>
     },
   });
 
+export const cardDelete = ({ id }: { id: number }) => {
+  axios.delete(`/team/${id}`);
+};
+
 export const detail = (id: number) =>
   axios.get<{
     _id: number;
-    hackathon_id: number;
+    hackathon: {
+      _id: number;
+      name: string;
+    }[];
     name: string;
     description: string;
     contact: string;

@@ -1,26 +1,17 @@
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
-export interface PropTypes {
-  children: string;
-  onClick?: () => void;
+interface PropTypes {
+  text: string;
+  goUrl: string;
 }
 
-function Button({ children, onClick }: PropTypes) {
-  return <Wrapper onClick={onClick}>{children}</Wrapper>;
+function LinkButton({ text, goUrl }: PropTypes) {
+  const history = useNavigate();
+  return <Link onClick={() => history(`${goUrl}`)}>{text}</Link>;
 }
 
-export default Button;
+export default LinkButton;
 
-const Wrapper = styled.button`
-  cursor: pointer;
-  transition: all 0.6s cubic-bezier(0.9, 0.24, 0.4, 1);
-  &:hover {
-    box-shadow: inset 00px 100px 0px 0px #6098ff;
-    color: #ffffff;
-  }
-  &:hover::before {
-    opacity: 1;
-    height: 100%;
-  }
-`;
+const Link = styled.button``;

@@ -4,7 +4,7 @@ import HacktonRegist, {
   HackathonRegist,
   PropTypes as RegistPropTypes,
 } from "template/HacktonRegist";
-import SubmitButton from "template/SubmitButton";
+import SubmitButton from "components/molecules/SubmitButton";
 
 import { regist } from "api/hackathon";
 
@@ -42,6 +42,7 @@ function HacktonContainer({ onCancel }: PropTypes) {
     await regist({ bodyData });
     onCancel();
   };
+
   return (
     <Wrapper>
       <Content>

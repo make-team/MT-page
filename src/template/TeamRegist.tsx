@@ -55,7 +55,7 @@ function TeamRegist({
     skill: string;
     count: number;
   }>({
-    id: 0,
+    id: recruimentId,
     field: 0,
     skill: "",
     count: 0,
@@ -77,7 +77,7 @@ function TeamRegist({
     count: number;
   }) => {
     onAddRecruiment({ id: recruimentId, field, skill, count });
-    setRecruimentId((prev) => prev + 1);
+    setRecruimentId(recruimentId + 1);
     setAddActive(false);
   };
 
@@ -105,10 +105,14 @@ function TeamRegist({
       <InputWrapper>
         <div>모집 기간</div>
         <StartEndPicker
-          endTime={new Date()}
-          startTime={new Date()}
+          endTime={contents.endTime}
+          startTime={contents.startTime}
           onChange={onChange}
         />
+      </InputWrapper>
+      <InputWrapper>
+        <div>연락처(이메일 , 오픈카톡 등등...)</div>
+        <input name="contact" onChange={contentsChange}></input>
       </InputWrapper>
       <InputWrapper>
         <div>모집 팀원 등록하기</div>
@@ -157,10 +161,6 @@ function TeamRegist({
           ))}
         </TeamRecruitmentCard>
       )}
-      <InputWrapper>
-        <div>연락처(이메일 , 오픈카톡 등등...)</div>
-        <input name="contact" onChange={contentsChange}></input>
-      </InputWrapper>
     </Wrapper>
   );
 }
@@ -170,6 +170,7 @@ export default TeamRegist;
 const Wrapper = styled.div`
   margin: 0 auto;
   border: 1px solid black;
+  width: 100%;
 `;
 
 const InputWrapper = styled.div`
@@ -194,13 +195,14 @@ const AddTeamWrapper = styled.div`
 
 const TeamRecruitmentCard = styled.div`
   display: flex;
+  flex-wrap: wrap;
   text-align: left;
-  width: min-content;
+  width: 100%;
   margin: 1rem;
   & > div {
     background-color: #c3a6a0;
     border: 3px solid black;
-    width: 15rem;
+    width: min-content;
     margin: 0.5rem;
     & > div {
       padding: 1rem;

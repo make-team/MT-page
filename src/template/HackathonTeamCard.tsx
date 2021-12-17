@@ -47,11 +47,26 @@ export default HackathonCard;
 const List = styled.div`
   display: flex;
   grid-area: main;
+  justify-content: center;
+  background-color: inherit;
   flex-wrap: wrap;
-  background-color: #f7f1f0;
+  & > div {
+    margin: 1rem;
+  }
 `;
 
 const Card = styled.div`
-  border: 1px solid black;
-  width: 100%;
+  position: relative;
+  cursor: pointer;
+  font-size: 0.7rem;
+  width: 25rem;
+  height: min-content;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  background-color: #c3a6a0;
+  border-radius: 8px;
+  &:hover {
+    transform: scale(1.025, 1.025);
+    box-shadow: 0.8rem 0.8rem 0.5rem rgba(0, 0, 0, 0.2);
+  }
 `;

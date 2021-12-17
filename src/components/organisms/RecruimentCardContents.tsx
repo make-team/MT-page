@@ -10,11 +10,9 @@ export interface Recruiment {
 
 export interface PropTypes {
   items?: Recruiment[];
-  add?: boolean;
-  toUrl?: string;
 }
 
-function RecruimentCardContents({ items, add, toUrl }: PropTypes) {
+function RecruimentCardContents({ items }: PropTypes) {
   return (
     <Wrapper>
       <div>

@@ -19,6 +19,13 @@ export const JOB = {
   5: "기타",
 };
 
+export const POSTION = {
+  0: "기타",
+  1: "기획자",
+  2: "개발",
+  3: "디자이너",
+};
+
 export const STATUS = {
   0: "기타",
   1: "고등학생",

@@ -49,7 +49,7 @@ export const regist = ({ bodyData }: { bodyData: FormData }) =>
   });
 
 export const cardDelete = ({ id }: { id: number }) => {
-  axios.delete(`/team/${id}`);
+  axios.delete(`${URL}/team/${id}`);
 };
 
 export const detail = (id: number) =>
@@ -70,3 +70,10 @@ export const detail = (id: number) =>
       count: number;
     }[];
   }>(`${URL}/team/${id}`);
+
+export const modify = ({ bodyData }: { bodyData: FormData }, id: number) =>
+  axios.put(`${URL}/team/${id}`, bodyData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });

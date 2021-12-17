@@ -60,13 +60,13 @@ export default HackathonDetail;
 
 const Wrapper = styled.div`
   display: flex;
+  flex-wrap: wrap;
   & > div {
     flex: 1;
   }
 `;
 
 const ImgBox = styled.div`
-  padding: 2rem;
-  max-width: 35rem;
-  height: 40rem;
+  min-width: 25rem;
+  height: 30rem;
 `;

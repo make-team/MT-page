@@ -4,14 +4,14 @@ import styled from "styled-components";
 import { Div } from "../atoms/Div";
 
 export interface PropTypes {
-  contentTitle: string;
+  contentTitle?: string;
   content: string | JSX.Element;
 }
 
 function CardItem({ contentTitle, content }: PropTypes) {
   return (
     <Wrapper>
-      <Div flex="1">{contentTitle}</Div>
+      {contentTitle && <Div flex="1">{contentTitle}</Div>}
       <Div flex="2">{content}</Div>
     </Wrapper>
   );

@@ -8,6 +8,7 @@ import DateTerm from "../molecules/DateTerm";
 export interface PropTypes {
   cardImg: Img[];
   title: string;
+  hit: number;
   description: string;
   contact: string;
   startTime: Date;
@@ -19,17 +20,18 @@ function HackathonCardContent({
   endTime,
   startTime,
   title,
+  hit,
   description,
   contact,
 }: PropTypes) {
   return (
     <Wrapper>
       <CardImg attachment={cardImg} height="17rem" />
-      <CardItem contentTitle="공모전 명 : " content={title} />
-      <CardItem contentTitle="상세 설명 : " content={description} />
-      <CardItem contentTitle="연 락 처 : " content={contact} />
+      <Intro>
+        <div>{title}</div>
+        {`🔎${hit}`}
+      </Intro>
       <CardItem
-        contentTitle="기간 : "
         content={<DateTerm startTime={startTime} endTime={endTime} />}
       />
     </Wrapper>
@@ -39,8 +41,12 @@ function HackathonCardContent({
 export default HackathonCardContent;
 
 const Wrapper = styled.div`
-  text-align: left;
   & > div {
     margin: 0.2rem 0;
   }
+`;
+const Intro = styled.div`
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
 `;

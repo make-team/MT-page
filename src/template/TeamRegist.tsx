@@ -5,6 +5,7 @@ import Radio from "components/molecules/RadioList";
 
 import { FIELD } from "constant/checkItems";
 import StartEndPicker from "components/molecules/form/StartEndPicker";
+import Quill from "components/atoms/Quill";
 
 export interface Team {
   id: number;
@@ -98,10 +99,15 @@ function TeamRegist({
         <div>팀 명</div>
         <input name="name" onChange={contentsChange}></input>
       </InputWrapper>
-      <InputWrapper>
+      <TextEditor>
         <div>팀 소개</div>
-        <input name="description" onChange={contentsChange}></input>
-      </InputWrapper>
+        <Quill
+          toolbarOff={true}
+          name="description"
+          text={contents.description}
+          onChange={onChange}
+        ></Quill>
+      </TextEditor>
       <InputWrapper>
         <div>모집 기간</div>
         <StartEndPicker
@@ -211,5 +217,15 @@ const TeamRecruitmentCard = styled.div`
       width: 5rem;
       margin-left: 10rem;
     }
+  }
+`;
+
+const TextEditor = styled.div`
+  height: 24rem;
+  width: 90%;
+  margin: 0 auto 4rem auto;
+  & > div:last-child {
+    height: 20rem;
+    background-color: white;
   }
 `;

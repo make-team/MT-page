@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-import CardItem from "components/molecules/CardItem";
 import DateTerm from "components/molecules/DateTerm";
 
 export interface TeamCard {
@@ -24,16 +23,12 @@ function TeamCardContents({
 }: TeamCard) {
   return (
     <Wrapper>
-      {hackathon && (
-        <CardItem contentTitle="공모전 명 : " content={hackathon.title} />
-      )}
-      <CardItem contentTitle="팀 명  : " content={name} />
-
-      <CardItem contentTitle="연 락 처 : " content={contact} />
-      <CardItem
-        contentTitle="기간 : "
-        content={<DateTerm startTime={startTime} endTime={endTime} />}
-      />
+      <Name>{name}</Name>
+      {hackathon && <Sub>공모 : {hackathon.title}</Sub>}
+      <div>팀원 모집중</div>
+      <Date>
+        <DateTerm startTime={startTime} endTime={endTime} />
+      </Date>
     </Wrapper>
   );
 }
@@ -41,3 +36,15 @@ function TeamCardContents({
 export default TeamCardContents;
 
 const Wrapper = styled.div``;
+const Name = styled.h2`
+  margin: 0;
+`;
+const Sub = styled.div`
+  font-size: 1rem;
+  color: gray;
+  margin-bottom: 1rem;
+`;
+const Date = styled.div`
+  display: flex;
+  justify-content: center;
+`;

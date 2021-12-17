@@ -11,6 +11,7 @@ import TeamRegist from "pages/TeamRegist";
 
 import HackathonCardList from "template/HackathonCard";
 import CardListTeamContainer from "template/TeamCard";
+import PersonCard from "template/personCard";
 
 function Root() {
   return (
@@ -19,7 +20,7 @@ function Root() {
         <Route path="/" element={<Main />}>
           <Route path="hackathon" element={<HackathonCardList />} />
           <Route path="team" element={<CardListTeamContainer />} />
-          <Route path="person" element={<></>} />
+          <Route path="person" element={<PersonCard />} />
           <Route
             path="/"
             element={<Navigate to="/hackathon" state={{ test: "test" }} />}

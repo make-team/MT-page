@@ -21,11 +21,6 @@ function HackathonDetailContents({
 }: PropTypes) {
   return (
     <Wrapper>
-      <StartEndPicker
-        startTime={startTime}
-        endTime={endTime}
-        onChange={onChange}
-      />
       <DetailItem
         name="description"
         title="설명 : "
@@ -36,6 +31,11 @@ function HackathonDetailContents({
         name="contact"
         title="연락처 : "
         content={contact}
+        onChange={onChange}
+      />
+      <StartEndPicker
+        startTime={startTime}
+        endTime={endTime}
         onChange={onChange}
       />
     </Wrapper>

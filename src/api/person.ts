@@ -1,24 +1,27 @@
 import axios from "axios";
 import URL from "./baseUrl";
 
-import { INTEREST, STATUS } from "constant/checkItems";
+import { INTEREST, STATUS, POSTION } from "constant/checkItems";
+
 export const list = () =>
-  axios.get<{
-    name: string;
-    phone: number;
-    contact: string;
-    position: keyof typeof INTEREST;
-    status: keyof typeof STATUS;
-    location: String;
-    interest: string;
-    attachment: {
-      s3: string;
-      uuid: string;
+  axios.get<
+    {
       name: string;
-      size: number;
-      content_type: string;
-    }[];
-  }>(`${URL}/person`);
+      phone: number;
+      contact: string;
+      position: keyof typeof POSTION;
+      status: keyof typeof STATUS;
+      location: string;
+      interest: keyof typeof INTEREST;
+      attachment: {
+        s3: string;
+        uuid: string;
+        name: string;
+        size: number;
+        content_type: string;
+      }[];
+    }[]
+  >(`${URL}/person`);
 
 export const detail = (id: number) =>
   axios.get<{

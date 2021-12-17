@@ -40,7 +40,6 @@ function Main() {
         </Suspense>
       </Content>
       <Footer />
-      <Loading />
     </>
   );
 }
@@ -81,14 +80,18 @@ const ListLink = styled(NavLink)`
   font-weight: bolder;
   font-size: 0.75rem;
   text-decoration: none;
+  border-right: 1px solid #100c0d;
   &:visited {
-    color: white;
+    color: var(--color);
   }
   &:link {
-    color: white;
+    color: var(--color);
   }
   &.active {
-    color: black;
+    color: var(--selected-color);
+  }
+  &:last-child {
+    border-right: none;
   }
 `;
 

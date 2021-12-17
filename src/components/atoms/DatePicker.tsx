@@ -1,6 +1,7 @@
 import React from "react";
 import Picker from "react-datepicker";
 import { ko } from "date-fns/esm/locale";
+import styled from "styled-components";
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -22,9 +23,12 @@ function DatePicker({ selected, minDate, pickerName, onChange }: PropTypes) {
       locale={ko}
       selected={selected}
       minDate={minDate}
+      customInput={<DateInput></DateInput>}
       onChange={(date) => changeDate(date as Date, `${pickerName}`)}
     />
   );
 }
 
 export default DatePicker;
+
+const DateInput = styled.input``;

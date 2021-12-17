@@ -23,6 +23,6 @@ export default TeamRecruimentItem;
 const Wrapper = styled.div`
   max-width: fit-content;
   padding: 0.2rem;
-  border: 1px dashed #100c0d;
+  border: 1px dashed var(--color);
   margin: 0.2rem;
 `;

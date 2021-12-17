@@ -2,10 +2,9 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 import { FIELD } from "constant/checkItems";
-import SubmitButton from "components/molecules/SubmitButton";
 import TeamDetailContents from "components/organisms/TeamDetailContents";
-import TeamRecruimentCardList from "components/organisms/TeamRecruimentCardList";
 import StartEndPicker from "components/molecules/form/StartEndPicker";
+import TeamRecruimentCardList from "components/organisms/TeamRecruimentCardList";
 
 export interface Team {
   id: number;
@@ -25,15 +24,10 @@ export interface PropTypes {
   contents: Team;
   modifyStatus: boolean;
   onChange: ({ name, value }: { name: string; value: string | Date }) => void;
-  onBack: () => void;
 }
 
-function HackathonDetail({
-  contents,
-  modifyStatus,
-  onChange,
-  onBack,
-}: PropTypes) {
+function HackathonDetail({ contents, modifyStatus, onChange }: PropTypes) {
+  console.log(contents);
   return (
     <RegistForm modifyStatus={modifyStatus}>
       <TeamDetailContents
@@ -41,17 +35,12 @@ function HackathonDetail({
         hackathon={contents.hackathon}
         description={contents.description}
         contact={contents.contact}
-        onChange={onChange}
-      />
-      <StartEndPicker
+        modifyStatus={modifyStatus}
         startTime={contents.startTime}
         endTime={contents.endTime}
         onChange={onChange}
       />
       <TeamRecruimentCardList recruiment={contents.recruiment} />
-      <ButtonWrapper>
-        <SubmitButton onCancel={onBack} />
-      </ButtonWrapper>
     </RegistForm>
   );
 }
@@ -59,14 +48,9 @@ function HackathonDetail({
 export default HackathonDetail;
 
 const RegistForm = styled.div<{ modifyStatus: boolean }>`
+  grid-area: content;
+  padding: 1.5rem;
   ${({ modifyStatus }) => css`
-    grid-area: content;
-    padding: 1.5rem;
-    pointer-events: ${modifyStatus ? "none" : "auto"};
+    pointer-events: ${modifyStatus ? "auto" : "none"};
   `}
-`;
-
-const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: right;
 `;

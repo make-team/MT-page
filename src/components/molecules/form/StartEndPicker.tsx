@@ -13,21 +13,19 @@ export interface PropTypes {
 function StartEndPicker({ startTime, endTime, onChange }: PropTypes) {
   return (
     <Wrapper>
-      <div>
-        <DatePicker
-          pickerName="startTime"
-          selected={startTime}
-          minDate={new Date()}
-          onChange={onChange ? onChange : () => {}}
-        />
-        ~
-        <DatePicker
-          pickerName="endTime"
-          selected={endTime}
-          minDate={startTime}
-          onChange={onChange ? onChange : () => {}}
-        />
-      </div>
+      <DatePicker
+        pickerName="startTime"
+        selected={startTime}
+        minDate={new Date()}
+        onChange={onChange ? onChange : () => {}}
+      />
+      ~
+      <DatePicker
+        pickerName="endTime"
+        selected={endTime}
+        minDate={startTime}
+        onChange={onChange ? onChange : () => {}}
+      />
     </Wrapper>
   );
 }
@@ -35,8 +33,5 @@ function StartEndPicker({ startTime, endTime, onChange }: PropTypes) {
 export default StartEndPicker;
 
 const Wrapper = styled.div`
-  text-align: center;
-  & > div {
-    display: flex;
-  }
+  display: flex;
 `;

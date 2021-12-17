@@ -8,6 +8,7 @@ export const list = () =>
       title: string;
       description: string;
       contact: string;
+      hit: number;
       attachment: {
         s3: string;
         uuid: string;

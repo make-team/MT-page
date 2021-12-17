@@ -11,14 +11,14 @@ function DateTerm({ startTime, endTime }: PropTypes) {
     <Wrapper>
       <div>
         {`${startTime.getFullYear().toString().substr(-2)}.` +
-          `${startTime.getMonth()}.` +
-          `${startTime.getDay()}`}
+          `${startTime.getMonth() + 1}.` +
+          `${startTime.getDate()}`}
       </div>
       <div>~</div>
       <div>
         {`${endTime.getFullYear().toString().substr(-2)}.` +
-          `${endTime.getMonth()}.` +
-          `${endTime.getDay()}`}
+          `${endTime.getMonth() + 1}.` +
+          `${endTime.getDate()}`}
       </div>
       <div>
         {"(" +

@@ -37,6 +37,7 @@ function HackathonCard() {
               startTime={item.startTime}
               contact={item.contact}
               title={item.title}
+              hit={item.hit}
               description={item.description}
             />
           </Card>
@@ -51,19 +52,19 @@ const List = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  background-color: #f7f1f0;
+  background-color: inherit;
 `;
 
 const Card = styled.div`
   cursor: pointer;
-  height: 25rem;
+  height: 20rem;
   width: 16rem;
   padding: 0.5rem;
   margin: 1rem 1rem;
   border-radius: 8px;
   background-color: #c3a6a0;
   &:hover {
-    transform: scale(1.025, 1.025);
+    transform: scale(1.2, 1.2);
     box-shadow: 0.8rem 0.8rem 0.5rem rgba(0, 0, 0, 0.2);
   }
 `;

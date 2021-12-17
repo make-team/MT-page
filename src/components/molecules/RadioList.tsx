@@ -21,7 +21,7 @@ function RadioList({ list, name, onChange }: PropTypes) {
                 value={item[0]}
                 onChange={onChange}
               ></input>
-                <label htmlFor={`${index}`}>{Object.values(item[1])}</label>
+                <label htmlFor={`${index}`}>{item[1]}</label>
             </Wrapper>
           );
         })}

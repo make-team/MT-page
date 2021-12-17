@@ -27,6 +27,7 @@ export const boardListSelector = selector({
       title: item.title,
       description: item.description,
       contact: item.contact,
+      hit: item.hit,
       attachment: item.attachment.map((imgItem) => ({
         imgUrl: imgItem.s3,
         uuid: imgItem.uuid,

@@ -1,11 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 import PersonContainer from "components/container/regist/PersonContainer";
+import { useNavigate } from "react-router-dom";
 
 function HackathonRegist() {
+  const history = useNavigate();
+  const goBackClick = () => {
+    history(-1);
+  };
   return (
     <Wrapper>
-      <PersonContainer />
+      <PersonContainer onCancel={goBackClick} />
     </Wrapper>
   );
 }

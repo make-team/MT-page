@@ -8,7 +8,8 @@ import TeamDetailTemplate, {
   Team,
 } from "template/TeamDetail";
 
-import { detail } from "api/team";
+import { detail, modify } from "api/team";
+import ModifySubmitButton from "components/molecules/ModifySubmitButton";
 
 function TeamDetail() {
   const location = useLocation();
@@ -18,7 +19,7 @@ function TeamDetail() {
   const [modifyStatus, setModifyStatus] = useState<boolean>(false);
   const [detailData, setDetailData] = useState<Team>({
     id: 0,
-    hackathon: [],
+    hackathon: [{ id: 0, title: "" }],
     name: "",
     description: "",
     contact: "",
@@ -52,6 +53,19 @@ function TeamDetail() {
     });
   }, [id]);
 
+  const onModify = async () => {
+    let bodyData = new FormData();
+    bodyData.append("name", detailData.name);
+    bodyData.append("description", detailData.description);
+    bodyData.append("contact", detailData.contact);
+    bodyData.append("end_time", `${detailData.endTime.getTime()}`);
+    bodyData.append("start_time", `${detailData.startTime.getTime()}`);
+    if (detailData.recruiment) {
+      bodyData.append("recruiment", `${detailData.recruiment}`);
+    }
+    await modify({ bodyData }, +id);
+  };
+
   const changeContents = useCallback<TeamPropTypes["onChange"]>(
     ({ name, value }) => {
       setDetailData({ ...detailData, [name]: value });
@@ -59,18 +73,28 @@ function TeamDetail() {
     [detailData]
   );
 
+  const modifyTeam = () => {
+    setModifyStatus((prev) => !prev);
+  };
+
   useEffect(() => {
     updateDetail();
   }, [updateDetail]);
 
   return (
     <Wrapper>
-      <Title>팀 상세보기</Title>
       <TeamDetailTemplate
         contents={detailData}
-        onChange={changeContents}
-        onBack={goBackClick}
         modifyStatus={modifyStatus}
+        onChange={changeContents}
+      />
+
+      <ModifySubmitButton
+        onBack={goBackClick}
+        onDelete={() => {}}
+        modifyStatus={modifyStatus}
+        onModify={modifyTeam}
+        onSubmitModify={onModify}
       />
     </Wrapper>
   );
@@ -85,8 +109,9 @@ const Wrapper = styled.div`
   grid-template-rows: 3rem auto 3rem;
   grid-template-areas:
     " . title ."
-    " . content ."
-    " . . . ";
+    " . content . "
+    ".  submitbutton ."
+    ". list .";
   margin: 0 auto;
 `;
 

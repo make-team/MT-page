@@ -7,11 +7,11 @@ interface PropTypes {
   onDelete: () => void;
   onModify: () => void;
   onSubmitModify: () => void;
-  onTeamRegist: () => void;
+  onTeamRegist?: () => void;
   modifyStatus: boolean;
 }
 
-function StickyMenu({
+function ModifySubmitButton({
   modifyStatus,
   onBack,
   onDelete,
@@ -35,7 +35,7 @@ function StickyMenu({
     <Wrapper>
       <Div onClick={onBack}> 뒤로가기 </Div>
       <Div onClick={deleteClick}> 삭제하기 </Div>
-      <Div onClick={onTeamRegist}> 팀원 모집글 등록하기 </Div>
+      <Div onClick={onTeamRegist}> 팀 만들기 </Div>
       {modifyStatus ? (
         <>
           <Div onClick={submitModiy}> 수정완료 </Div>
@@ -48,23 +48,24 @@ function StickyMenu({
   );
 }
 
-export default StickyMenu;
+export default ModifySubmitButton;
 const Wrapper = styled.div`
-  position: fixed;
-  box-sizing: border-box;
-  top: 15rem;
-  right: 3rem;
-  height: max-content;
+  grid-area: submitbutton;
+  display: flex;
+  justify-content: end;
+  margin-bottom: 2rem;
   & > div {
     display: flex;
+    background-color: inherit;
+    padding: 0.5rem;
+    margin: 0.2rem;
+    width: fit-content;
+    height: 1rem;
+    border: 1px solid var(--color);
+    border-radius: 8px;
     align-items: center;
     justify-content: center;
-    background-color: coral;
-    border: 1px solid black;
     cursor: pointer;
-    height: 4rem;
-    width: 8rem;
-    margin-bottom: 2rem;
     &:hover {
       transform: scale(1.1, 1.1);
     }

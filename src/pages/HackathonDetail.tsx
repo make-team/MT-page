@@ -10,13 +10,14 @@ import HackathonDetailTamplate, {
 import HackathonTeamCard, { Team } from "template/HackathonTeamCard";
 
 import Popup from "components/organisms/Popup";
-import StickyMenu from "components/molecules/StickyMenu";
+import StickyMenu from "components/molecules/ModifySubmitButton";
 
 import { detail, remove, modify } from "api/hackathon";
 import { inHackathon } from "api/team";
 
 import { useRecoilState } from "recoil";
 import { ImgType, ImgState } from "recoil/hackathonImg";
+import Detail from "./layout/Detail";
 
 function HackathonDetail() {
   const location = useLocation();
@@ -39,7 +40,7 @@ function HackathonDetail() {
   const [dataList, setDataList] = useState<Team[]>();
 
   const goBackClick = () => {
-    history(-1);
+    history(`${location.pathname}/hackathon`);
   };
 
   const registTeam = () => {
@@ -107,7 +108,6 @@ function HackathonDetail() {
 
   const deleteHackathon = () => {
     remove(+id);
-    goBackClick();
   };
 
   const modifyHackathon = () => {
@@ -129,29 +129,34 @@ function HackathonDetail() {
   }, [updateDetail, TeamList]);
 
   return (
-    <Wrapper>
-      <HackathonDetailTamplate
-        contents={detailData}
-        img={img.attachment}
-        modifyStatus={modifyStatus}
-        onChange={changeContents}
-      />
-      <HackathonTeamCard items={dataList} />
-      <StickyMenu
-        onBack={goBackClick}
-        onDelete={deleteHackathon}
-        onModify={modifyHackathon}
-        onTeamRegist={registTeam}
-        onSubmitModify={confirmModify}
-        modifyStatus={modifyStatus}
-      />
-      <Popup
-        text="수정하시겠습니까?"
-        status={popup ? "open" : "close"}
-        onCancel={popupClose}
-        onSubmit={confirmModify}
-      />
-    </Wrapper>
+    <Detail
+      child={
+        <Wrapper>
+          <HackathonDetailTamplate
+            contents={detailData}
+            img={img.attachment}
+            modifyStatus={modifyStatus}
+            onChange={changeContents}
+          />
+          <StickyMenu
+            onBack={goBackClick}
+            onDelete={deleteHackathon}
+            onModify={modifyHackathon}
+            onTeamRegist={registTeam}
+            onSubmitModify={confirmModify}
+            modifyStatus={modifyStatus}
+          />
+          <HackathonTeamCard items={dataList} />
+          <Popup
+            text="수정하시겠습니까?"
+            status={popup ? "open" : "close"}
+            onCancel={popupClose}
+            onSubmit={confirmModify}
+          />
+        </Wrapper>
+      }
+      title={`${detailData.title}`}
+    />
   );
 }
 

@@ -5,13 +5,20 @@ import { Div } from "../atoms/Div";
 import { Input } from "components/atoms/Input";
 
 export interface PropTypes {
-  title: string;
+  title?: string;
   content: string;
   name: string;
+  modifyStatus?: boolean;
   onChange?: ({ name, value }: { name: string; value: string | Date }) => void;
 }
 
-function HackathonDetail({ title, content, name, onChange }: PropTypes) {
+function HackathonDetail({
+  title,
+  content,
+  name,
+  modifyStatus,
+  onChange,
+}: PropTypes) {
   const contentsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     onChange && onChange({ name, value });
@@ -20,14 +27,14 @@ function HackathonDetail({ title, content, name, onChange }: PropTypes) {
   return (
     <InputWrapper>
       <Div>{title}</Div>
-      {onChange ? (
+      {modifyStatus ? (
         <Input
           name={name}
           defaultValue={content}
           onChange={contentsChange}
         ></Input>
       ) : (
-        <Div>{content}</Div>
+        <span>{content}</span>
       )}
     </InputWrapper>
   );
@@ -35,7 +42,4 @@ function HackathonDetail({ title, content, name, onChange }: PropTypes) {
 
 export default HackathonDetail;
 
-const InputWrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-`;
+const InputWrapper = styled.span``;

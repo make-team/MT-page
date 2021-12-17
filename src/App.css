@@ -2,12 +2,26 @@
   min-height: 100vh;
   margin: 0;
   padding: 0;
-  color: #262220;
+  color: #100c0d;
+  --color: #100c0d;
+  --editor: white;
   background-color: #f7f1f0;
+  --selected-color: #f7f1f0;
   text-align: center;
   overflow: hidden;
+  user-select: none;
 }
 
-.App-link {
-  color: #61dafb;
+.Dark {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  color: #f7f1f0;
+  --color: #f7f1f0;
+  --editor: gray;
+  background-color: #252525;
+  --selected-color: #100c0d;
+  text-align: center;
+  overflow: hidden;
+  user-select: none;
 }

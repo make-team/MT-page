@@ -15,11 +15,16 @@ interface PropTypes {
   attachment?: Img[];
   width?: string;
   height?: string;
+  radius?: string;
 }
 
-function CardImg({ attachment, width, height }: PropTypes) {
+function CardImg({ attachment, width, height, radius }: PropTypes) {
   return (
-    <Wrapper width={width ?? "100%"} height={height ?? "100%"}>
+    <Wrapper
+      width={width ?? "100%"}
+      height={height ?? "100%"}
+      radius={radius ?? "none"}
+    >
       {attachment && attachment.length > 0 ? (
         attachment.map(
           (attachment) =>
@@ -42,7 +47,10 @@ function CardImg({ attachment, width, height }: PropTypes) {
 
 export default CardImg;
 
-const Wrapper = styled.div<{ width: string; height: string }>`
+const Wrapper = styled.div<{ width: string; height: string; radius: string }>`
   width: ${({ width }) => width};
   height: ${({ height }) => height};
+  & > img {
+    border-radius: ${({ radius }) => radius};
+  }
 `;

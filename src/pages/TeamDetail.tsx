@@ -115,7 +115,7 @@ const Wrapper = styled.div`
   margin: 0 auto;
 `;
 
-const Title = styled.div`
-  grid-area: title;
-  font-size: 2rem;
-`;
+// const Title = styled.div`
+//   grid-area: title;
+//   font-size: 2rem;
+// `;

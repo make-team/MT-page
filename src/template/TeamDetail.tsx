@@ -3,7 +3,6 @@ import styled, { css } from "styled-components";
 
 import { FIELD } from "constant/checkItems";
 import TeamDetailContents from "components/organisms/TeamDetailContents";
-import StartEndPicker from "components/molecules/form/StartEndPicker";
 import TeamRecruimentCardList from "components/organisms/TeamRecruimentCardList";
 
 export interface Team {

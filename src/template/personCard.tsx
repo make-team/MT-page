@@ -10,18 +10,25 @@ import CardImg from "components/molecules/ImgBox";
 function HackathonCard() {
   const data = useRecoilValue(personListSelector);
   return (
-    <List>
-      {data &&
-        data.map((item) => (
-          <Card key={item.phone + item.contact + item.name}>
-            <Info>
-              <CardImg
-                attachment={item.attachment}
-                width="3rem"
-                height="3rem"
-                radius="50%"
-              />
-              <div>
+    <div>
+      <TableHeader>
+        <div></div>
+        <div>이름</div>
+        <div>연락처</div>
+        <div>활동지역</div>
+        <div>역할</div>
+      </TableHeader>
+      <List>
+        {data &&
+          data.map((item) => (
+            <Card key={item.phone + item.contact + item.name}>
+              <Info>
+                <CardImg
+                  attachment={item.attachment}
+                  width="3rem"
+                  height="3rem"
+                  radius="50%"
+                />
                 <div>{item.name}</div>
                 {item.phone && (
                   <div>
@@ -32,17 +39,17 @@ function HackathonCard() {
                   </div>
                 )}
                 {item.contact && <div>{item.contact}</div>}
-              </div>
-            </Info>
-            <Status>
-              <div>{POSTION[item.position]} 직군의</div>
-              <div>{STATUS[item.status]}입니다.</div>
-              <div>{INTEREST[item.interest]}</div>
-            </Status>
-            <div>활동 구역 : {item.location}</div>
-          </Card>
-        ))}
-    </List>
+                <div>{item.location}</div>
+              </Info>
+              <Status>
+                <div>{POSTION[item.position]} 직군의</div>
+                <div>{STATUS[item.status]}입니다.</div>
+                <div>{INTEREST[item.interest]}</div>
+              </Status>
+            </Card>
+          ))}
+      </List>
+    </div>
   );
 }
 
@@ -50,15 +57,22 @@ export default HackathonCard;
 
 const List = styled.div`
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column-reverse;
   justify-content: center;
   background-color: inherit;
 `;
 
+const TableHeader = styled.div`
+  display: flex;
+  & > div {
+    flex: 1;
+  }
+`;
+
 const Card = styled.div`
-  cursor: pointer;
-  height: 10rem;
-  width: 16rem;
+  flex: 1;
+  display: flex;
+  height: 5rem;
   font-size: 0.8rem;
   padding: 0.5rem;
   margin: 1rem 1rem;
@@ -73,8 +87,6 @@ const Card = styled.div`
 const Info = styled.div`
   display: flex;
   text-align: left;
-  padding-bottom: 0.3rem;
-  border-bottom: 1px dashed black;
   & > div {
     &:first-child {
       margin: 0 1rem 0 0;
@@ -82,9 +94,4 @@ const Info = styled.div`
   }
 `;
 
-const Status = styled.div`
-  display: flex;
-  & > div {
-    margin: 0.8rem 0.5rem;
-  }
-`;
+const Status = styled.div``;

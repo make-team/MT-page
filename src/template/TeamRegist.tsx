@@ -5,7 +5,7 @@ import Radio from "components/molecules/RadioList";
 
 import { FIELD } from "constant/checkItems";
 import StartEndPicker from "components/molecules/form/StartEndPicker";
-import Quill from "components/atoms/Quill";
+import Quill from "components/common/Quill";
 
 export interface Team {
   id: number;

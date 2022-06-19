@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { Div } from "../atoms/Div";
+import { Div } from "../common/Div";
 
 function Footer() {
   return (

@@ -5,7 +5,7 @@ import Radio from "components/molecules/RadioList";
 
 import { INTEREST, STATUS, POSTION } from "constant/checkItems";
 import ImgUpload from "components/molecules/form/ImgUpload";
-import { Input } from "components/atoms/Input";
+import { Input } from "components/common/Input";
 //import CheckButtonList from "components/organisms/CheckButtonList";
 
 export interface Person {

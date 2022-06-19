@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import DatePicker from "components/molecules/form/StartEndPicker";
 import ImgUpload from "components/molecules/form/ImgUpload";
-import { Input } from "components/atoms/Input";
+import { Input } from "components/common/Input";
 
 export interface HackathonRegist {
   title: string;

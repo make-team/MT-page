@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import DetailItem from "../molecules/ModifyItem";
-import Quill from "components/atoms/Quill";
+import Quill from "components/common/Quill";
 import StartEndPicker from "components/molecules/form/StartEndPicker";
 import DateTerm from "components/molecules/DateTerm";
 

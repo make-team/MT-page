@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Input } from "../../atoms/Input";
+import { Input } from "../../common/Input";
 
 export interface PropTypes {
   onChange: ({ name, value }: { name: string; value: File }) => void;

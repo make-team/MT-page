@@ -4,7 +4,7 @@ import PersonRegist, {
   PropTypes as PersonRegistPropTypes,
   Person,
 } from "template/PersonRegist";
-import SubmitButton from "components/molecules/SubmitButton";
+import SubmitButton from "components/common/SubmitButton";
 
 import { regist } from "api/person";
 

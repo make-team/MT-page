@@ -3,9 +3,9 @@ import styled from "styled-components";
 
 import HackathonDetailContents, {
   PropTypes as DetailContentsPropTypes,
-} from "components/organisms/HackathonDetailContents";
+} from "components/hackthon/detail/HackathonDetailContents";
 
-import CardImg from "components/molecules/ImgBox";
+import CardImg from "components/common/ImgBox";
 
 export interface Hackathon {
   title: string;

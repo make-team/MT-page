@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import TeamRecruimentItem from "components/molecules/TeamRecruimentItem";
+import TeamRecruimentItem from "components/common/team/TeamRecruimentItem";
 
 import { FIELD } from "constant/checkItems";
 

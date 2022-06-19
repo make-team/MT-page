@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import styled from "styled-components";
 
-import Radio from "components/molecules/RadioList";
+import Radio from "components/common/RadioList";
 
 import { INTEREST, STATUS, POSTION } from "constant/checkItems";
-import ImgUpload from "components/molecules/form/ImgUpload";
+import ImgUpload from "components/common/ImgUpload";
 import { Input } from "components/common/Input";
 //import CheckButtonList from "components/organisms/CheckButtonList";
 

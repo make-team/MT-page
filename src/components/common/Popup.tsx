@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { Div } from "../common/Div";
-import SubmitButton from "../molecules/SubmitButton";
+import { Div } from "./Div";
+import SubmitButton from "./SubmitButton";
 
 export interface PropTypes {
   text: string;

@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 import { FIELD } from "constant/checkItems";
 
-import TeamCardContents from "components/organisms/TeamCardContents";
-import TeamRecruimentCardList from "components/organisms/TeamRecruimentCardList";
+import TeamCardContents from "components/team/main/TeamCardContents";
+import TeamRecruimentCardList from "components/team/regist/TeamRecruimentCardList";
 import { useNavigate } from "react-router-dom";
 
 export interface Team {

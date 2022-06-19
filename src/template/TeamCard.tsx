@@ -6,10 +6,10 @@ import { FIELD } from "constant/checkItems";
 
 import { teamListSelector } from "store/teamList";
 import { useNavigate } from "react-router-dom";
-import TeamCardContents from "components/organisms/TeamCardContents";
-import TeamRecruimentCardList from "components/organisms/TeamRecruimentCardList";
+import TeamCardContents from "components/team/main/TeamCardContents";
+import TeamRecruimentCardList from "components/team/regist/TeamRecruimentCardList";
 import { cardDelete } from "api/team";
-import CardDeleteButton from "components/molecules/CardDeleteButton";
+import CardDeleteButton from "components/common/card/CardDeleteButton";
 
 export interface Team {
   id: number;

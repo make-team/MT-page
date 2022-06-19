@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-import DetailItem from "../molecules/ModifyItem";
+import DetailItem from "../../common/modify/ModifyItem";
 import Quill from "components/common/Quill";
-import StartEndPicker from "components/molecules/form/StartEndPicker";
-import DateTerm from "components/molecules/DateTerm";
+import StartEndPicker from "components/common/date/StartEndPicker";
+import DateTerm from "components/common/date/DateTerm";
 
 interface PropTypes {
   name: string;

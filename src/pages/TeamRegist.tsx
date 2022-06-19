@@ -3,7 +3,7 @@ import { useLocation } from "react-router";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import TeamRegistContainer from "components/container/team/TeamContainer";
+import TeamRegistContainer from "container/team/TeamContainer";
 
 function TeamRegist() {
   const location = useLocation();

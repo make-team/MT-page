@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import DetailItem from "../molecules/ModifyItem";
-import StartEndPicker from "../molecules/form/StartEndPicker";
+import DetailItem from "../../common/modify/ModifyItem";
+import StartEndPicker from "../../common/date/StartEndPicker";
 
 export interface PropTypes {
   description: string;

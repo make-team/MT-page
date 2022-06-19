@@ -1,7 +1,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
-import SubmitButton from "components/molecules/SubmitButton";
+import SubmitButton from "components/common/SubmitButton";
 
 export const actions = {
   onCancel: action("cancel"),

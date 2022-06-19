@@ -4,7 +4,7 @@ import HacktonRegist, {
   HackathonRegist,
   PropTypes as RegistPropTypes,
 } from "template/HacktonRegist";
-import SubmitButton from "components/molecules/SubmitButton";
+import SubmitButton from "components/common/SubmitButton";
 
 import { regist } from "api/hackathon";
 

@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 import { FIELD } from "constant/checkItems";
-import DateTerm from "../molecules/DateTerm";
-import CardItem from "../molecules/CardItem";
+import DateTerm from "../../common/date/DateTerm";
+import CardItem from "../../common/card/CardItem";
 import RecruimentCardContents from "./RecruimentCardContents";
 
 export interface Team {

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { Div } from "../common/Div";
+import { Div } from "../Div";
 
 export interface PropTypes {
   contentTitle?: string;

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import DateTerm from "components/molecules/DateTerm";
+import DateTerm from "components/common/date/DateTerm";
 
 export interface TeamCard {
   hackathon?: {

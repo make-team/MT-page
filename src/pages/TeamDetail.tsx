@@ -9,7 +9,7 @@ import TeamDetailTemplate, {
 } from "template/TeamDetail";
 
 import { detail, modify } from "api/team";
-import ModifySubmitButton from "components/molecules/ModifySubmitButton";
+import ModifySubmitButton from "components/common/modify/ModifySubmitButton";
 
 function TeamDetail() {
   const location = useLocation();

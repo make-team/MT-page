@@ -2,8 +2,8 @@ import React, { Suspense } from "react";
 import styled from "styled-components";
 import { NavLink, Outlet } from "react-router-dom";
 
-import Header from "components/molecules/Header";
-import Footer from "components/molecules/Footer";
+import Header from "./layout/Header";
+import Footer from "./layout/Footer";
 import Loading from "components/common/Loading";
 
 const MENU = [

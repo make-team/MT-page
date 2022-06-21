@@ -6,7 +6,7 @@ import styled from "styled-components";
 import TeamDetailTemplate, {
   PropTypes as TeamPropTypes,
   Team,
-} from "template/TeamDetail";
+} from "components/team/detail/TeamDetail";
 
 import { detail, modify } from "api/team";
 import ModifySubmitButton from "components/common/modify/ModifySubmitButton";

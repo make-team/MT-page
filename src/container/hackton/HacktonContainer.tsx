@@ -3,7 +3,7 @@ import styled from "styled-components";
 import HacktonRegist, {
   HackathonRegist,
   PropTypes as RegistPropTypes,
-} from "template/HacktonRegist";
+} from "components/hackthon/regist/HacktonRegist";
 import SubmitButton from "components/common/SubmitButton";
 
 import { regist } from "api/hackathon";

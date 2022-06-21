@@ -6,8 +6,8 @@ import { FIELD } from "constant/checkItems";
 
 import { teamListSelector } from "store/teamList";
 import { useNavigate } from "react-router-dom";
-import TeamCardContents from "components/team/main/TeamCardContents";
-import TeamRecruimentCardList from "components/team/regist/TeamRecruimentCardList";
+import TeamCardContents from "components/hackthon/DetailTeamCardContents";
+import TeamRecruimentCardList from "components/team/RecruimentCardList";
 import { cardDelete } from "api/team";
 import CardDeleteButton from "components/common/card/CardDeleteButton";
 

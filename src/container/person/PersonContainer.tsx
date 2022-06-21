@@ -3,7 +3,7 @@ import styled from "styled-components";
 import PersonRegist, {
   PropTypes as PersonRegistPropTypes,
   Person,
-} from "components/person/regist/PersonRegist";
+} from "components/person/Regist";
 import SubmitButton from "components/common/SubmitButton";
 
 import { regist } from "api/person";

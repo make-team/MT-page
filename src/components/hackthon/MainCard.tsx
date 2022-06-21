@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 
-import HackathonCardContent from "components/hackthon/main/HackathonCardContent";
+import HackathonCardContent from "./MainCardContent";
 
 import { boardListSelector } from "store/hackathonList";
 

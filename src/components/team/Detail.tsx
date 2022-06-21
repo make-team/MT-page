@@ -2,8 +2,8 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 import { FIELD } from "constant/checkItems";
-import TeamDetailContents from "components/team/detail/TeamDetailContents";
-import TeamRecruimentCardList from "components/team/regist/TeamRecruimentCardList";
+import TeamDetailContents from "components/team/DetailContents";
+import TeamRecruimentCardList from "components/team/RecruimentCardList";
 
 export interface Team {
   id: number;

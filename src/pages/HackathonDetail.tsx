@@ -6,10 +6,8 @@ import styled from "styled-components";
 import HackathonDetailTamplate, {
   Hackathon,
   PropTypes as HackathonPropTypes,
-} from "components/hackthon/detail/HackathonDetail";
-import HackathonTeamCard, {
-  Team,
-} from "components/team/main/HackathonTeamCard";
+} from "components/hackthon/Detail";
+import HackathonTeamCard, { Team } from "components/team/MainCard";
 
 import Popup from "components/common/Popup";
 import StickyMenu from "components/common/modify/ModifySubmitButton";

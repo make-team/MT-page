@@ -9,9 +9,9 @@ import PersonRegist from "pages/PersonRegist";
 import TeamDetail from "pages/TeamDetail";
 import TeamRegist from "pages/TeamRegist";
 
-import HackathonCardList from "components/hackthon/main/HackathonCard";
-import CardListTeamContainer from "components/team/main/TeamCard";
-import PersonCard from "components/person/main/personCard";
+import HackathonCardList from "components/hackthon/MainCard";
+import CardListTeamContainer from "components/hackthon/DetailTeamCard";
+import PersonCard from "components/person/Card";
 
 function Root() {
   return (

@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import HackathonDetailContents, {
   PropTypes as DetailContentsPropTypes,
-} from "components/hackthon/detail/HackathonDetailContents";
+} from "./DetailContents";
 
 import CardImg from "components/common/ImgBox";
 

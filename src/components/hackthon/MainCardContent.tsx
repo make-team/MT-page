@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-import CardImg, { Img } from "../../common/ImgBox";
-import CardItem from "../../common/card/CardItem";
-import DateTerm from "../../common/date/DateTerm";
+import CardImg, { Img } from "../common/ImgBox";
+import CardItem from "../common/card/CardItem";
+import DateTerm from "../common/date/DateTerm";
 
 export interface PropTypes {
   cardImg: Img[];

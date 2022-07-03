@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 import { FIELD } from "constant/checkItems";
 import DateTerm from "../common/date/DateTerm";
-import CardItem from "../common/card/CardItem";
-import RecruimentCardContents from "../common/card/RecruimentCardContents";
+import CardItem from "../common/card/ItemWrapper";
+import RecruimentCardContents from "../common/card/Recruiment";
 
 export interface Team {
   id: number;

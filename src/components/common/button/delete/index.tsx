@@ -3,16 +3,16 @@ import styled from "styled-components";
 
 interface PropTypes {
   id: number;
-  onDelete: (id: number) => void;
+  onClick: (id: number) => void;
 }
-function CardDeleteButton({ id, onDelete }: PropTypes) {
-  const onClick = (e: React.MouseEvent) => {
+function CardDeleteButton({ id, onClick }: PropTypes) {
+  const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
   };
 
   return (
-    <DeleteButton onClick={onClick}>
-      <button onClick={() => onDelete(id)}>❌</button>
+    <DeleteButton onClick={handleClick}>
+      <button onClick={() => onClick(id)}>❌</button>
     </DeleteButton>
   );
 }

@@ -4,7 +4,7 @@ import PersonRegist, {
   PropTypes as PersonRegistPropTypes,
   Person,
 } from "components/person/Regist";
-import SubmitButton from "components/common/button/SubmitButton";
+import SubmitButton from "components/common/button/submit";
 
 import { regist } from "api/person";
 

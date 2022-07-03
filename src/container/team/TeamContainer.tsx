@@ -4,7 +4,7 @@ import TeamRegist, {
   Team,
   PropTypes as TeamPropTypes,
 } from "components/team/Regist";
-import SubmitButton from "components/common/button/SubmitButton";
+import SubmitButton from "components/common/button/submit";
 
 import { regist } from "api/team";
 import { FIELD } from "constant/checkItems";

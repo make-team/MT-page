@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import TeamCardContents from "components/hackthon/DetailTeamCardContents";
 import TeamRecruimentCardList from "components/team/RecruimentCardList";
 import { cardDelete } from "api/team";
-import CardDeleteButton from "components/common/card/CardDeleteButton";
+import CardDeleteButton from "components/common/button/delete";
 
 export interface Team {
   id: number;
@@ -39,7 +39,7 @@ function TeamCard() {
       {data &&
         data.map((item) => (
           <Card key={item.id} onClick={() => history(`/team/${item.id}`)}>
-            <CardDeleteButton onDelete={onDelete} id={item.id} />
+            <CardDeleteButton onClick={onDelete} id={item.id} />
             <Wrapper>
               <TeamCardContents
                 name={item.name}

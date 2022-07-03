@@ -9,6 +9,7 @@ import CardImg from "components/common/ImgBox";
 
 function HackathonCard() {
   const data = useRecoilValue(personListSelector);
+
   return (
     <div>
       <TableHeader>

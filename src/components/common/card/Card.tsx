@@ -1,18 +1,16 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
 
 export interface PropTypes {
   children: JSX.Element;
-  toUrl?: string;
   width?: string;
   height?: string;
+  onClick: React.MouseEventHandler<HTMLDivElement>;
 }
 
-function Card({ children, toUrl, width, height }: PropTypes) {
-  const history = useNavigate();
+function Card({ children, onClick, width, height }: PropTypes) {
   return (
-    <Wrapper width={width} height={height} onClick={() => history(`${toUrl}`)}>
+    <Wrapper width={width} height={height} onClick={onClick}>
       {children}
     </Wrapper>
   );

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 import { FIELD } from "constant/checkItems";
-import DateTerm from "../common/date/DateTerm";
+import DateTerm from "../common/date/term";
 import CardItem from "../common/card/ItemWrapper";
 import RecruimentCardContents from "../common/card/Recruiment";
 

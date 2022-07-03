@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import DetailItem from "../common/modify/ModifyItem";
-import StartEndPicker from "../common/date/StartEndPicker";
+import StartEndPicker from "../common/date/stardEnd";
 
 export interface PropTypes {
   description: string;

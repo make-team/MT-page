@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import styled from "styled-components";
 
-import DatePicker from "components/common/date/StartEndPicker";
+import DatePicker from "components/common/date/stardEnd";
 import ImgUpload from "components/common/ImgUpload";
 import { Input } from "components/common/Input";
 

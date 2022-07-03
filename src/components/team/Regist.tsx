@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Radio from "components/common/RadioList";
 
 import { FIELD } from "constant/checkItems";
-import StartEndPicker from "components/common/date/StartEndPicker";
+import StartEndPicker from "components/common/date/stardEnd";
 import Quill from "components/common/Quill";
 
 export interface Team {

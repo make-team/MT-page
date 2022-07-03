@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 import DetailItem from "../common/modify/ModifyItem";
 import Quill from "components/common/Quill";
-import StartEndPicker from "components/common/date/StartEndPicker";
-import DateTerm from "components/common/date/DateTerm";
+import StartEndPicker from "components/common/date/stardEnd";
+import DateTerm from "components/common/date/term";
 
 interface PropTypes {
   name: string;

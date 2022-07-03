@@ -2,7 +2,7 @@ import React from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import styled from "styled-components";
 
-import DatePicker from "./DatePicker";
+import DatePicker from "../normal";
 
 export interface PropTypes {
   onChange?: ({ name, value }: { name: string; value: string | Date }) => void;

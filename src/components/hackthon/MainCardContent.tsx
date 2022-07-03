@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import CardImg, { Img } from "../common/ImgBox";
 import CardItem from "../common/card/ItemWrapper";
-import DateTerm from "../common/date/DateTerm";
+import DateTerm from "../common/date/term";
 
 export interface PropTypes {
   cardImg: Img[];

@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import DatePicker from "components/common/date/stardEnd";
 import ImgUpload from "components/common/ImgUpload";
-import { Input } from "components/common/Input";
+import { Input } from "components/common/input/Input";
 
 export interface HackathonRegist {
   title: string;

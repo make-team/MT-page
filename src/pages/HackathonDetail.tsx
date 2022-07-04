@@ -9,8 +9,8 @@ import HackathonDetailTamplate, {
 } from "components/hackthon/Detail";
 import HackathonTeamCard, { Team } from "components/team/MainCard";
 
-import Popup from "components/common/Popup";
-import StickyMenu from "components/common/modify/ModifySubmitButton";
+import Popup from "components/common/popup/Popup";
+import StickyMenu from "components/common/button/modify";
 
 import { detail, remove, modify } from "api/hackathon";
 import { inHackathon } from "api/team";

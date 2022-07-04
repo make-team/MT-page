@@ -9,7 +9,7 @@ import TeamDetailTemplate, {
 } from "components/team/Detail";
 
 import { detail, modify } from "api/team";
-import ModifySubmitButton from "components/common/modify/ModifySubmitButton";
+import ModifySubmitButton from "components/common/button/modify";
 
 function TeamDetail() {
   const location = useLocation();

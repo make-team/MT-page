@@ -4,7 +4,7 @@ import { NavLink, Outlet } from "react-router-dom";
 
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
-import Loading from "components/common/Loading";
+import Loading from "components/common/loading/Loading";
 
 const MENU = [
   {

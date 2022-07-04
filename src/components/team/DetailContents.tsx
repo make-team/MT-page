@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import DetailItem from "../common/modify/ModifyItem";
-import Quill from "components/common/Quill";
+import Quill from "components/common/editor/Quill";
 import StartEndPicker from "components/common/date/stardEnd";
 import DateTerm from "components/common/date/term";
 

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import Radio from "components/common/RadioList";
+import Radio from "components/common/radio/RadioList";
 
 import { FIELD } from "constant/checkItems";
 import StartEndPicker from "components/common/date/stardEnd";
-import Quill from "components/common/Quill";
+import Quill from "components/common/editor/Quill";
 
 export interface Team {
   id: number;

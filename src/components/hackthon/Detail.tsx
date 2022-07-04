@@ -5,7 +5,7 @@ import HackathonDetailContents, {
   PropTypes as DetailContentsPropTypes,
 } from "./DetailContents";
 
-import CardImg from "components/common/ImgBox";
+import CardImg from "components/common/image/ImgBox";
 
 export interface Hackathon {
   title: string;

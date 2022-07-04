@@ -5,7 +5,7 @@ import { useRecoilValue } from "recoil";
 import { personListSelector } from "store/personList";
 
 import { INTEREST, STATUS, POSTION } from "constant/checkItems";
-import CardImg from "components/common/ImgBox";
+import CardImg from "components/common/image/ImgBox";
 
 function HackathonCard() {
   const data = useRecoilValue(personListSelector);

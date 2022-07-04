@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import Checkbox from "components/common/CheckBox";
+import Checkbox from "components/common/checkBox/normal";
 
 interface PropTypes {
   items: Array<[string, string]>;

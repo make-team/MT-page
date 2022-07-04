@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import styled from "styled-components";
 
-import Radio from "components/common/RadioList";
+import Radio from "components/common/radio/RadioList";
 
 import { INTEREST, STATUS, POSTION } from "constant/checkItems";
 import ImgUpload from "components/common/ImgUpload";
-import { Input } from "components/common/Input";
+import { Input } from "components/common/input/Input";
 //import CheckButtonList from "components/organisms/CheckButtonList";
 
 export interface Person {

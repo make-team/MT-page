@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { Div } from "../Div";
-import { Input } from "components/common/input/Input";
+import { Input } from "components/common/input";
 
 export interface PropTypes {
   title?: string;

@@ -4,8 +4,8 @@ import styled from "styled-components";
 import Radio from "components/common/radio/RadioList";
 
 import { INTEREST, STATUS, POSTION } from "constant/checkItems";
-import ImgUpload from "components/common/ImgUpload";
-import { Input } from "components/common/input/Input";
+import ImgUpload from "components/common/image/ImgUpload";
+import { Input } from "components/common/input";
 //import CheckButtonList from "components/organisms/CheckButtonList";
 
 export interface Person {

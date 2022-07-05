@@ -17,7 +17,7 @@ import { inHackathon } from "api/team";
 
 import { useRecoilState } from "recoil";
 import { ImgType, ImgState } from "recoil/hackathonImg";
-import Detail from "./layout/Detail";
+import Detail from "../layout/Detail";
 
 function HackathonDetail() {
   const location = useLocation();

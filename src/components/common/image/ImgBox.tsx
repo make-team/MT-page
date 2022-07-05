@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import emptyImg from "image/emptyImg.png";
+import emptyImg from "assets/image/emptyImg.png";
 
 export interface Img {
   imgUrl: string;

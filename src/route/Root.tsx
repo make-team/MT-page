@@ -2,12 +2,12 @@ import React from "react";
 import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
 
 import Main from "pages/Main";
-import HackathonRegist from "pages/HackathonRegist";
-import HackathonDetail from "pages/HackathonDetail";
-import PersonDetail from "pages/PersonDetail";
-import PersonRegist from "pages/PersonRegist";
-import TeamDetail from "pages/TeamDetail";
-import TeamRegist from "pages/TeamRegist";
+import HackathonRegist from "pages/hackathon/Regist";
+import HackathonDetail from "pages/hackathon/Detail";
+import PersonDetail from "pages/person/Detail";
+import PersonRegist from "pages/person/Regist";
+import TeamDetail from "pages/team/Detail";
+import TeamRegist from "pages/team/Regist";
 
 import HackathonCardList from "components/hackthon/MainCard";
 import CardListTeamContainer from "components/hackthon/DetailTeamCard";

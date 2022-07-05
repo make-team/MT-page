@@ -4,15 +4,17 @@ export const Theme = {
 };
 
 export const palette = {
-  lightBackground: "#92B4EC",
-  lightFooter: "#FFFFFF",
-  lightMenu: "#FFFFFF",
-  lightCardBackground: "#FFE69A",
-  lightTextColor: "#FFFFFF",
+  background: "#92B4EC",
+  footer: "#FFFFFF",
+  menu: "#FFFFFF",
+  cardBackground: "#FFE69A",
+  textColor: "#FFFFFF",
+  selectedColor: "#100c0d",
 
-  blackBackground: "#1B1A17",
-  blackFooter: "#F0A500",
-  blackMenu: "#F0A500",
-  blackCardBackground: "#F0A500",
-  blackTextColor: "#E6D5B8",
+  darkBackground: "#203239",
+  darkFooter: "#F0A500",
+  darkMenu: "#F0A500",
+  darkCardBackground: "#F0A500",
+  darkTextColor: "#EEEDDE",
+  darkSelectedColor: "#E0DDAA",
 };

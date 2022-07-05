@@ -4,6 +4,7 @@ import styled from "styled-components";
 import CardImg, { Img } from "../common/image/ImgBox";
 import CardItem from "../common/card/ItemWrapper";
 import DateTerm from "../common/date/term";
+import Card from "components/common/card/wrapper";
 
 export interface PropTypes {
   cardImg: Img[];
@@ -25,28 +26,25 @@ function HackathonCardContent({
   contact,
 }: PropTypes) {
   return (
-    <Wrapper>
-      <CardImg attachment={cardImg} height="17rem" />
-      <Intro>
-        <div>{title}</div>
-        {`🔎${hit}`}
-      </Intro>
-      <CardItem
-        content={<DateTerm startTime={startTime} endTime={endTime} />}
-      />
-    </Wrapper>
+    <Card margin="0.5rem">
+      <div>
+        <CardImg attachment={cardImg} height="14rem" />
+        <Title>
+          <div>{title}</div>
+          {`🔎${hit ? hit : 0}`}
+        </Title>
+        <CardItem
+          content={<DateTerm startTime={startTime} endTime={endTime} />}
+        />
+      </div>
+    </Card>
   );
 }
 
 export default HackathonCardContent;
 
-const Wrapper = styled.div`
-  & > div {
-    margin: 0.2rem 0;
-  }
-`;
-const Intro = styled.div`
+const Title = styled.div`
   display: flex;
+  padding: 0.2rem;
   justify-content: space-between;
-  font-size: 0.8rem;
 `;

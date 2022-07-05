@@ -9,6 +9,7 @@ interface Hackathon {
   contact: string;
   startTime: Date;
   endTime: Date;
+  hit: number;
   attachment: {
     imgUrl: string;
     uuid: string;
@@ -50,6 +51,7 @@ export const boardListState = atom<Array<Hackathon>>({
       description: "",
       attachment: [],
       contact: "",
+      hit: 1,
       startTime: new Date(),
       endTime: new Date(),
     },

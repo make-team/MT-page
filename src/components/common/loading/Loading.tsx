@@ -29,7 +29,7 @@ const LoadingAni = keyframes`
   }
 `;
 
-const Wrapper = styled.button`
+const Wrapper = styled.div`
   position: relative;
   background-color: inherit;
   border: none;

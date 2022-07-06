@@ -3,18 +3,19 @@ export const Theme = {
   1: "DARK",
 };
 
-export const palette = {
-  background: "#92B4EC",
-  footer: "#FFFFFF",
-  menu: "#FFFFFF",
+export const light = {
+  mainBackground: "#F9F3DF",
+  subBackground: "#FDFCE5",
   cardBackground: "#FFE69A",
-  textColor: "#FFFFFF",
-  selectedColor: "#100c0d",
+  textColor: "#000000",
+  selectedColor: "#F4D19B",
+};
 
-  darkBackground: "#203239",
-  darkFooter: "#F0A500",
+export const dark = {
+  mainBackground: "#222831",
+  subBackground: "#393E46",
   darkMenu: "#F0A500",
-  darkCardBackground: "#F0A500",
-  darkTextColor: "#EEEDDE",
-  darkSelectedColor: "#E0DDAA",
+  cardBackground: "#F0A500",
+  textColor: "#EEEDDE",
+  selectedColor: "#E0DDAA",
 };

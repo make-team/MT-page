@@ -38,4 +38,7 @@ const Wrapper = styled.div<{
   @media screen and (max-width: 700px) {
     width: 15rem;
   }
+  @media screen and (max-width: 500px) {
+    width: 20rem;
+  }
 `;

@@ -1,10 +1,12 @@
-import React, { useCallback } from "react";
-import styled from "styled-components";
+import React, { useCallback, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import styled, { css } from "styled-components";
 
 import { useRecoilState } from "recoil";
-import { Theme, palette } from "constant/theme";
 import { themeMode } from "store/ColorMode";
+
+import { Theme, palette } from "constant/theme";
+import Toggle from "../toggle";
 
 const MENU = [
   {
@@ -22,39 +24,48 @@ const MENU = [
 ];
 
 function Header() {
-  const [theme, setTheme] = useRecoilState<keyof typeof Theme>(themeMode);
+  const [themeStatus, setStatus] =
+    useRecoilState<keyof typeof Theme>(themeMode);
 
-  const handleChangeTheme = useCallback(() => {
-    if (theme === 0) {
+  const toggleClick = useCallback(() => {
+    if (themeStatus === 0) {
       localStorage.setItem("theme", "1");
-      setTheme(1);
+      setStatus(1);
       return;
     }
 
     localStorage.setItem("theme", "0");
-    setTheme(0);
-  }, [setTheme, theme]);
+    setStatus(0);
+  }, [setStatus, themeStatus]);
+
+  useEffect(() => {
+    setStatus(0);
+  }, [setStatus]);
 
   return (
-    <Wrapper>
+    <Wrapper status={themeStatus}>
       <Logo>
         <div>Make Team</div>
-        <div onClick={handleChangeTheme}>{theme === 0 ? "🌜" : "🌞"}</div>
       </Logo>
       <Menu>
         {MENU.map((item) => (
-          <ListLink key={item.url} to={item.url} end>
+          <ListLink status={themeStatus} key={item.url} to={item.url} end>
             <div key={item.url}>{item.title}</div>
           </ListLink>
         ))}
       </Menu>
+      <Toggle
+        status={themeStatus === 0}
+        onClick={toggleClick}
+        circleText={themeStatus ? "🌞" : "🌜"}
+      />
     </Wrapper>
   );
 }
 
 export default Header;
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ status: 0 | 1 }>`
   grid-area: nav;
   display: flex;
   height: 3rem;
@@ -62,10 +73,12 @@ const Wrapper = styled.div`
   color: var(--color);
   justify-content: space-between;
   padding: 0 2rem;
-  background-color: ${({ theme }) =>
-    theme === 0 ? palette.background : palette.darkBackground};
-  color: ${({ theme }) =>
-    theme === 0 ? palette.textColor : palette.darkTextColor};
+  ${({ status }) => css`
+    background-color: ${status === 0
+      ? palette.background
+      : palette.darkBackground};
+    color: ${status === 0 ? palette.textColor : palette.darkTextColor};
+  `}
 `;
 
 const Logo = styled.div`
@@ -77,7 +90,7 @@ const Menu = styled.div`
   width: 20rem;
 `;
 
-const ListLink = styled(NavLink)`
+const ListLink = styled(NavLink)<{ status: 0 | 1 }>`
   flex: 1;
   position: relative;
   display: flex;
@@ -88,20 +101,21 @@ const ListLink = styled(NavLink)`
   font-weight: bolder;
   font-size: 0.75rem;
   text-decoration: none;
-  border-right: 1px solid
-    ${({ theme }) => (theme === 0 ? palette.textColor : palette.darkTextColor)};
-  &:visited {
-    color: ${({ theme }) =>
-      theme === 0 ? palette.textColor : palette.darkTextColor};
-  }
-  &:link {
-    color: ${({ theme }) =>
-      theme === 0 ? palette.textColor : palette.darkTextColor};
-  }
-  &.active {
-    color: ${({ theme }) =>
-      theme === 0 ? palette.selectedColor : palette.darkSelectedColor};
-  }
+  ${({ status }) => css`
+    border-right: 1px solid
+      ${status === 0 ? palette.textColor : palette.darkTextColor};
+    &:visited {
+      color: ${status === 0 ? palette.textColor : palette.darkTextColor};
+    }
+    &:link {
+      color: ${status === 0 ? palette.textColor : palette.darkTextColor};
+    }
+    &.active {
+      color: ${status === 0
+        ? palette.selectedColor
+        : palette.darkSelectedColor};
+    }
+  `}
   &:last-child {
     border-right: none;
   }

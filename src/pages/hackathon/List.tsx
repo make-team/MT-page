@@ -22,4 +22,8 @@ export default HackathonList;
 
 const Wrapper = styled.div`
   max-width: 90rem;
+  background-color: inherit;
+  @media screen and (max-width: 700px) {
+    width: 40rem;
+  }
 `;

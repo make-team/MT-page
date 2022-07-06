@@ -5,7 +5,7 @@ import styled, { css } from "styled-components";
 import { useRecoilState } from "recoil";
 import { themeMode } from "store/ColorMode";
 
-import { Theme, palette } from "constant/theme";
+import { Theme, light, dark } from "constant/theme";
 import Toggle from "../toggle";
 
 const MENU = [
@@ -75,9 +75,9 @@ const Wrapper = styled.div<{ status: 0 | 1 }>`
   padding: 0 2rem;
   ${({ status }) => css`
     background-color: ${status === 0
-      ? palette.background
-      : palette.darkBackground};
-    color: ${status === 0 ? palette.textColor : palette.darkTextColor};
+      ? light.mainBackground
+      : dark.subBackground};
+    color: ${status === 0 ? light.textColor : dark.textColor};
   `}
 `;
 
@@ -102,18 +102,15 @@ const ListLink = styled(NavLink)<{ status: 0 | 1 }>`
   font-size: 0.75rem;
   text-decoration: none;
   ${({ status }) => css`
-    border-right: 1px solid
-      ${status === 0 ? palette.textColor : palette.darkTextColor};
+    border-right: 1px solid ${status === 0 ? light.textColor : dark.textColor};
     &:visited {
-      color: ${status === 0 ? palette.textColor : palette.darkTextColor};
+      color: ${status === 0 ? light.textColor : dark.textColor};
     }
     &:link {
-      color: ${status === 0 ? palette.textColor : palette.darkTextColor};
+      color: ${status === 0 ? light.textColor : dark.textColor};
     }
     &.active {
-      color: ${status === 0
-        ? palette.selectedColor
-        : palette.darkSelectedColor};
+      color: ${status === 0 ? light.selectedColor : dark.selectedColor};
     }
   `}
   &:last-child {

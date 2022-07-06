@@ -35,4 +35,7 @@ const Wrapper = styled.div<{
   &:hover {
     box-shadow: 0.8rem 0.8rem 0.5rem rgba(0, 0, 0, 0.2);
   }
+  @media screen and (max-width: 700px) {
+    width: 15rem;
+  }
 `;

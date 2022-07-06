@@ -24,9 +24,9 @@ const Wrapper = styled.div`
   max-width: 90rem;
   background-color: inherit;
   @media screen and (max-width: 700px) {
-    width: 40rem;
+    max-width: 40rem;
   }
   @media screen and (max-width: 450px) {
-    width: 20rem;
+    width: 15rem;
   }
 `;

@@ -21,7 +21,6 @@ function HackathonList() {
 export default HackathonList;
 
 const Wrapper = styled.div`
-  background-color: inherit;
   @media screen and (max-width: 700px) {
     max-width: 45rem;
   }

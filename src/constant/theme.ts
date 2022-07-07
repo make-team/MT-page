@@ -6,6 +6,7 @@ export const Theme = {
 export const light = {
   mainBackground: "#FFFFFF",
   subBackground: "#FDFCE5",
+  menu: "#FFD369",
   cardBackground: "#FFE69A",
   textColor: "#000000",
   selectedColor: "#C84B31",
@@ -14,7 +15,7 @@ export const light = {
 export const dark = {
   mainBackground: "#000000",
   subBackground: "#393E46",
-  cardBackground: "#F0A500",
+  menu: "#30475E",
   textColor: "#EEEDDE",
   selectedColor: "#E0DDAA",
 };

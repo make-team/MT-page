@@ -6,7 +6,7 @@ import { Div } from "../Div";
 function Footer() {
   return (
     <Wrapper>
-      <Div>menu</Div>
+      <Div>Footer</Div>
     </Wrapper>
   );
 }

@@ -57,7 +57,6 @@ function PersonCard() {
 export default PersonCard;
 
 const Wrapper = styled.div`
-  max-width: 40rem;
   margin: 0 auto;
   overflow: hidden;
 `;

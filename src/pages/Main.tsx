@@ -30,19 +30,20 @@ export default Main;
 
 const Wrapepr = styled.div`
   display: grid;
-  grid-template-columns: minmax(1fr, 90rem);
-  grid-template-rows: 4rem 1fr 4rem;
+  grid-template-columns: minmax(20rem, 90rem);
+  grid-template-rows: 3rem 1fr 4rem;
   grid-template-areas:
     "header header header"
     "main main main"
     "footer footer footer";
   min-height: 100vh;
-  background-color: ${(props) => props.theme.mainBackground};
   color: ${(props) => props.theme.textColor};
 `;
 
 const TabContents = styled.div`
   grid-area: main;
+  padding-top: 2rem;
+  background-color: ${(props) => props.theme.mainBackground};
 `;
 
 const HeaderWrapper = styled.div`

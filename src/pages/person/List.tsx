@@ -14,5 +14,6 @@ function PersonList() {
 export default PersonList;
 
 const Wrapper = styled.div`
-  min-width: 20rem;
+  max-width: 90rem;
+  margin: 0 auto;
 `;

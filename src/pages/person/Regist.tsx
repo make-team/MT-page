@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import PersonContainer from "container/person/PersonContainer";
+import PersonContainer from "container/person/RegistContainer";
 import { useNavigate } from "react-router-dom";
 
 function HackathonRegist() {

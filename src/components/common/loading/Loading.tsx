@@ -31,7 +31,6 @@ const LoadingAni = keyframes`
 
 const Wrapper = styled.div`
   position: relative;
-  background-color: inherit;
   border: none;
   width: 30rem;
   height: 20rem;
@@ -40,7 +39,8 @@ const Wrapper = styled.div`
 
 const Item = styled.button`
   position: absolute;
-  border: 4px solid #100c0d;
+  border: 4px solid ${(props) => props.theme.textColor};
+  background-color: ${(props) => props.theme.mainBackground};
   opacity: 1;
   border-radius: 50%;
   animation: ${LoadingAni} 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;

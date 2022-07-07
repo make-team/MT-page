@@ -164,6 +164,5 @@ export default HackathonDetail;
 
 const Wrapper = styled.div`
   padding: 1rem;
-  max-width: 90rem;
   margin: 1rem auto;
 `;

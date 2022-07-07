@@ -60,8 +60,9 @@ function ListContainer({ goDetail }: PropTypes) {
 export default ListContainer;
 
 const List = styled.div`
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 20rem);
+  justify-content: center;
+  grid-gap: 1rem;
   background-color: inherit;
 `;

@@ -11,7 +11,7 @@ export const getTheme = (): keyof typeof Theme => {
   return 1;
 };
 
-export const themeMode = atom<keyof typeof Theme>({
-  key: "themeMode",
+export const themeStatus = atom<keyof typeof Theme>({
+  key: "themeStatus",
   default: getTheme(),
 });

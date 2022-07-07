@@ -18,5 +18,5 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   height: 4rem;
-  background-color: black;
+  background-color: ${(props) => props.theme.subBackground};
 `;

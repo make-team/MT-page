@@ -35,10 +35,5 @@ const Wrapper = styled.div<{
   &:hover {
     box-shadow: 0.8rem 0.8rem 0.5rem rgba(0, 0, 0, 0.2);
   }
-  @media screen and (max-width: 700px) {
-    width: 15rem;
-  }
-  @media screen and (max-width: 500px) {
-    width: 20rem;
-  }
+  background-color: ${(props) => props.theme.subBackground};
 `;

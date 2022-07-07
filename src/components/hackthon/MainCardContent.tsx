@@ -26,7 +26,7 @@ function HackathonCardContent({
   contact,
 }: PropTypes) {
   return (
-    <Card margin="0.5rem">
+    <Card>
       <div>
         <CardImg attachment={cardImg} height="14rem" />
         <Title>
@@ -45,6 +45,5 @@ export default HackathonCardContent;
 
 const Title = styled.div`
   display: flex;
-  padding: 0.2rem;
   justify-content: space-between;
 `;

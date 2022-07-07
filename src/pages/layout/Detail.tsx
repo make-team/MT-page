@@ -18,7 +18,6 @@ function Detail({ title, child }: PropTypes) {
 export default Detail;
 
 const Wrapper = styled.div`
-  max-width: 90rem;
   margin: 1rem auto;
   border: 1px solid black;
 `;

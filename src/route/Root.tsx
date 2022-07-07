@@ -11,7 +11,7 @@ import TeamRegist from "pages/team/Regist";
 
 import HackathonCardList from "pages/hackathon/List";
 import CardListTeamContainer from "components/hackthon/DetailTeamCard";
-import PersonCard from "components/person/Card";
+import PersonCard from "pages/person/List";
 
 function Root() {
   return (

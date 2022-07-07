@@ -1,14 +1,21 @@
 import React from "react";
+import { createGlobalStyle, ThemeProvider } from "styled-components";
+
+import { useRecoilValue } from "recoil";
+import { themeStatus } from "store/theme";
+
 import Root from "./route/Root";
 
-import { createGlobalStyle } from "styled-components";
+import { dark, light } from "constant/theme";
 
 function App() {
+  const theme = useRecoilValue(themeStatus);
+
   return (
-    <>
+    <ThemeProvider theme={theme ? dark : light}>
       <GlobalStyle />
       <Root />
-    </>
+    </ThemeProvider>
   );
 }
 export default App;

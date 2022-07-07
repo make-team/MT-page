@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { useRecoilValue } from "recoil";
 
 import { personListSelector } from "store/personList";
@@ -7,11 +7,11 @@ import { personListSelector } from "store/personList";
 import { INTEREST, STATUS, POSTION } from "constant/checkItems";
 import CardImg from "components/common/image/ImgBox";
 
-function HackathonCard() {
+function PersonCard() {
   const data = useRecoilValue(personListSelector);
 
   return (
-    <div>
+    <Wrapepr>
       <TableHeader>
         <div></div>
         <div>이름</div>
@@ -50,11 +50,15 @@ function HackathonCard() {
             </Card>
           ))}
       </List>
-    </div>
+    </Wrapepr>
   );
 }
 
-export default HackathonCard;
+export default PersonCard;
+
+const Wrapepr = styled.div`
+  overflow: hidden;
+`;
 
 const List = styled.div`
   display: flex;
@@ -65,6 +69,7 @@ const List = styled.div`
 
 const TableHeader = styled.div`
   display: flex;
+  background-color: ${(props) => props.theme.subBackground};
   & > div {
     flex: 1;
   }
@@ -76,9 +81,9 @@ const Card = styled.div`
   height: 5rem;
   font-size: 0.8rem;
   padding: 0.5rem;
-  margin: 1rem 1rem;
-  border-radius: 8px;
-  background-color: #c3a6a0;
+  border-bottom: 1px solid black;
+  background-color: ${(props) => props.theme.subBackground};
+  color: ${(props) => props.theme.textColor};
   &:hover {
     transform: scale(1.025, 1.025);
     box-shadow: 0.8rem 0.8rem 0.5rem rgba(0, 0, 0, 0.2);

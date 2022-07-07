@@ -8,36 +8,47 @@ import Loading from "components/common/loading/Loading";
 
 function Main() {
   return (
-    <>
-      <Content>
+    <Wrapepr>
+      <HeaderWrapper>
         <Header />
+      </HeaderWrapper>
+
+      <TabContents>
         <Suspense fallback={<Loading />}>
-          <TabContents>
-            <Outlet />
-          </TabContents>
+          <Outlet />
         </Suspense>
-      </Content>
-      <Footer />
-    </>
+      </TabContents>
+
+      <FooterWrapper>
+        <Footer />
+      </FooterWrapper>
+    </Wrapepr>
   );
 }
 
 export default Main;
 
-const Content = styled.div`
+const Wrapepr = styled.div`
   display: grid;
-  grid-template-columns: minmax(0, 66fr);
-  grid-template-rows: 5rem 4rem auto 2rem;
+  grid-template-columns: minmax(1fr, 90rem);
+  grid-template-rows: 4rem 1fr 4rem;
   grid-template-areas:
-    "nav nav nav"
-    "menu menu menu"
+    "header header header"
     "main main main"
-    " . . . ";
+    "footer footer footer";
   min-height: 100vh;
-  margin: 0 auto;
+  background-color: ${(props) => props.theme.mainBackground};
+  color: ${(props) => props.theme.textColor};
 `;
 
 const TabContents = styled.div`
   grid-area: main;
-  margin: 0 auto;
+`;
+
+const HeaderWrapper = styled.div`
+  grid-area: header;
+`;
+
+const FooterWrapper = styled.div`
+  grid-area: footer;
 `;

@@ -1,11 +1,11 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback } from "react";
 import { NavLink } from "react-router-dom";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { useRecoilState } from "recoil";
-import { themeMode } from "store/ColorMode";
+import { themeStatus } from "store/theme";
 
-import { Theme, light, dark } from "constant/theme";
+import { Theme } from "constant/theme";
 import Toggle from "../toggle";
 
 const MENU = [
@@ -24,40 +24,35 @@ const MENU = [
 ];
 
 function Header() {
-  const [themeStatus, setStatus] =
-    useRecoilState<keyof typeof Theme>(themeMode);
+  const [theme, setTheme] = useRecoilState<keyof typeof Theme>(themeStatus);
 
   const toggleClick = useCallback(() => {
-    if (themeStatus === 0) {
-      localStorage.setItem("theme", "1");
-      setStatus(1);
+    if (theme) {
+      localStorage.setItem("theme", "0");
+      setTheme(0);
       return;
     }
 
-    localStorage.setItem("theme", "0");
-    setStatus(0);
-  }, [setStatus, themeStatus]);
-
-  useEffect(() => {
-    setStatus(0);
-  }, [setStatus]);
+    localStorage.setItem("theme", "1");
+    setTheme(1);
+  }, [theme, setTheme]);
 
   return (
-    <Wrapper status={themeStatus}>
+    <Wrapper>
       <Logo>
         <div>Make Team</div>
       </Logo>
       <Menu>
         {MENU.map((item) => (
-          <ListLink status={themeStatus} key={item.url} to={item.url} end>
+          <ListLink key={item.url} to={item.url} end>
             <div key={item.url}>{item.title}</div>
           </ListLink>
         ))}
       </Menu>
       <Toggle
-        status={themeStatus === 0}
+        status={theme === 0}
         onClick={toggleClick}
-        circleText={themeStatus ? "🌞" : "🌜"}
+        circleText={theme ? "🌜" : "🌞"}
       />
     </Wrapper>
   );
@@ -65,20 +60,14 @@ function Header() {
 
 export default Header;
 
-const Wrapper = styled.div<{ status: 0 | 1 }>`
-  grid-area: nav;
+const Wrapper = styled.div`
   display: flex;
   height: 3rem;
   align-items: center;
-  color: var(--color);
   justify-content: space-between;
   padding: 0 2rem;
-  ${({ status }) => css`
-    background-color: ${status === 0
-      ? light.mainBackground
-      : dark.subBackground};
-    color: ${status === 0 ? light.textColor : dark.textColor};
-  `}
+  background-color: ${(props) => props.theme.subBackground};
+  color: ${(props) => props.theme.textColor};
 `;
 
 const Logo = styled.div`
@@ -90,7 +79,7 @@ const Menu = styled.div`
   width: 20rem;
 `;
 
-const ListLink = styled(NavLink)<{ status: 0 | 1 }>`
+const ListLink = styled(NavLink)`
   flex: 1;
   position: relative;
   display: flex;
@@ -101,18 +90,16 @@ const ListLink = styled(NavLink)<{ status: 0 | 1 }>`
   font-weight: bolder;
   font-size: 0.75rem;
   text-decoration: none;
-  ${({ status }) => css`
-    border-right: 1px solid ${status === 0 ? light.textColor : dark.textColor};
-    &:visited {
-      color: ${status === 0 ? light.textColor : dark.textColor};
-    }
-    &:link {
-      color: ${status === 0 ? light.textColor : dark.textColor};
-    }
-    &.active {
-      color: ${status === 0 ? light.selectedColor : dark.selectedColor};
-    }
-  `}
+  border-right: 1px solid ${(props) => props.theme.textColor};
+  &:visited {
+    color: ${(props) => props.theme.textColor};
+  }
+  &:link {
+    color: ${(props) => props.theme.textColor};
+  }
+  &.active {
+    color: ${(props) => props.theme.selectedColor};
+  }
   &:last-child {
     border-right: none;
   }

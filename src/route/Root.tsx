@@ -19,16 +19,16 @@ function Root() {
       <Routes>
         <Route path="/" element={<Main />}>
           <Route path="hackathon" element={<HackathonCardList />} />
+          <Route path="/hackathon/:id" element={<HackathonDetail />} />
           <Route path="team" element={<CardListTeamContainer />} />
+          <Route path="/team/:id" element={<TeamDetail />} />
           <Route path="person" element={<PersonCard />} />
+          <Route path="/person/:id" element={<PersonDetail />} />
           <Route path="/" element={<Navigate to="/hackathon" />} />
         </Route>
         <Route path="/hackathon/regist" element={<HackathonRegist />} />
-        <Route path="/hackathon/:id" element={<HackathonDetail />} />
         <Route path="/hackathon/:id/team/regist" element={<TeamRegist />} />
-        <Route path="/team/:id" element={<TeamDetail />} />
         <Route path="/person/regist" element={<PersonRegist />} />
-        <Route path="/person/:id" element={<PersonDetail />} />
         <Route path="*" element={<Navigate to="/hackathon" />} />
       </Routes>
     </BrowserRouter>

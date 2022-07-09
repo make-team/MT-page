@@ -9,13 +9,13 @@ interface PropTypes {
   recruiment: { field: keyof typeof FIELD; skill: string; count: number }[];
 }
 
-function TeamRecruimentCardList({ recruiment }: PropTypes) {
+function RecruimentCardList({ recruiment }: PropTypes) {
   return (
     <Wrapper>
-      {recruiment.map((item) => {
+      {recruiment.map((item, index) => {
         return (
           <TeamRecruimentItem
-            key={item.field + item.skill + item.count}
+            key={`${index} + ${item.field}`}
             field={item.field}
             skill={item.skill}
             count={item.count}
@@ -26,7 +26,7 @@ function TeamRecruimentCardList({ recruiment }: PropTypes) {
   );
 }
 
-export default TeamRecruimentCardList;
+export default RecruimentCardList;
 
 const Wrapper = styled.div`
   grid-area: list;

@@ -6,6 +6,7 @@ import HackathonDetailContents, {
 } from "./DetailContents";
 
 import CardImg from "components/common/image/ImgBox";
+import StartEndPicker from "../common/date/stardEnd";
 
 export interface Hackathon {
   title: string;
@@ -32,6 +33,14 @@ export interface PropTypes {
 }
 
 function HackathonDetail({ contents, img, modifyStatus, onChange }: PropTypes) {
+  const startDate = `${contents.startTime.getFullYear()}.${
+    contents.startTime.getMonth() + 1
+  }.${contents.startTime.getDate()}`;
+
+  const endDate = `${contents.endTime.getFullYear()}.${
+    contents.endTime.getMonth() + 1
+  }.${contents.endTime.getDate()}`;
+
   const contentsChange = useCallback<
     Exclude<DetailContentsPropTypes["onChange"], undefined>
   >(
@@ -40,18 +49,31 @@ function HackathonDetail({ contents, img, modifyStatus, onChange }: PropTypes) {
     },
     [onChange]
   );
+
   return (
     <Wrapper>
       <ImgBox>
         <CardImg attachment={img} height="100%" width="100%" />
       </ImgBox>
-      <HackathonDetailContents
-        description={contents.description}
-        contact={contents.contact}
-        startTime={contents.startTime}
-        endTime={contents.endTime}
-        onChange={modifyStatus ? contentsChange : undefined}
-      />
+      <ContentsWrapper>
+        <HackathonDetailContents
+          description={contents.description}
+          contact={contents.contact}
+          onChange={modifyStatus ? contentsChange : undefined}
+        />
+        <Title>- 기 간 -</Title>
+        {modifyStatus ? (
+          <StartEndPicker
+            startTime={contents.startTime}
+            endTime={contents.endTime}
+            onChange={modifyStatus ? contentsChange : undefined}
+          />
+        ) : (
+          <DateWrapper>
+            <div>{`${startDate}`}</div>~<div>{`${endDate}`}</div>
+          </DateWrapper>
+        )}
+      </ContentsWrapper>
     </Wrapper>
   );
 }
@@ -61,12 +83,24 @@ export default HackathonDetail;
 const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  & > div {
-    flex: 1;
-  }
 `;
-
+const Title = styled.div`
+  margin: 1rem 0;
+`;
 const ImgBox = styled.div`
+  flex: 1;
   min-width: 25rem;
   height: 30rem;
+`;
+
+const ContentsWrapper = styled.div`
+  flex: 1;
+  padding: 1rem;
+`;
+
+const DateWrapper = styled.div`
+  display: flex;
+  & > div {
+    margin: 0 1rem;
+  }
 `;

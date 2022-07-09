@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-import HacktonContainer from "container/hackton/HacktonContainer";
+import HacktonContainer from "container/hackton/RegistContainer";
 
 function HackathonRegist() {
   const history = useNavigate();

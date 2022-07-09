@@ -12,7 +12,7 @@ export interface PropTypes {
   onCancel: () => void;
 }
 
-function HacktonContainer({ onCancel }: PropTypes) {
+function RegistContainer({ onCancel }: PropTypes) {
   const [contents, setContents] = useState<HackathonRegist>({
     title: "",
     description: "",
@@ -55,7 +55,7 @@ function HacktonContainer({ onCancel }: PropTypes) {
   );
 }
 
-export default HacktonContainer;
+export default RegistContainer;
 
 const Wrapper = styled.div`
   grid-area: main;

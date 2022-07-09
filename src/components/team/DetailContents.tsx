@@ -34,12 +34,7 @@ function TeamDetailContents({
     <Wrapper>
       <Intro>
         <div>팀 |</div>
-        <DetailItem
-          name="name"
-          modifyStatus={modifyStatus}
-          content={name}
-          onChange={onChange}
-        />
+        <DetailItem name="name" content={name} onChange={onChange} />
       </Intro>
       <Intro>
         참여할 공모전 -

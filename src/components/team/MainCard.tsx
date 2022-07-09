@@ -22,13 +22,13 @@ export interface PropTypes {
   items?: Team[];
 }
 
-function HackathonCard({ items }: PropTypes) {
+function TeamCard({ items }: PropTypes) {
   const history = useNavigate();
   return (
     <List>
       {items &&
         items.map((item) => (
-          <Card onClick={() => history(`/team/${item.id}`)}>
+          <Card key={item.id} onClick={() => history(`/team/${item.id}`)}>
             <TeamCardContents
               name={item.name}
               contact={item.contact}
@@ -42,7 +42,7 @@ function HackathonCard({ items }: PropTypes) {
   );
 }
 
-export default HackathonCard;
+export default TeamCard;
 
 const List = styled.div`
   display: flex;

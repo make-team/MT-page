@@ -9,12 +9,12 @@ export interface PropTypes {
   pickerName: string;
   selected: Date;
   minDate: Date;
-  onChange: ({ name, value }: { name: string; value: string | Date }) => void;
+  onChange?: ({ name, value }: { name: string; value: string | Date }) => void;
 }
 
 function DatePicker({ selected, minDate, pickerName, onChange }: PropTypes) {
   const changeDate = (date: Date, name: string) => {
-    onChange({ name: name, value: date });
+    if (onChange) onChange({ name: name, value: date });
   };
 
   return (

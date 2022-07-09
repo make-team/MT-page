@@ -1,13 +1,14 @@
 import React from "react";
-import "react-datepicker/dist/react-datepicker.css";
 import styled from "styled-components";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 import DatePicker from "../normal";
 
 export interface PropTypes {
-  onChange?: ({ name, value }: { name: string; value: string | Date }) => void;
   startTime: Date;
   endTime: Date;
+  onChange?: ({ name, value }: { name: string; value: string | Date }) => void;
 }
 
 function StartEndPicker({ startTime, endTime, onChange }: PropTypes) {
@@ -17,14 +18,14 @@ function StartEndPicker({ startTime, endTime, onChange }: PropTypes) {
         pickerName="startTime"
         selected={startTime}
         minDate={new Date()}
-        onChange={onChange ? onChange : () => {}}
+        onChange={onChange}
       />
       ~
       <DatePicker
         pickerName="endTime"
         selected={endTime}
         minDate={startTime}
-        onChange={onChange ? onChange : () => {}}
+        onChange={onChange}
       />
     </Wrapper>
   );
@@ -34,4 +35,5 @@ export default StartEndPicker;
 
 const Wrapper = styled.div`
   display: flex;
+  text-align: center;
 `;

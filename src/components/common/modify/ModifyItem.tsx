@@ -1,45 +1,45 @@
 import React from "react";
 import styled from "styled-components";
 
-import { Div } from "../Div";
 import { Input } from "components/common/input";
 
 export interface PropTypes {
   title?: string;
   content: string;
   name: string;
-  modifyStatus?: boolean;
   onChange?: ({ name, value }: { name: string; value: string | Date }) => void;
 }
 
-function HackathonDetail({
-  title,
-  content,
-  name,
-  modifyStatus,
-  onChange,
-}: PropTypes) {
+function HackathonDetail({ title, content, name, onChange }: PropTypes) {
   const contentsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     onChange && onChange({ name, value });
   };
 
   return (
-    <InputWrapper>
-      <Div>{title}</Div>
-      {modifyStatus ? (
+    <Wrapper>
+      <Title>{title}</Title>
+      {onChange ? (
         <Input
           name={name}
           defaultValue={content}
           onChange={contentsChange}
         ></Input>
       ) : (
-        <span>{content}</span>
+        <Content>{content}</Content>
       )}
-    </InputWrapper>
+    </Wrapper>
   );
 }
 
 export default HackathonDetail;
 
-const InputWrapper = styled.span``;
+const Wrapper = styled.div``;
+
+const Title = styled.div`
+  margin-bottom: 1rem;
+`;
+
+const Content = styled.div`
+  margin-bottom: 2rem;
+`;

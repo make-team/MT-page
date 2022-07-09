@@ -44,8 +44,8 @@ function TeamContainer({ id, onCancel }: PropTypes) {
     bodyData.append("hackathon_id", id);
     bodyData.append("description", contents.description);
     bodyData.append("contact", contents.contact);
-    bodyData.append("end_time", `${contents.endTime.getTime()}`);
-    bodyData.append("start_time", `${contents.startTime.getTime()}`);
+    bodyData.append("end_time", `${contents.endTime.getTime() / 1000}`);
+    bodyData.append("start_time", `${contents.startTime.getTime() / 1000}`);
     bodyData.append(
       "recruiment",
       `${JSON.stringify(

@@ -75,14 +75,14 @@ function DetailContainer({ id, toBack, toRegistTeam }: PropTypes) {
         onChange={changeContents}
       />
       <ButtonWrapper>
-        <ModifyButton
+        {/* <ModifyButton
           onBack={toBack}
           onDelete={deleteClick}
           onModify={modifyClick}
           onTeamRegist={toRegistTeam}
           onSubmitModify={confirmModify}
           modifyStatus={modifyStatus}
-        />
+        /> */}
       </ButtonWrapper>
       <HackathonTeamCard items={data.teamList} />
       <Popup

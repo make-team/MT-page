@@ -63,7 +63,7 @@ const Card = styled.div`
   height: min-content;
   padding: 0.5rem;
   margin-bottom: 1rem;
-  background-color: #c3a6a0;
+  background-color: ${(props) => props.theme.menu};
   border-radius: 8px;
   &:hover {
     transform: scale(1.025, 1.025);

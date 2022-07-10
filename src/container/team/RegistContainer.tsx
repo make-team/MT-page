@@ -17,7 +17,7 @@ export interface PropTypes {
   onCancel: () => void;
 }
 
-function TeamContainer({ id, onCancel }: PropTypes) {
+function RegistContainer({ id, onCancel }: PropTypes) {
   // const teamRecruiment = useSelector((state: RootState) => state.recruiment);
   // const dispatch = useDispatch();
   const [contents, setContents] = useState<Team>({
@@ -95,7 +95,7 @@ function TeamContainer({ id, onCancel }: PropTypes) {
   );
 }
 
-export default TeamContainer;
+export default RegistContainer;
 
 const Wrapper = styled.div`
   grid-area: main;

@@ -8,7 +8,7 @@ export interface TeamCard {
     id: number;
     title: string;
   };
-  name: string;
+  name?: string;
   contact: string;
   startTime: Date;
   endTime: Date;
@@ -23,28 +23,29 @@ function TeamCardContents({
 }: TeamCard) {
   return (
     <Wrapper>
-      <Name>{name}</Name>
-      {hackathon && <Sub>공모 : {hackathon.title}</Sub>}
-      <div>팀원 모집중</div>
+      <Name>{name ?? name}</Name>
+      {hackathon && <SubTitle>{hackathon.title}</SubTitle>}
       <Date>
         <DateTerm startTime={startTime} endTime={endTime} />
       </Date>
+      {contact ? contact : "없음"}
     </Wrapper>
   );
 }
 
 export default TeamCardContents;
 
-const Wrapper = styled.div``;
-const Name = styled.h2`
-  margin: 0;
+const Wrapper = styled.div`
+  display: flex;
 `;
-const Sub = styled.div`
-  font-size: 1rem;
-  color: gray;
-  margin-bottom: 1rem;
+const Name = styled.div`
+  flex: 1;
+`;
+const SubTitle = styled.div`
+  flex: 1;
 `;
 const Date = styled.div`
+  flex: 1;
   display: flex;
   justify-content: center;
 `;

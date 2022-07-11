@@ -1,52 +1,27 @@
 import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
+import { useRecoilValue } from "recoil";
+import { detailSelector } from "store/teamDetail";
 
+import ModifySubmitButton from "components/common/button/modify";
 import TeamDetailTemplate, {
   PropTypes as TeamPropTypes,
   Team,
 } from "components/team/Detail";
 
-import { detail, modify } from "api/team";
-import ModifySubmitButton from "components/common/button/modify";
+import { modify } from "api/team";
 
 interface PropTypes {
   id: string;
   toBack: () => void;
+  goHackathon: (id: number) => void;
 }
 
-function TeamDetail({ id, toBack }: PropTypes) {
-  const [modifyStatus, setModifyStatus] = useState<boolean>(false);
-  const [detailData, setDetailData] = useState<Team>({
-    id: 0,
-    hackathon: [{ id: 0, title: "" }],
-    name: "",
-    description: "",
-    contact: "",
-    startTime: new Date(),
-    endTime: new Date(),
-    recruiment: [],
-  });
+function TeamDetail({ id, toBack, goHackathon }: PropTypes) {
+  const data = useRecoilValue(detailSelector(+id));
 
-  const updateDetail = useCallback(async () => {
-    const { data } = await detail(+id);
-    setDetailData({
-      id: data._id,
-      hackathon: data.hackathon.map((item) => ({
-        id: item._id,
-        title: item.name,
-      })),
-      name: data.name,
-      description: data.description,
-      contact: data.contact,
-      startTime: new Date(data.start_time),
-      endTime: new Date(data.end_time),
-      recruiment: data.recruiment.map((item) => ({
-        field: item.field,
-        count: item.count,
-        skill: item.skill,
-      })),
-    });
-  }, [id]);
+  const [modifyStatus, setModifyStatus] = useState<boolean>(false);
+  const [detailData, setDetailData] = useState<Team>(data);
 
   const onModify = async () => {
     let bodyData = new FormData();
@@ -70,11 +45,8 @@ function TeamDetail({ id, toBack }: PropTypes) {
 
   const modifyTeam = () => {
     setModifyStatus((prev) => !prev);
+    detailSelector(+id);
   };
-
-  useEffect(() => {
-    updateDetail();
-  }, [updateDetail]);
 
   return (
     <Wrapper>
@@ -82,8 +54,8 @@ function TeamDetail({ id, toBack }: PropTypes) {
         contents={detailData}
         modifyStatus={modifyStatus}
         onChange={changeContents}
+        goHackathon={goHackathon}
       />
-
       <ModifySubmitButton
         onBack={toBack}
         onDelete={() => {}}
@@ -98,14 +70,6 @@ function TeamDetail({ id, toBack }: PropTypes) {
 export default TeamDetail;
 
 const Wrapper = styled.div`
-  display: grid;
   padding: 1rem;
-  grid-template-columns: 17fr minmax(0, 66fr) 17fr;
-  grid-template-rows: 3rem auto 3rem;
-  grid-template-areas:
-    " . title ."
-    " . content . "
-    ".  submitbutton ."
-    ". list .";
-  margin: 0 auto;
+  margin: 1rem auto;
 `;

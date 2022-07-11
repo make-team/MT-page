@@ -9,14 +9,18 @@ function TeamDetail() {
   const history = useNavigate();
 
   const goBackClick = () => {
-    history(`${location.pathname}/team`);
+    history(`/team`);
+  };
+
+  const goHackathon = (id: number) => {
+    history(`/hackathon/${id}`);
   };
 
   const id = location.pathname.split("/")[2];
 
   return (
     <Wrapper>
-      <DetailContainer id={id} toBack={goBackClick} />
+      <DetailContainer id={id} toBack={goBackClick} goHackathon={goHackathon} />
     </Wrapper>
   );
 }

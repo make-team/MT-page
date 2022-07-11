@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { FIELD } from "constant/checkItems";
 
-import TeamCardContents from "components/hackthon/DetailTeamCardContents";
+import TeamCardContents from "./Contents";
 import TeamRecruimentCardList from "components/team/RecruimentCardList";
 import { useNavigate } from "react-router-dom";
 
@@ -46,7 +46,6 @@ export default TeamCard;
 
 const List = styled.div`
   display: flex;
-  grid-area: main;
   justify-content: center;
   background-color: inherit;
   flex-wrap: wrap;

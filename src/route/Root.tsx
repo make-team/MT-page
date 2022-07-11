@@ -5,11 +5,11 @@ import Main from "pages/Main";
 import HackathonDetail from "pages/hackathon/Detail";
 import PersonDetail from "pages/person/Detail";
 import PersonRegist from "pages/person/Regist";
+import TeamList from "pages/team/List";
 import TeamDetail from "pages/team/Detail";
 import TeamRegist from "pages/team/Regist";
 
 import HackathonCardList from "pages/hackathon/List";
-import CardListTeamContainer from "components/hackthon/DetailTeamCard";
 import PersonCard from "pages/person/List";
 
 function Root() {
@@ -19,7 +19,7 @@ function Root() {
         <Route path="/" element={<Main />}>
           <Route path="hackathon" element={<HackathonCardList />} />
           <Route path="/hackathon/:id" element={<HackathonDetail />} />
-          <Route path="team" element={<CardListTeamContainer />} />
+          <Route path="team" element={<TeamList />} />
           <Route path="/team/:id" element={<TeamDetail />} />
           <Route path="person" element={<PersonCard />} />
           <Route path="/person/:id" element={<PersonDetail />} />

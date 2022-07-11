@@ -206,7 +206,6 @@ const TeamRecruitmentCard = styled.div`
   width: 100%;
   margin: 1rem;
   & > div {
-    background-color: #c3a6a0;
     border: 3px solid black;
     width: min-content;
     margin: 0.5rem;

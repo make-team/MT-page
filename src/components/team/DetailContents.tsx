@@ -32,20 +32,34 @@ function TeamDetailContents({
 }: PropTypes) {
   return (
     <Wrapper>
-      <Intro>
-        <div>팀 |</div>
-        <DetailItem name="name" content={name} onChange={onChange} />
-      </Intro>
-      <Intro>
-        참여할 공모전 -
-        {hackathon &&
-          hackathon.map((item) => (
-            <div key={item.id}>
-              {item.title}
-              <a href={`/hackathon/${item.id}`}> 자세히보러가기 </a>
-            </div>
-          ))}
-      </Intro>
+      <Info>
+        <div>
+          <h3> - 팀 명 -</h3>
+          <DetailItem
+            name="name"
+            content={name}
+            onChange={modifyStatus ? onChange : undefined}
+          />
+        </div>
+        <div>
+          <h3> - 연락처 - </h3>
+          <DetailItem
+            name="contact"
+            content={contact}
+            onChange={modifyStatus ? onChange : undefined}
+          />
+        </div>
+        <div>
+          <h3> - 참여하는 공모전 - </h3>
+          {hackathon &&
+            hackathon.map((item) => (
+              <div key={item.id}>
+                <a href={`/hackathon/${item.id}`}>{item.title} </a>
+              </div>
+            ))}
+        </div>
+      </Info>
+      <h3> - 팀 상세 - </h3>
       <TextEditorBox>
         <Quill
           name="description"
@@ -54,20 +68,20 @@ function TeamDetailContents({
           onChange={onChange}
         />
       </TextEditorBox>
-      <Intro>
-        팀원 모집기간 |{" "}
-        {modifyStatus ? (
-          <StartEndPicker
-            startTime={startTime}
-            endTime={endTime}
-            onChange={onChange}
-          />
-        ) : (
-          <DateTerm startTime={startTime} endTime={endTime} />
-        )}
-        연락처 |{" "}
-        <DetailItem name="contact" content={contact} onChange={onChange} />
-      </Intro>
+      <Info>
+        <h3> - 기 간 - </h3>
+        <div>
+          {modifyStatus ? (
+            <StartEndPicker
+              startTime={startTime}
+              endTime={endTime}
+              onChange={onChange}
+            />
+          ) : (
+            <DateTerm startTime={startTime} endTime={endTime} />
+          )}
+        </div>
+      </Info>
     </Wrapper>
   );
 }
@@ -78,13 +92,14 @@ const Wrapper = styled.div`
   padding: 1rem;
 `;
 
-const Intro = styled.div`
+const Info = styled.div`
   display: flex;
-  font-size: 1.2rem;
+  align-content: center;
+  justify-content: space-between;
 `;
 
 const TextEditorBox = styled.div`
   height: 22rem;
   margin-bottom: 3rem;
-  background-color: var(--editor);
+  background-color: inherit;
 `;

@@ -62,7 +62,7 @@ const Wrapper = styled.div`
   padding: 1rem;
   margin: 1rem 0;
   border-radius: 8px;
-  background-color: #c3a6a0;
+  background-color: ${(props) => props.theme.menu};
   &:hover {
     transform: scale(1.025, 1.025);
     box-shadow: 0.8rem 0.8rem 0.5rem rgba(0, 0, 0, 0.2);

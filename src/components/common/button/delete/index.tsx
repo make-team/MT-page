@@ -20,11 +20,9 @@ function CardDeleteButton({ id, onClick }: PropTypes) {
 export default CardDeleteButton;
 
 const DeleteButton = styled.div`
-  position: absolute;
-  right: 0;
   & > button {
     border: none;
     cursor: pointer;
-    background-color: #c3a6a0;
+    background-color: inherit;
   }
 `;

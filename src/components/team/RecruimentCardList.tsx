@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-import TeamRecruimentItem from "components/common/team/recruiment";
-
 import { FIELD } from "constant/checkItems";
 
 interface PropTypes {
@@ -14,12 +12,10 @@ function RecruimentCardList({ recruiment }: PropTypes) {
     <Wrapper>
       {recruiment.map((item, index) => {
         return (
-          <TeamRecruimentItem
-            key={`${index} + ${item.field}`}
-            field={item.field}
-            skill={item.skill}
-            count={item.count}
-          />
+          <Item key={index}>
+            <div>분야 : {FIELD[item.field]}</div>
+            <div>기술 : {item.skill}</div>
+          </Item>
         );
       })}
     </Wrapper>
@@ -29,14 +25,13 @@ function RecruimentCardList({ recruiment }: PropTypes) {
 export default RecruimentCardList;
 
 const Wrapper = styled.div`
-  grid-area: list;
   display: flex;
-  height: 3.75rem;
-  justify-content: center;
-  flex-wrap: wrap;
-  overflow-y: hidden;
-  &:hover {
-    overflow-y: unset;
-    height: fit-content;
-  }
+  text-align: left;
+  font-size: 0.6rem;
+`;
+
+const Item = styled.div`
+  padding: 0.5rem;
+  margin: 0.5rem;
+  background-color: ${(props) => props.theme.menu};
 `;

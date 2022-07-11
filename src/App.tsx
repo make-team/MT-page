@@ -12,10 +12,12 @@ function App() {
   const theme = useRecoilValue(themeStatus);
 
   return (
-    <ThemeProvider theme={theme ? dark : light}>
+    <>
       <GlobalStyle />
-      <Root />
-    </ThemeProvider>
+      <ThemeProvider theme={theme ? dark : light}>
+        <Root />
+      </ThemeProvider>
+    </>
   );
 }
 export default App;

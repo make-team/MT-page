@@ -1,10 +1,20 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import styled from "styled-components";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import { boardListSelector } from "store/hackathonList";
+import { modalState } from "store/modalStatus";
 
-import HackathonCardContent from "../../components/hackthon/MainCardContent";
+import { HackathonRegist } from "components/hackthon/Regist";
+import { PropTypes as RegistPropsTypes } from "./RegistContainer";
+
+import HackathonCardContent from "components/hackthon/MainCardContent";
+import Modal from "components/common/modal";
+
+import RegistContainer from "./RegistContainer";
+
+import { regist } from "api/hackathon";
+import Button from "components/common/button/normal";
 
 export interface Hackathon {
   id: number;
@@ -29,6 +39,16 @@ interface PropTypes {
 
 function ListContainer({ goDetail }: PropTypes) {
   const data = useRecoilValue(boardListSelector);
+  const [modalStatus, setModalStatus] = useRecoilState<boolean>(modalState);
+
+  const [inputValue, setInputValue] = useState<HackathonRegist>({
+    title: "",
+    description: "",
+    contact: "",
+    endTime: new Date(),
+    startTime: new Date(),
+    attachment: undefined,
+  });
 
   const handleClick = useCallback<PropTypes["goDetail"]>(
     (id) => {
@@ -37,23 +57,67 @@ function ListContainer({ goDetail }: PropTypes) {
     [goDetail]
   );
 
+  const onRegist = async () => {
+    let bodyData = new FormData();
+    bodyData.append("title", inputValue.title);
+    bodyData.append("description", inputValue.description);
+    bodyData.append("contact", inputValue.contact);
+    bodyData.append("end_time", `${inputValue.endTime.getTime()}`);
+    bodyData.append("start_time", `${inputValue.startTime.getTime()}`);
+    if (inputValue.attachment) {
+      bodyData.append("attachment", inputValue.attachment);
+    }
+    await regist({ bodyData });
+  };
+
+  const changeContents = useCallback<RegistPropsTypes["onChange"]>(
+    ({ name, value }) => {
+      setInputValue({ ...inputValue, [name]: value });
+    },
+    [inputValue]
+  );
+
+  const handleCloseClick = () => {
+    setModalStatus(false);
+  };
+
+  const handleSubmitClick = () => {
+    // onRegist();
+    setModalStatus(false);
+  };
+
+  const handleAddClick = () => {
+    setModalStatus(true);
+  };
+
   return (
-    <List>
-      {data &&
-        data.map((item) => (
-          <div key={item.id} onClick={() => handleClick(item.id)}>
-            <HackathonCardContent
-              title={item.title}
-              hit={item.hit}
-              cardImg={item.attachment}
-              endTime={item.endTime}
-              startTime={item.startTime}
-              contact={item.contact}
-              description={item.description}
-            />
-          </div>
-        ))}
-    </List>
+    <>
+      <List>
+        {data &&
+          data.map((item) => (
+            <div key={item.id} onClick={() => handleClick(item.id)}>
+              <HackathonCardContent
+                title={item.title}
+                hit={item.hit}
+                cardImg={item.attachment}
+                endTime={item.endTime}
+                startTime={item.startTime}
+                contact={item.contact}
+                description={item.description}
+              />
+            </div>
+          ))}
+      </List>
+      <Button onClick={handleAddClick}> 추가하기 </Button>
+      <Modal
+        open={modalStatus}
+        onSubmit={handleSubmitClick}
+        onClose={handleCloseClick}
+        content={
+          <RegistContainer inputValue={inputValue} onChange={changeContents} />
+        }
+      />
+    </>
   );
 }
 

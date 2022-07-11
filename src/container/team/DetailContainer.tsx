@@ -1,6 +1,4 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { useLocation } from "react-router";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import TeamDetailTemplate, {
@@ -11,11 +9,12 @@ import TeamDetailTemplate, {
 import { detail, modify } from "api/team";
 import ModifySubmitButton from "components/common/button/modify";
 
-function TeamDetail() {
-  const location = useLocation();
-  const history = useNavigate();
-  let id = location.pathname.split("/")[2];
+interface PropTypes {
+  id: string;
+  toBack: () => void;
+}
 
+function TeamDetail({ id, toBack }: PropTypes) {
   const [modifyStatus, setModifyStatus] = useState<boolean>(false);
   const [detailData, setDetailData] = useState<Team>({
     id: 0,
@@ -27,10 +26,6 @@ function TeamDetail() {
     endTime: new Date(),
     recruiment: [],
   });
-
-  const goBackClick = () => {
-    history(-1);
-  };
 
   const updateDetail = useCallback(async () => {
     const { data } = await detail(+id);
@@ -90,7 +85,7 @@ function TeamDetail() {
       />
 
       <ModifySubmitButton
-        onBack={goBackClick}
+        onBack={toBack}
         onDelete={() => {}}
         modifyStatus={modifyStatus}
         onModify={modifyTeam}
@@ -114,8 +109,3 @@ const Wrapper = styled.div`
     ". list .";
   margin: 0 auto;
 `;
-
-// const Title = styled.div`
-//   grid-area: title;
-//   font-size: 2rem;
-// `;

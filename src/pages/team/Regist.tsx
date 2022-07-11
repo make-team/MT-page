@@ -3,15 +3,17 @@ import { useLocation } from "react-router";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import TeamRegistContainer from "container/team/TeamContainer";
+import TeamRegistContainer from "container/team/RegistContainer";
 
 function TeamRegist() {
   const location = useLocation();
   const history = useNavigate();
   let id = location.pathname.split("/");
+
   const goBackClick = () => {
     history(-1);
   };
+
   return (
     <Wrapper>
       <TeamRegistContainer id={id[2]} onCancel={goBackClick} />

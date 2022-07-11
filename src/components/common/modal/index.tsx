@@ -36,11 +36,12 @@ const Wrapper = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.8);
 `;
 
 const Content = styled.div`
-  background-color: black;
+  background-color: ${(props) => props.theme.subBackground};
+  color: ${(props) => props.theme.textColor};
   height: fit-content;
   width: fit-content;
   padding: 2rem;

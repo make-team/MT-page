@@ -15,6 +15,7 @@ import RegistContainer from "./RegistContainer";
 
 import { regist } from "api/hackathon";
 import Button from "components/common/button/normal";
+import Loading from "components/common/loading/Loading";
 
 export interface Hackathon {
   id: number;
@@ -107,8 +108,8 @@ function ListContainer({ goDetail }: PropTypes) {
               />
             </div>
           ))}
+        <Button onClick={handleAddClick}> + </Button>
       </List>
-      <Button onClick={handleAddClick}> 추가하기 </Button>
       <Modal
         open={modalStatus}
         onSubmit={handleSubmitClick}

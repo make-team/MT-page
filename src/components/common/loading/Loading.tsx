@@ -1,9 +1,14 @@
 import React from "react";
+import { useRecoilValue } from "recoil";
+
+import { loadingStatus } from "store/loading";
+
 import styled, { keyframes } from "styled-components";
 
 function Loading() {
+  const status = useRecoilValue(loadingStatus);
   return (
-    <Wrapper>
+    <Wrapper status={status}>
       <Item></Item>
       <Item></Item>
     </Wrapper>
@@ -29,7 +34,8 @@ const LoadingAni = keyframes`
   }
 `;
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ status: boolean }>`
+  display: ${({ status }) => (status ? "block" : "none")};
   position: relative;
   border: none;
   width: 30rem;

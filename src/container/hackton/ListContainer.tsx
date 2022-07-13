@@ -1,21 +1,29 @@
 import React, { useCallback, useState } from "react";
 import styled from "styled-components";
-import { useRecoilState, useRecoilValue } from "recoil";
+import {
+  useRecoilRefresher_UNSTABLE,
+  useRecoilState,
+  useRecoilValue,
+} from "recoil";
 
-import { boardListSelector } from "store/hackathonList";
+import { hackathonListSelector } from "store/hackathonList";
 import { modalState } from "store/modalStatus";
 
-import { HackathonRegist } from "components/hackthon/Regist";
-import { PropTypes as RegistPropsTypes } from "./RegistContainer";
+import { usePopup } from "hooks/popup";
+import { useLoading } from "hooks/loading";
 
-import HackathonCardContent from "components/hackthon/MainCardContent";
-import Modal from "components/common/modal";
+import { PropTypes as RegistPropsTypes } from "./RegistContainer";
+import { HackathonRegist } from "components/hackthon/Regist";
 
 import RegistContainer from "./RegistContainer";
 
-import { regist } from "api/hackathon";
+import Modal from "components/common/modal";
 import Button from "components/common/button/normal";
+import Popup from "components/common/popup";
 import Loading from "components/common/loading/Loading";
+import HackathonCardContent from "components/hackthon/MainCardContent";
+
+import { regist } from "api/hackathon";
 
 export interface Hackathon {
   id: number;
@@ -39,7 +47,12 @@ interface PropTypes {
 }
 
 function ListContainer({ goDetail }: PropTypes) {
-  const data = useRecoilValue(boardListSelector);
+  const data = useRecoilValue(hackathonListSelector);
+  const refresh = useRecoilRefresher_UNSTABLE(hackathonListSelector);
+
+  const [togglePopup] = usePopup();
+  const [setLoading] = useLoading();
+
   const [modalStatus, setModalStatus] = useRecoilState<boolean>(modalState);
 
   const [inputValue, setInputValue] = useState<HackathonRegist>({
@@ -59,16 +72,24 @@ function ListContainer({ goDetail }: PropTypes) {
   );
 
   const onRegist = async () => {
-    let bodyData = new FormData();
-    bodyData.append("title", inputValue.title);
-    bodyData.append("description", inputValue.description);
-    bodyData.append("contact", inputValue.contact);
-    bodyData.append("end_time", `${inputValue.endTime.getTime()}`);
-    bodyData.append("start_time", `${inputValue.startTime.getTime()}`);
-    if (inputValue.attachment) {
-      bodyData.append("attachment", inputValue.attachment);
+    try {
+      setLoading(true);
+      let bodyData = new FormData();
+      bodyData.append("title", inputValue.title);
+      bodyData.append("description", inputValue.description);
+      bodyData.append("contact", inputValue.contact);
+      bodyData.append("end_time", `${inputValue.endTime.getTime()}`);
+      bodyData.append("start_time", `${inputValue.startTime.getTime()}`);
+      if (inputValue.attachment) {
+        bodyData.append("attachment", inputValue.attachment);
+      }
+      await regist({ bodyData });
+      refresh();
+    } catch {
+      togglePopup();
+    } finally {
+      setLoading(false);
     }
-    await regist({ bodyData });
   };
 
   const changeContents = useCallback<RegistPropsTypes["onChange"]>(
@@ -80,14 +101,30 @@ function ListContainer({ goDetail }: PropTypes) {
 
   const handleCloseClick = () => {
     setModalStatus(false);
+    setInputValue({
+      title: "",
+      description: "",
+      contact: "",
+      endTime: new Date(),
+      startTime: new Date(),
+      attachment: undefined,
+    });
   };
 
   const handleSubmitClick = () => {
-    // onRegist();
-    setModalStatus(false);
+    onRegist();
+    setInputValue({
+      title: "",
+      description: "",
+      contact: "",
+      endTime: new Date(),
+      startTime: new Date(),
+      attachment: undefined,
+    });
   };
 
   const handleAddClick = () => {
+    setLoading(false);
     setModalStatus(true);
   };
 
@@ -115,9 +152,16 @@ function ListContainer({ goDetail }: PropTypes) {
         onSubmit={handleSubmitClick}
         onClose={handleCloseClick}
         content={
-          <RegistContainer inputValue={inputValue} onChange={changeContents} />
+          <>
+            <Loading />
+            <RegistContainer
+              inputValue={inputValue}
+              onChange={changeContents}
+            />
+          </>
         }
       />
+      <Popup text="등록 오류" onClick={togglePopup} />
     </>
   );
 }

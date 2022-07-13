@@ -1,4 +1,4 @@
-import { atom, selector } from "recoil";
+import { selector } from "recoil";
 
 import { list } from "api/hackathon";
 
@@ -19,8 +19,8 @@ interface Hackathon {
   }[];
 }
 
-export const boardListSelector = selector({
-  key: "boardListSelector",
+export const hackathonListSelector = selector({
+  key: "hackathonListSelector",
   get: async () => {
     const { data } = await list();
     return data.map((item) => ({
@@ -40,20 +40,4 @@ export const boardListSelector = selector({
       startTime: new Date(item.start_time),
     }));
   },
-});
-
-export const boardListState = atom<Array<Hackathon>>({
-  key: "item",
-  default: [
-    {
-      id: 0,
-      title: "",
-      description: "",
-      attachment: [],
-      contact: "",
-      hit: 1,
-      startTime: new Date(),
-      endTime: new Date(),
-    },
-  ],
 });

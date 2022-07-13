@@ -1,19 +1,19 @@
 import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 
-import { remove, modify } from "api/hackathon";
-
 import { useRecoilValue } from "recoil";
-import { ImgType, ImgState } from "recoil/hackathonImg";
+import { detailSelector } from "store/hackathonDetail";
+
+import { usePopup } from "hooks/popup";
 
 import HackathonDetailTamplate, {
   PropTypes as HackathonPropTypes,
 } from "components/hackthon/Detail";
 import HackathonTeamCard from "components/team/MainCard";
-import Popup from "components/common/popup/Popup";
+import Popup from "components/common/popup";
 import ModifyButton from "components/common/button/modify";
 
-import { detailSelector } from "store/hackathonDetail";
+import { remove, modify } from "api/hackathon";
 
 interface PropTypes {
   id: string;
@@ -24,10 +24,9 @@ interface PropTypes {
 function DetailContainer({ id, toBack, toRegistTeam }: PropTypes) {
   const data = useRecoilValue(detailSelector(+id));
 
-  const [modifyStatus, setModifyStatus] = useState<boolean>(false);
-  const [popup, setPopup] = useState<boolean>(false);
+  const [togglePopup] = usePopup();
 
-  const img = useRecoilValue<ImgType>(ImgState);
+  const [modifyStatus, setModifyStatus] = useState<boolean>(false);
   const [detailData, setDetailData] = useState(data);
 
   const changeContents = useCallback<HackathonPropTypes["onChange"]>(
@@ -57,12 +56,12 @@ function DetailContainer({ id, toBack, toRegistTeam }: PropTypes) {
   };
 
   const confirmModify = () => {
-    setPopup((prev) => !prev);
+    togglePopup();
     onModify();
   };
 
-  const popupClose = () => {
-    setPopup((prev) => !prev);
+  const onPopupClick = () => {
+    togglePopup();
   };
 
   return (
@@ -70,27 +69,22 @@ function DetailContainer({ id, toBack, toRegistTeam }: PropTypes) {
       <Title>{`${detailData.title}`}</Title>
       <HackathonDetailTamplate
         contents={detailData}
-        img={img.attachment}
+        img={data.attachment}
         modifyStatus={modifyStatus}
         onChange={changeContents}
       />
       <ButtonWrapper>
-        {/* <ModifyButton
+        <ModifyButton
           onBack={toBack}
           onDelete={deleteClick}
           onModify={modifyClick}
           onTeamRegist={toRegistTeam}
           onSubmitModify={confirmModify}
           modifyStatus={modifyStatus}
-        /> */}
+        />
       </ButtonWrapper>
       <HackathonTeamCard items={data.teamList} />
-      <Popup
-        text="수정하시겠습니까?"
-        status={popup ? "open" : "close"}
-        onCancel={popupClose}
-        onSubmit={confirmModify}
-      />
+      <Popup text="수정하시겠습니까?" onClick={onPopupClick} />
     </Wrapper>
   );
 }

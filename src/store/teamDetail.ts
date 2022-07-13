@@ -46,7 +46,7 @@ export const detailSelector = selectorFamily({
 });
 
 export const DetailData = atom<TeamDetail>({
-  key: "DetailData",
+  key: "TeamDetailData",
   default: {
     id: 0,
     hackathon: [],

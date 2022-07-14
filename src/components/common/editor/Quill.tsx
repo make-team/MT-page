@@ -10,23 +10,22 @@ interface PropTypes {
   toolbarOff?: boolean;
 }
 
-function Quill({ name, text, onChange, toolbarOff = false }: PropTypes) {
+function Quill({ name, text, onChange, toolbarOff, readonly }: PropTypes) {
   const contentsChange = useCallback(
     (contents: string) => {
-      if (toolbarOff) {
-        onChange({ name: name, value: contents });
-      }
+      onChange({ name: name, value: contents });
     },
-    [onChange, name, toolbarOff]
+    [onChange, name]
   );
 
   return (
     <ReactQuill
-      modules={{ toolbar: toolbarOff ? undefined : false }}
+      modules={{ toolbar: toolbarOff ?? false }}
       theme="snow"
       value={text}
       onChange={contentsChange}
-      style={{ height: "100%" }}
+      style={{ height: "20rem" }}
+      readOnly={readonly}
     />
   );
 }

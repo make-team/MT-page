@@ -8,7 +8,7 @@ import TeamRegistContainer from "container/team/RegistContainer";
 function TeamRegist() {
   const location = useLocation();
   const history = useNavigate();
-  let id = location.pathname.split("/");
+  const id = location.state as string;
 
   const goBackClick = () => {
     history(-1);
@@ -16,19 +16,11 @@ function TeamRegist() {
 
   return (
     <Wrapper>
-      <TeamRegistContainer id={id[2]} onCancel={goBackClick} />
+      <TeamRegistContainer id={id} onCancel={goBackClick} />
     </Wrapper>
   );
 }
 
 export default TeamRegist;
 
-const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: 17fr minmax(0, 66fr) 17fr;
-  grid-template-rows: 10rem auto 10rem;
-  grid-template-areas:
-    " . . . "
-    ". main ."
-    " . . . ";
-`;
+const Wrapper = styled.div``;

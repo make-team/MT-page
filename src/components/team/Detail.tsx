@@ -75,12 +75,13 @@ function HackathonDetail({
         </div>
       </Info>
       <h3> - 팀 상세 - </h3>
-      <TextEditorBox modifyStatus={modifyStatus}>
+      <TextEditorBox>
         <Quill
           name="description"
           toolbarOff={modifyStatus}
           text={contents.description}
           onChange={onChange}
+          readonly={!modifyStatus}
         />
       </TextEditorBox>
       <h3> - 구 인 - </h3>
@@ -112,11 +113,8 @@ const Info = styled.div`
   justify-content: space-between;
 `;
 
-const TextEditorBox = styled.div<{ modifyStatus: boolean }>`
+const TextEditorBox = styled.div`
   height: 22rem;
   margin-bottom: 3rem;
   background-color: inherit;
-  ${({ modifyStatus }) => css`
-    pointer-events: ${modifyStatus ? "auto" : "none"};
-  `}
 `;

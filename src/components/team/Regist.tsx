@@ -185,7 +185,7 @@ const InputWrapper = styled.div`
   height: 2rem;
   & > div {
     &:first-child {
-      background-color: #a15c38;
+      background-color: ${(props) => props.theme.menu};
       color: white;
       padding: 0.25rem 1rem 1rem 1rem;
       margin-right: 1rem;
@@ -194,7 +194,7 @@ const InputWrapper = styled.div`
 `;
 
 const AddTeamWrapper = styled.div`
-  border: 1px solid #262220;
+  background-color: ${(props) => props.theme.menu};
   margin-bottom: 1rem;
   padding: 1rem;
 `;
@@ -223,8 +223,4 @@ const TextEditor = styled.div`
   height: 24rem;
   width: 90%;
   margin: 0 auto 4rem auto;
-  & > div:last-child {
-    height: 20rem;
-    background-color: white;
-  }
 `;

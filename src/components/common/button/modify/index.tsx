@@ -38,7 +38,7 @@ function ModifySubmitButton({
       <Button onClick={deleteClick} backgroundColor="#F05454">
         삭제하기
       </Button>
-      <Button onClick={onTeamRegist}> 팀 만들기 </Button>
+      {onTeamRegist && <Button onClick={onTeamRegist}> 팀 만들기 </Button>}
       {modifyStatus ? (
         <>
           <Button onClick={submitModiy}> 수정완료 </Button>

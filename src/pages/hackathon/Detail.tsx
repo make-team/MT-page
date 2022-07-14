@@ -9,11 +9,11 @@ function HackathonDetail() {
   const history = useNavigate();
 
   const goBackClick = () => {
-    history(`$/hackathon`);
+    history(`/hackathon`);
   };
 
   const registTeam = () => {
-    history(`/team/regist`);
+    history(`${location.pathname}/team/regist`);
   };
 
   const id = location.pathname.split("/")[2];

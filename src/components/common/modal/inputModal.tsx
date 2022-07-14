@@ -27,13 +27,17 @@ function InputModal({ open, text, onClose, onSubmit }: PropTypes) {
   }, []);
 
   const handlePopup = () => {
-    console.log("aa");
     togglePopup();
   };
 
   const handleSubmitClick = () => {
-    if (inputValue === password) return onSubmit();
-    return handlePopup();
+    if (inputValue === password) {
+      localStorage.setItem("manager", `${inputValue}`);
+      setInputValue("");
+      onSubmit();
+    } else {
+      handlePopup();
+    }
   };
 
   return (

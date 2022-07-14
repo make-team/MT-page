@@ -2,23 +2,6 @@ import { selector } from "recoil";
 
 import { list } from "api/hackathon";
 
-interface Hackathon {
-  id: number;
-  title: string;
-  description: string;
-  contact: string;
-  startTime: Date;
-  endTime: Date;
-  hit: number;
-  attachment: {
-    imgUrl: string;
-    uuid: string;
-    name: string;
-    size: number;
-    contentType: string;
-  }[];
-}
-
 export const hackathonListSelector = selector({
   key: "hackathonListSelector",
   get: async () => {

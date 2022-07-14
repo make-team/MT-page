@@ -1,16 +1,17 @@
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+
 import { useRecoilValue } from "recoil";
+import { teamListSelector } from "store/teamList";
 
 import { FIELD } from "constant/checkItems";
 
-import { teamListSelector } from "store/teamList";
-import { useNavigate } from "react-router-dom";
-import TeamCardContents from "../../components/team/Contents";
 import TeamRecruimentCardList from "components/team/RecruimentCardList";
-import { cardDelete } from "api/team";
 import CardDeleteButton from "components/common/button/delete";
 import DateTerm from "components/common/date/term";
+
+import { cardDelete } from "api/team";
 
 export interface Team {
   id: number;

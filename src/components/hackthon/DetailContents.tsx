@@ -1,6 +1,3 @@
-import React from "react";
-import styled from "styled-components";
-
 import DetailItem from "../common/modify/ModifyItem";
 
 export interface PropTypes {

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 import { detailSelector } from "store/teamDetail";

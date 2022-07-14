@@ -20,7 +20,7 @@ import RegistContainer from "./RegistContainer";
 import Modal from "components/common/modal";
 import Button from "components/common/button/normal";
 import Popup from "components/common/popup";
-import Loading from "components/common/loading/Loading";
+import Loading from "components/common/loading/stateLoading";
 import HackathonCardContent from "components/hackthon/MainCardContent";
 
 import { regist } from "api/hackathon";
@@ -113,7 +113,7 @@ function ListContainer({ goDetail }: PropTypes) {
     });
   };
 
-  const handleSubmitClick = () => {
+  const onSubmitClick = () => {
     onRegist();
     setInputValue({
       title: "",
@@ -123,11 +123,12 @@ function ListContainer({ goDetail }: PropTypes) {
       startTime: new Date(),
       attachment: undefined,
     });
+    setModalStatus(false);
   };
 
   const handleAddClick = () => {
-    setLoading(false);
     setPass(false);
+    setLoading(false);
     setModalStatus(true);
   };
 
@@ -162,7 +163,7 @@ function ListContainer({ goDetail }: PropTypes) {
       />
       <Modal
         open={modalStatus}
-        onSubmit={handleSubmitClick}
+        onSubmit={onSubmitClick}
         onClose={handleCloseClick}
         content={
           <>

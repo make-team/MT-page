@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 
 import Header from "../components/common/header";
 import Footer from "../components/common/footer";
-import Loading from "components/common/loading/Loading";
+import Loading from "components/common/loading/baseLoading";
 
 function Main() {
   return (

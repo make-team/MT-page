@@ -24,6 +24,7 @@ import Loading from "components/common/loading/Loading";
 import HackathonCardContent from "components/hackthon/MainCardContent";
 
 import { regist } from "api/hackathon";
+import InputModal from "components/common/modal/inputModal";
 
 export interface Hackathon {
   id: number;
@@ -54,6 +55,7 @@ function ListContainer({ goDetail }: PropTypes) {
   const [setLoading] = useLoading();
 
   const [modalStatus, setModalStatus] = useRecoilState<boolean>(modalState);
+  const [pass, setPass] = useState<boolean>(false);
 
   const [inputValue, setInputValue] = useState<HackathonRegist>({
     title: "",
@@ -125,7 +127,12 @@ function ListContainer({ goDetail }: PropTypes) {
 
   const handleAddClick = () => {
     setLoading(false);
+    setPass(false);
     setModalStatus(true);
+  };
+
+  const handlePassClick = () => {
+    setPass((prev) => !prev);
   };
 
   return (
@@ -145,8 +152,14 @@ function ListContainer({ goDetail }: PropTypes) {
               />
             </div>
           ))}
-        <Button onClick={handleAddClick}> + </Button>
+        <Button onClick={handlePassClick}> + </Button>
       </List>
+      <InputModal
+        open={pass}
+        text="비밀번호 입력"
+        onSubmit={handleAddClick}
+        onClose={handlePassClick}
+      />
       <Modal
         open={modalStatus}
         onSubmit={handleSubmitClick}
@@ -158,10 +171,10 @@ function ListContainer({ goDetail }: PropTypes) {
               inputValue={inputValue}
               onChange={changeContents}
             />
+            <Popup text="등록 오류" onClick={togglePopup} />
           </>
         }
       />
-      <Popup text="등록 오류" onClick={togglePopup} />
     </>
   );
 }

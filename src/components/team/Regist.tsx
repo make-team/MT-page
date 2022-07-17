@@ -66,13 +66,14 @@ function TeamRegist({
     setAddActive((prev) => !prev);
   };
 
+  console.log(contents.endTime);
+  console.log(contents.startTime);
+
   const submitAddTeam = ({
-    id,
     field,
     skill,
     count,
   }: {
-    id: number;
     field: keyof typeof FIELD;
     skill: string;
     count: number;

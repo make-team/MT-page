@@ -8,6 +8,7 @@ import TeamRegistContainer from "container/team/RegistContainer";
 function TeamRegist() {
   const location = useLocation();
   const history = useNavigate();
+
   const id = location.state as string;
 
   const goBackClick = () => {

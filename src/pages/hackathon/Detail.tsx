@@ -8,15 +8,15 @@ function HackathonDetail() {
   const location = useLocation();
   const history = useNavigate();
 
+  const id = location.pathname.split("/")[2];
+
   const goBackClick = () => {
     history(`/hackathon`);
   };
 
   const registTeam = () => {
-    history(`${location.pathname}/team/regist`);
+    history(`${location.pathname}/team/regist`, { state: id });
   };
-
-  const id = location.pathname.split("/")[2];
 
   return (
     <Wrapper>

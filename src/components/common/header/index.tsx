@@ -87,7 +87,6 @@ const ListLink = styled(NavLink)`
   align-items: center;
   height: 100%;
   cursor: pointer;
-  font-weight: bolder;
   font-size: 0.75rem;
   text-decoration: none;
   border-right: 1px solid ${(props) => props.theme.textColor};

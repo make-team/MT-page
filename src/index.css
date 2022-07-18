@@ -1,14 +1,19 @@
+@font-face {
+  font-family: "AppleSDGothic";
+  font-weight: 400;
+  src: url("./fonts/AppleSDGothicNeoB.woff2") format("truetype");
+}
+
+@font-face {
+  font-family: "AppleSDGothicB";
+  font-weight: 700;
+  src: url("./fonts/AppleSDGothicNeoEB.woff2") format("truetype");
+}
+
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: "AppleSDGothic", "AppleSDGothicB";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
 }

@@ -15,10 +15,10 @@ function Modal({ open, content, onClose, onSubmit }: PropTypes) {
     <>
       {open && (
         <Wrapper>
-          <Content>
+          <Contents>
             {content}
             <SubmitButton onCancel={onClose} onSubmit={onSubmit} />
-          </Content>
+          </Contents>
         </Wrapper>
       )}
     </>
@@ -31,18 +31,15 @@ const Wrapper = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
 `;
 
-const Content = styled.div`
+const Contents = styled.div`
+  width: fit-content;
   background-color: ${(props) => props.theme.subBackground};
   color: ${(props) => props.theme.textColor};
-  height: fit-content;
-  width: fit-content;
-  padding: 2rem;
+  padding: 1rem;
+  margin: 0 auto;
 `;

@@ -13,7 +13,7 @@ import { usePopup } from "hooks/popup";
 import { useLoading } from "hooks/loading";
 
 import { PropTypes as RegistPropsTypes } from "./RegistContainer";
-import { HackathonRegist } from "components/hackthon/Regist";
+import { HackathonRegist } from "container/hackton/RegistContainer";
 
 import RegistContainer from "./RegistContainer";
 
@@ -168,10 +168,7 @@ function ListContainer({ goDetail }: PropTypes) {
         content={
           <>
             <Loading />
-            <RegistContainer
-              inputValue={inputValue}
-              onChange={changeContents}
-            />
+            <RegistContainer contents={inputValue} onChange={changeContents} />
             <Popup text="등록 오류" onClick={togglePopup} />
           </>
         }

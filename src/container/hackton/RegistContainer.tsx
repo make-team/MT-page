@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import styled from "styled-components";
-import RegistForm, { HackathonRegist } from "components/hackthon/Regist";
+
+import DatePicker from "components/common/date/stardEnd";
+import ImgUpload from "components/common/image/ImgUpload";
+import { Input } from "components/common/input";
+
+export interface HackathonRegist {
+  title: string;
+  description: string;
+  contact: string;
+  endTime: Date;
+  startTime: Date;
+  attachment?: File;
+}
 
 export interface PropTypes {
-  inputValue: HackathonRegist;
+  contents: HackathonRegist;
   onChange: ({
     name,
     value,
@@ -13,18 +25,94 @@ export interface PropTypes {
   }) => void;
 }
 
-function RegistContainer({ inputValue, onChange }: PropTypes) {
+function HacktonRegist({ contents, onChange }: PropTypes) {
+  const post = useRef<HTMLImageElement>(null);
+
+  const contentsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    onChange({ name, value });
+  };
+
+  const preview = useCallback(() => {
+    if (contents.attachment && post.current) {
+      post.current.src = URL.createObjectURL(contents.attachment);
+      post.current.onload = () => {
+        URL.revokeObjectURL(`${post.current}`);
+      };
+    }
+  }, [contents.attachment]);
+
+  useEffect(() => {
+    preview();
+  }, [preview]);
+
   return (
     <Wrapper>
-      <RegistForm contents={inputValue} onChange={onChange} />
+      <ImgWrapper>
+        <PostImg ref={post} />
+        <ImgUpload onChange={onChange} />
+      </ImgWrapper>
+      <div>
+        <InputWrapper>
+          <div>제목 : </div>
+          <Input
+            name="title"
+            value={contents.title}
+            onChange={contentsChange}
+          ></Input>
+        </InputWrapper>
+        <InputWrapper>
+          <div>기간 : </div>
+          <DatePicker
+            onChange={onChange}
+            endTime={contents.endTime}
+            startTime={contents.startTime}
+          />
+        </InputWrapper>
+        <InputWrapper>
+          <div>설명 : </div>
+          <Input
+            name="description"
+            value={contents.description}
+            onChange={contentsChange}
+          ></Input>
+        </InputWrapper>
+        <InputWrapper>
+          <div>연락처 : </div>
+          <Input
+            name="contact"
+            value={contents.contact}
+            onChange={contentsChange}
+          ></Input>
+        </InputWrapper>
+      </div>
     </Wrapper>
   );
 }
 
-export default RegistContainer;
+export default HacktonRegist;
 
 const Wrapper = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
+  @media (max-width: 700px) {
+    flex-direction: column;
+    font-size: 0.6rem;
+  }
+`;
+
+const InputWrapper = styled.div`
+  margin-bottom: 1rem;
+`;
+
+const ImgWrapper = styled.div``;
+
+const PostImg = styled.img`
+  height: 50vh;
+  width: 40vh;
+  margin: 1rem;
+  background-size: cover;
+  @media (max-width: 700px) {
+    height: 40vh;
+    width: 30vh;
+  }
 `;

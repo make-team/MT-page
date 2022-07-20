@@ -181,7 +181,7 @@ export default ListContainer;
 
 const List = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, 20rem);
+  grid-template-columns: repeat(auto-fill, 20rem);
   justify-content: center;
   grid-gap: 1rem;
   background-color: inherit;

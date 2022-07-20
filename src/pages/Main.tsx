@@ -36,7 +36,7 @@ const Wrapepr = styled.div`
     "header header header"
     "main main main"
     "footer footer footer";
-  min-height: 100vh;
+  height: 100vh;
   color: ${(props) => props.theme.textColor};
 `;
 

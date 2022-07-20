@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import styled from "styled-components";
 import {
   useRecoilRefresher_UNSTABLE,
@@ -18,13 +18,13 @@ import { HackathonRegist } from "container/hackton/RegistContainer";
 import RegistContainer from "./RegistContainer";
 
 import Modal from "components/common/modal";
-import Button from "components/common/button/normal";
 import Popup from "components/common/popup";
 import Loading from "components/common/loading/stateLoading";
 import HackathonCardContent from "components/hackthon/MainCardContent";
 
 import { regist } from "api/hackathon";
 import InputModal from "components/common/modal/inputModal";
+import Card from "components/common/card/wrapper";
 
 export interface Hackathon {
   id: number;
@@ -153,7 +153,9 @@ function ListContainer({ goDetail }: PropTypes) {
               />
             </div>
           ))}
-        <Button onClick={handlePassClick}> + </Button>
+        <Card onClick={handlePassClick}>
+          <Add> + </Add>
+        </Card>
       </List>
       <InputModal
         open={pass}
@@ -185,4 +187,9 @@ const List = styled.div`
   justify-content: center;
   grid-gap: 1rem;
   background-color: inherit;
+`;
+
+const Add = styled.div`
+  text-align: center;
+  line-height: 20rem;
 `;

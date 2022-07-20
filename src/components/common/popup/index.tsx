@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 
 import { useRecoilValue } from "recoil";
@@ -54,7 +53,8 @@ const PopupWindow = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #ffffff;
+  background-color: ${(props) => props.theme.subBackground};
+  color: ${(props) => props.theme.textColor};
   height: 10rem;
   width: 30rem;
   padding: 2rem;

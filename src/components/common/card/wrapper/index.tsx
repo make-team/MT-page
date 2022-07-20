@@ -2,7 +2,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 export interface PropTypes {
-  children: JSX.Element;
+  children: JSX.Element | string;
   width?: string;
   height?: string;
   margin?: string;
@@ -33,7 +33,7 @@ const Wrapper = styled.div<{
     border: 1px solid black;
   `}
   &:hover {
-    box-shadow: 0.8rem 0.8rem 0.5rem rgba(0, 0, 0, 0.2);
+    box-shadow: 0.8rem 0.8rem 0.5rem rgba(120, 122, 145, 0.5);
   }
   background-color: ${(props) => props.theme.subBackground};
 `;

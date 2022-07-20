@@ -30,12 +30,11 @@ export default Main;
 
 const Wrapepr = styled.div`
   display: grid;
-  grid-template-columns: minmax(20rem, 90rem);
   grid-template-rows: 3rem 1fr 4rem;
   grid-template-areas:
-    "header header header"
-    "main main main"
-    "footer footer footer";
+    "header "
+    "main"
+    "footer";
   height: 100vh;
   color: ${(props) => props.theme.textColor};
 `;

@@ -1,8 +1,6 @@
-import React from "react";
 import styled from "styled-components";
 
 import CardImg, { Img } from "../common/image/ImgBox";
-import CardItem from "../common/card/ItemWrapper";
 import DateTerm from "../common/date/term";
 import Card from "components/common/card/wrapper";
 
@@ -27,16 +25,17 @@ function HackathonCardContent({
 }: PropTypes) {
   return (
     <Card>
-      <div>
+      <>
         <CardImg attachment={cardImg} height="14rem" />
         <Title>
           <div>{title}</div>
-          {`🔎${hit ? hit : 0}`}
         </Title>
-        <CardItem
-          content={<DateTerm startTime={startTime} endTime={endTime} />}
-        />
-      </div>
+        <Contents>
+          <DateTerm startTime={startTime} endTime={endTime} />
+          <div>설명 : {description}</div>
+          <div>연락 : {contact}</div>
+        </Contents>
+      </>
     </Card>
   );
 }
@@ -44,6 +43,17 @@ function HackathonCardContent({
 export default HackathonCardContent;
 
 const Title = styled.div`
-  display: flex;
-  justify-content: space-between;
+  font-weight: 700;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: break-all;
+`;
+
+const Contents = styled.div`
+  font-size: 0.8rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: break-all;
 `;

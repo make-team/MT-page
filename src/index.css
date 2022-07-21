@@ -1,28 +1,30 @@
 @font-face {
   font-family: "AppleSDGothic";
   font-weight: 400;
-  src: url("./fonts/AppleSDGothicNeoB.woff2") format("truetype");
+  src: local("AppleSDGothic"),
+    url("./fonts/AppleSDGothicNeoB.woff2") format("truetype");
   unicode-range: U+AC00-D7A3;
 }
 
 @font-face {
   font-family: "AppleSDGothicB";
   font-weight: 700;
-  src: url("./fonts/AppleSDGothicNeoEB.woff2") format("truetype");
+  src: local("AppleSDGothicB"),
+    url("./fonts/AppleSDGothicNeoEB.woff2") format("truetype");
   unicode-range: U+AC00-D7A3;
 }
 
 @font-face {
   font-family: "Sfpro";
   font-weight: 400;
-  src: url("./fonts/sfpro.woff2") format("truetype");
+  src: local("Sfpro"), url("./fonts/sfpro.woff2") format("truetype");
   unicode-range: U+0041-005A, U+0061-007A;
 }
 
 @font-face {
   font-family: "SfproB";
   font-weight: 700;
-  src: url("./fonts/sfproB.woff2") format("truetype");
+  src: local("SfproB"), url("./fonts/sfproB.woff2") format("truetype");
   unicode-range: U+0041-005A, U+0061-007A;
 }
 

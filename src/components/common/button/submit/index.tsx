@@ -28,12 +28,14 @@ const Wrapper = styled.div`
   & > button {
     width: 8rem;
     height: 3rem;
-    font-size: 1.2rem;
     margin-right: 1rem;
-    background-color: lightcoral;
     &:last-child {
       margin-right: 0;
       background-color: lightblue;
+    }
+    @media (max-width: 700px) {
+      height: 1.5rem;
+      font-size: 1rem;
     }
   }
 `;

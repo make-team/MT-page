@@ -45,8 +45,10 @@ function InputModal({ open, text, onClose, onSubmit }: PropTypes) {
       {open && (
         <Wrapper>
           <Content>
-            {text}
-            <Input onChange={onChange} />
+            <div>
+              {text}
+              <Input onChange={onChange} />
+            </div>
             <SubmitButton onCancel={onClose} onSubmit={handleSubmitClick} />
           </Content>
           <Popup text="틀린 입력" onClick={handlePopup} />
@@ -76,4 +78,7 @@ const Content = styled.div`
   height: fit-content;
   width: fit-content;
   padding: 2rem;
+  & > div:first-child {
+    margin-bottom: 1rem;
+  }
 `;

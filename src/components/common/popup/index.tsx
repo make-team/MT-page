@@ -5,18 +5,16 @@ import { popupStatus } from "store/popup";
 
 import { Div } from "../Div";
 import Button from "../button/normal";
+import { usePopup } from "hooks/popup";
 
 export interface PropTypes {
   text: string;
-  onClick: () => void;
 }
 
-function Popup({ text, onClick }: PropTypes) {
+function Popup({ text }: PropTypes) {
   const status = useRecoilValue(popupStatus);
 
-  const handleClick = () => {
-    onClick();
-  };
+  const [togglePopup] = usePopup();
 
   return (
     <>
@@ -24,7 +22,7 @@ function Popup({ text, onClick }: PropTypes) {
         <Wrapper>
           <PopupWindow>
             <Div fontSize="1.3rem">{text}</Div>
-            <Button onClick={handleClick}>확인</Button>
+            <Button onClick={togglePopup}>확인</Button>
           </PopupWindow>
         </Wrapper>
       )}

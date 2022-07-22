@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import styled from "styled-components";
 
 import { useRecoilValue } from "recoil";
@@ -60,10 +60,6 @@ function DetailContainer({ id, toBack, toRegistTeam }: PropTypes) {
     onModify();
   };
 
-  const onPopupClick = () => {
-    togglePopup();
-  };
-
   return (
     <Wrapper>
       <Title>{`${detailData.title}`}</Title>
@@ -84,7 +80,7 @@ function DetailContainer({ id, toBack, toRegistTeam }: PropTypes) {
         />
       </ButtonWrapper>
       <HackathonTeamCard items={data.teamList} />
-      <Popup text="수정하시겠습니까?" onClick={onPopupClick} />
+      <Popup text="수정하시겠습니까?" />
     </Wrapper>
   );
 }

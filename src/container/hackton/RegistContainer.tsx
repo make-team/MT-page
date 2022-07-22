@@ -175,7 +175,9 @@ const InputWrapper = styled.div`
   margin-bottom: 1rem;
 `;
 
-const ImgWrapper = styled.div``;
+const ImgWrapper = styled.div`
+  text-align: center;
+`;
 
 const PostImg = styled.img`
   height: 50vh;

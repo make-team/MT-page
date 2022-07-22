@@ -26,17 +26,13 @@ function InputModal({ open, text, onClose, onSubmit }: PropTypes) {
     setInputValue(value);
   }, []);
 
-  const handlePopup = () => {
-    togglePopup();
-  };
-
   const handleSubmitClick = () => {
     if (inputValue === password) {
       localStorage.setItem("manager", `${inputValue}`);
       setInputValue("");
       onSubmit();
     } else {
-      handlePopup();
+      togglePopup();
     }
   };
 
@@ -51,7 +47,7 @@ function InputModal({ open, text, onClose, onSubmit }: PropTypes) {
             </div>
             <SubmitButton onCancel={onClose} onSubmit={handleSubmitClick} />
           </Content>
-          <Popup text="틀린 입력" onClick={handlePopup} />
+          <Popup text="틀린 입력" />
         </Wrapper>
       )}
     </>

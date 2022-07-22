@@ -7,7 +7,6 @@ import PersonDetail from "pages/person/Detail";
 import PersonRegist from "pages/person/Regist";
 import TeamList from "pages/team/List";
 import TeamDetail from "pages/team/Detail";
-import TeamRegist from "pages/team/Regist";
 
 import HackathonCardList from "pages/hackathon/List";
 import PersonCard from "pages/person/List";
@@ -25,7 +24,6 @@ function Root() {
           <Route path="/person/:id" element={<PersonDetail />} />
           <Route path="/" element={<Navigate to="/hackathon" />} />
         </Route>
-        <Route path="/hackathon/:id/team/regist" element={<TeamRegist />} />
         <Route path="/person/regist" element={<PersonRegist />} />
         <Route path="*" element={<Navigate to="/hackathon" />} />
       </Routes>

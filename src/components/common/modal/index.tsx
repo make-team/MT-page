@@ -1,24 +1,16 @@
-import React from "react";
 import styled from "styled-components";
-
-import SubmitButton from "../button/submit";
 
 interface PropTypes {
   open: boolean;
   content: JSX.Element;
-  onClose: () => void;
-  onSubmit: () => void;
 }
 
-function Modal({ open, content, onClose, onSubmit }: PropTypes) {
+function Modal({ open, content }: PropTypes) {
   return (
     <>
       {open && (
         <Wrapper>
-          <Contents>
-            {content}
-            <SubmitButton onCancel={onClose} onSubmit={onSubmit} />
-          </Contents>
+          <Contents>{content}</Contents>
         </Wrapper>
       )}
     </>
@@ -33,6 +25,9 @@ const Wrapper = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: rgba(0, 0, 0, 0.8);
 `;
 
@@ -41,5 +36,4 @@ const Contents = styled.div`
   background-color: ${(props) => props.theme.subBackground};
   color: ${(props) => props.theme.textColor};
   padding: 1rem;
-  margin: 0 auto;
 `;

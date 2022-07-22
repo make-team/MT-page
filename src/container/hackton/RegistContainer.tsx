@@ -1,9 +1,19 @@
-import React, { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import { useRecoilRefresher_UNSTABLE, useSetRecoilState } from "recoil";
 
+import { hackathonListSelector } from "store/hackathonList";
+
+import { Input } from "components/common/input";
 import DatePicker from "components/common/date/stardEnd";
 import ImgUpload from "components/common/image/ImgUpload";
-import { Input } from "components/common/input";
+import SubmitButton from "components/common/button/submit";
+import useLoading from "hooks/loading";
+import { modalState } from "store/modalStatus";
+import { regist } from "api/hackathon";
+import { usePopup } from "hooks/popup";
+import Popup from "components/common/popup";
+import Loading from "components/common/loading/stateLoading";
 
 export interface HackathonRegist {
   title: string;
@@ -14,33 +24,91 @@ export interface HackathonRegist {
   attachment?: File;
 }
 
-export interface PropTypes {
-  contents: HackathonRegist;
-  onChange: ({
+function HacktonRegist() {
+  const post = useRef<HTMLImageElement>(null);
+  const refresh = useRecoilRefresher_UNSTABLE(hackathonListSelector);
+  const setModalStatus = useSetRecoilState<boolean>(modalState);
+  const [setLoading] = useLoading();
+  const [togglePopup] = usePopup();
+
+  const [inputValue, setInputValue] = useState<HackathonRegist>({
+    title: "",
+    description: "",
+    contact: "",
+    endTime: new Date(),
+    startTime: new Date(),
+    attachment: undefined,
+  });
+
+  const onRegist = async () => {
+    try {
+      setLoading(true);
+      let bodyData = new FormData();
+      bodyData.append("title", inputValue.title);
+      bodyData.append("description", inputValue.description);
+      bodyData.append("contact", inputValue.contact);
+      bodyData.append("end_time", `${inputValue.endTime.getTime()}`);
+      bodyData.append("start_time", `${inputValue.startTime.getTime()}`);
+      if (inputValue.attachment) {
+        bodyData.append("attachment", inputValue.attachment);
+      }
+      await regist({ bodyData });
+      refresh();
+    } catch {
+      togglePopup();
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setInputValue({ ...inputValue, [name]: value });
+  };
+
+  const onDataChange = ({
     name,
     value,
   }: {
     name: string;
-    value: string | Date | File;
-  }) => void;
-}
+    value: string | Date;
+  }) => {
+    setInputValue({ ...inputValue, [name]: value });
+  };
 
-function HacktonRegist({ contents, onChange }: PropTypes) {
-  const post = useRef<HTMLImageElement>(null);
+  const onClose = () => {
+    setModalStatus(false);
+    setInputValue({
+      title: "",
+      description: "",
+      contact: "",
+      endTime: new Date(),
+      startTime: new Date(),
+      attachment: undefined,
+    });
+  };
 
-  const contentsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    onChange({ name, value });
+  const onSubmit = () => {
+    onRegist();
+    setInputValue({
+      title: "",
+      description: "",
+      contact: "",
+      endTime: new Date(),
+      startTime: new Date(),
+      attachment: undefined,
+    });
+    setModalStatus(false);
   };
 
   const preview = useCallback(() => {
-    if (contents.attachment && post.current) {
-      post.current.src = URL.createObjectURL(contents.attachment);
+    if (inputValue.attachment && post.current) {
+      post.current.src = URL.createObjectURL(inputValue.attachment);
       post.current.onload = () => {
         URL.revokeObjectURL(`${post.current}`);
       };
     }
-  }, [contents.attachment]);
+  }, [inputValue.attachment]);
 
   useEffect(() => {
     preview();
@@ -57,35 +125,38 @@ function HacktonRegist({ contents, onChange }: PropTypes) {
           <div>제목 : </div>
           <Input
             name="title"
-            value={contents.title}
-            onChange={contentsChange}
+            value={inputValue.title}
+            onChange={onChange}
           ></Input>
         </InputWrapper>
         <InputWrapper>
           <div>기간 : </div>
           <DatePicker
-            onChange={onChange}
-            endTime={contents.endTime}
-            startTime={contents.startTime}
+            onChange={onDataChange}
+            endTime={inputValue.endTime}
+            startTime={inputValue.startTime}
           />
         </InputWrapper>
         <InputWrapper>
           <div>설명 : </div>
           <Input
             name="description"
-            value={contents.description}
-            onChange={contentsChange}
+            value={inputValue.description}
+            onChange={onChange}
           ></Input>
         </InputWrapper>
         <InputWrapper>
           <div>연락처 : </div>
           <Input
             name="contact"
-            value={contents.contact}
-            onChange={contentsChange}
+            value={inputValue.contact}
+            onChange={onChange}
           ></Input>
         </InputWrapper>
+        <SubmitButton onCancel={onClose} onSubmit={onSubmit} />
       </div>
+      <Loading />
+      <Popup text="등록 오류" />
     </Wrapper>
   );
 }

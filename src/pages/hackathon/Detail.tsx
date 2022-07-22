@@ -14,13 +14,9 @@ function HackathonDetail() {
     history(`/hackathon`);
   };
 
-  const registTeam = () => {
-    history(`${location.pathname}/team/regist`, { state: id });
-  };
-
   return (
     <Wrapper>
-      <DetailContainer id={id} toRegistTeam={registTeam} toBack={goBackClick} />
+      <DetailContainer id={id} toBack={goBackClick} />
     </Wrapper>
   );
 }

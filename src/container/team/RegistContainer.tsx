@@ -1,5 +1,14 @@
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import styled from "styled-components";
+import { useSetRecoilState } from "recoil";
+
+import { modalState } from "store/modalStatus";
+
+import useLoading from "hooks/loading";
+import { usePopup } from "hooks/popup";
+
+import { FIELD } from "constant/checkItems";
+
 import TeamRegist, {
   Team,
   PropTypes as TeamPropTypes,
@@ -7,19 +16,19 @@ import TeamRegist, {
 import SubmitButton from "components/common/button/submit";
 
 import { regist } from "api/team";
-import { FIELD } from "constant/checkItems";
-
 // import { RootState } from "store/reducers";
 // import { addRecruiment } from "store/reducers/recruiment";
 // import { useDispatch, useSelector } from "react-redux";
 export interface PropTypes {
   id: string;
-  onCancel: () => void;
 }
 
-function RegistContainer({ id, onCancel }: PropTypes) {
+function RegistContainer({ id }: PropTypes) {
   // const teamRecruiment = useSelector((state: RootState) => state.recruiment);
   // const dispatch = useDispatch();
+  const setModalStatus = useSetRecoilState<boolean>(modalState);
+  const [setLoading] = useLoading();
+  const [togglePopup] = usePopup();
   const [contents, setContents] = useState<Team>({
     id: 0,
     name: "",
@@ -38,26 +47,46 @@ function RegistContainer({ id, onCancel }: PropTypes) {
     [contents]
   );
 
+  const onClose = () => {
+    setModalStatus(false);
+    setContents({
+      id: 0,
+      name: "",
+      hackathonId: 0,
+      description: "",
+      contact: "",
+      recruiment: [],
+      endTime: new Date(),
+      startTime: new Date(),
+    });
+  };
+
   const onRegist = async () => {
-    let bodyData = new FormData();
-    bodyData.append("name", contents.name);
-    bodyData.append("hackathon_id", id);
-    bodyData.append("description", contents.description);
-    bodyData.append("contact", contents.contact);
-    bodyData.append("end_time", `${contents.endTime.getTime() / 1000}`);
-    bodyData.append("start_time", `${contents.startTime.getTime() / 1000}`);
-    bodyData.append(
-      "recruiment",
-      `${JSON.stringify(
-        recruiment.map((item) => ({
-          field: item.field,
-          skill: item.skill,
-          count: item.count,
-        }))
-      )}`
-    );
-    await regist({ bodyData });
-    onCancel();
+    try {
+      setLoading(true);
+      let bodyData = new FormData();
+      bodyData.append("name", contents.name);
+      bodyData.append("hackathon_id", id);
+      bodyData.append("description", contents.description);
+      bodyData.append("contact", contents.contact);
+      bodyData.append("end_time", `${contents.endTime.getTime() / 1000}`);
+      bodyData.append("start_time", `${contents.startTime.getTime() / 1000}`);
+      bodyData.append(
+        "recruiment",
+        `${JSON.stringify(
+          recruiment.map((item) => ({
+            field: item.field,
+            skill: item.skill,
+            count: item.count,
+          }))
+        )}`
+      );
+      await regist({ bodyData });
+      onClose();
+    } catch {
+      togglePopup();
+    } finally {
+    }
   };
 
   const [recruiment, setRecruiment] = useState<
@@ -81,6 +110,7 @@ function RegistContainer({ id, onCancel }: PropTypes) {
 
   return (
     <Wrapper>
+      <h2>팀 등록하기</h2>
       <TeamRegist
         contents={contents}
         recruiment={recruiment}
@@ -89,7 +119,7 @@ function RegistContainer({ id, onCancel }: PropTypes) {
         onDelete={removeRecuiment}
       />
       <ButtonWrapper>
-        <SubmitButton onCancel={onCancel} onSubmit={onRegist} />
+        <SubmitButton onCancel={onClose} onSubmit={onRegist} />
       </ButtonWrapper>
     </Wrapper>
   );
@@ -98,9 +128,10 @@ function RegistContainer({ id, onCancel }: PropTypes) {
 export default RegistContainer;
 
 const Wrapper = styled.div`
-  grid-area: main;
-  background-color: #f7f1f0;
-  padding: 2rem;
+  @media (max-width: 700px) {
+    flex-direction: column;
+    font-size: 0.6rem;
+  }
 `;
 
 const ButtonWrapper = styled.div`

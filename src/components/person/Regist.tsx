@@ -68,7 +68,7 @@ function PersonRegist({ contents, onChange }: PropTypes) {
       <RegistForm>
         <ImgWrapper>
           <PostImg ref={post} />
-          <ImgUpload onChange={onChange} />
+          {/* <ImgUpload onChange={onChange} /> */}
         </ImgWrapper>
         <div>
           <InputWrapper>

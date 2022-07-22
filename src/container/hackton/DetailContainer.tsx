@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import styled from "styled-components";
 
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { detailSelector } from "store/hackathonDetail";
 
 import { usePopup } from "hooks/popup";
@@ -14,17 +14,21 @@ import Popup from "components/common/popup";
 import ModifyButton from "components/common/button/modify";
 
 import { remove, modify } from "api/hackathon";
+import Modal from "components/common/modal";
+import RegistContainer from "container/team/RegistContainer";
+import { modalState } from "store/modalStatus";
 
 interface PropTypes {
   id: string;
-  toRegistTeam: () => void;
   toBack: () => void;
 }
 
-function DetailContainer({ id, toBack, toRegistTeam }: PropTypes) {
+function DetailContainer({ id, toBack }: PropTypes) {
   const data = useRecoilValue(detailSelector(+id));
 
   const [togglePopup] = usePopup();
+
+  const [modalStatus, setModalStatus] = useRecoilState<boolean>(modalState);
 
   const [modifyStatus, setModifyStatus] = useState<boolean>(false);
   const [detailData, setDetailData] = useState(data);
@@ -60,6 +64,10 @@ function DetailContainer({ id, toBack, toRegistTeam }: PropTypes) {
     onModify();
   };
 
+  const handleTeamAddClick = () => {
+    setModalStatus(true);
+  };
+
   return (
     <Wrapper>
       <Title>{`${detailData.title}`}</Title>
@@ -74,12 +82,13 @@ function DetailContainer({ id, toBack, toRegistTeam }: PropTypes) {
           onBack={toBack}
           onDelete={deleteClick}
           onModify={modifyClick}
-          onTeamRegist={toRegistTeam}
+          onTeamRegist={handleTeamAddClick}
           onSubmitModify={confirmModify}
           modifyStatus={modifyStatus}
         />
       </ButtonWrapper>
       <HackathonTeamCard items={data.teamList} />
+      <Modal open={modalStatus} content={<RegistContainer id={id} />} />
       <Popup text="수정하시겠습니까?" />
     </Wrapper>
   );

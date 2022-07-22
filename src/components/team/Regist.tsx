@@ -95,79 +95,82 @@ function TeamRegist({
 
   return (
     <Wrapper>
-      <h1>팀 등록하기</h1>
-      <InputWrapper>
-        <div>팀 명</div>
-        <input name="name" onChange={contentsChange}></input>
-      </InputWrapper>
-      <TextEditor>
-        <div>팀 소개</div>
-        <Quill
-          toolbarOff={true}
-          name="description"
-          text={contents.description}
-          onChange={onChange}
-        ></Quill>
-      </TextEditor>
-      <InputWrapper>
-        <div>모집 기간</div>
-        <StartEndPicker
-          endTime={contents.endTime}
-          startTime={contents.startTime}
-          onChange={onChange}
-        />
-      </InputWrapper>
-      <InputWrapper>
-        <div>연락처(이메일 , 오픈카톡 등등...)</div>
-        <input name="contact" onChange={contentsChange}></input>
-      </InputWrapper>
-      <InputWrapper>
-        <div>모집 팀원 등록하기</div>
-        <button onClick={ClickTeamAdd}>추가하기</button>
-      </InputWrapper>
-      {addActive && (
-        <AddTeamWrapper>
-          <InputWrapper>
-            <div> 모집 분야 </div>
-            <Radio
-              name="field"
-              list={Object.entries(FIELD)}
-              onChange={teamContentChange}
-            />
-          </InputWrapper>
-          <InputWrapper>
-            <div>요구 기술 </div>
-            <input
-              name="skill"
-              onChange={teamContentChange}
-              placeholder="ex) java, react"
-            ></input>
-          </InputWrapper>
-          <InputWrapper>
-            <div>모집 인원 </div>
-            <input
-              name="count"
-              onChange={teamContentChange}
-              placeholder="숫자만 입력 가능합니다"
-            ></input>
-          </InputWrapper>
-          <button onClick={() => teamContents && submitAddTeam(teamContents)}>
-            추가하기
-          </button>
-        </AddTeamWrapper>
-      )}
-      {contents.recruiment && (
-        <TeamRecruitmentCard>
-          {recruiment.map(({ id, field, count, skill }) => (
-            <div key={id}>
-              <div>분야 - {field && FIELD[field]}</div>
-              <div>기술 - {skill}</div>
-              <div>인원 - {count}</div>
-              <button onClick={() => onDelete(id)}> 삭제 </button>
-            </div>
-          ))}
-        </TeamRecruitmentCard>
-      )}
+      <div>
+        <InputWrapper>
+          <div>팀 명</div>
+          <input name="name" onChange={contentsChange}></input>
+        </InputWrapper>
+        <TextEditor>
+          <div>팀 소개</div>
+          <Quill
+            toolbarOff={true}
+            name="description"
+            text={contents.description}
+            onChange={onChange}
+          ></Quill>
+        </TextEditor>
+        <InputWrapper>
+          <div>모집 기간</div>
+          <StartEndPicker
+            endTime={contents.endTime}
+            startTime={contents.startTime}
+            onChange={onChange}
+          />
+        </InputWrapper>
+        <InputWrapper>
+          <div>연락처(이메일 , 오픈카톡 등등...)</div>
+          <input name="contact" onChange={contentsChange}></input>
+        </InputWrapper>
+      </div>
+      <div>
+        <InputWrapper>
+          <div>모집 팀원 등록하기</div>
+          <button onClick={ClickTeamAdd}>{addActive ? "취소" : "추가"}</button>
+        </InputWrapper>
+        {addActive && (
+          <AddTeamWrapper>
+            <InputWrapper>
+              <div> 모집 분야 </div>
+              <Radio
+                name="field"
+                list={Object.entries(FIELD)}
+                onChange={teamContentChange}
+              />
+            </InputWrapper>
+            <InputWrapper>
+              <div>요구 기술 </div>
+              <input
+                name="skill"
+                onChange={teamContentChange}
+                placeholder="ex) java, react"
+              ></input>
+            </InputWrapper>
+            <InputWrapper>
+              <div>모집 인원 </div>
+              <input
+                name="count"
+                onChange={teamContentChange}
+                placeholder="숫자만 입력 가능합니다"
+              ></input>
+            </InputWrapper>
+            <button onClick={() => teamContents && submitAddTeam(teamContents)}>
+              추가하기
+            </button>
+          </AddTeamWrapper>
+        )}
+        {contents.recruiment && (
+          <TeamRecruitmentCard>
+            {recruiment.map(({ id, field, count, skill }) => (
+              <div key={id}>
+                <div>분야 - {field && FIELD[field]}</div>
+                <div>기술 - {skill}</div>
+                <div>인원 - {count}</div>
+                <button onClick={() => onDelete(id)}> 삭제 </button>
+              </div>
+            ))}
+          </TeamRecruitmentCard>
+        )}
+      </div>
     </Wrapper>
   );
 }
@@ -175,8 +178,9 @@ function TeamRegist({
 export default TeamRegist;
 
 const Wrapper = styled.div`
+  position: relative;
+  display: flex;
   margin: 0 auto;
-  border: 1px solid black;
   width: 100%;
 `;
 
@@ -186,7 +190,6 @@ const InputWrapper = styled.div`
   height: 2rem;
   & > div {
     &:first-child {
-      background-color: ${(props) => props.theme.menu};
       color: white;
       padding: 0.25rem 1rem 1rem 1rem;
       margin-right: 1rem;
@@ -195,6 +198,9 @@ const InputWrapper = styled.div`
 `;
 
 const AddTeamWrapper = styled.div`
+  position: absolute;
+  top: 10;
+  left: 0;
   background-color: ${(props) => props.theme.menu};
   margin-bottom: 1rem;
   padding: 1rem;
@@ -202,13 +208,8 @@ const AddTeamWrapper = styled.div`
 
 const TeamRecruitmentCard = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  text-align: left;
-  width: 100%;
   margin: 1rem;
   & > div {
-    border: 3px solid black;
-    width: min-content;
     margin: 0.5rem;
     & > div {
       padding: 1rem;

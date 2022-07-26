@@ -3,8 +3,9 @@ import styled from "styled-components";
 
 import { FIELD } from "constant/checkItems";
 import StartEndPicker from "components/common/date/stardEnd";
-import Quill from "components/common/editor/Quill";
 import Dropdown from "components/common/dropdown";
+import DeleteButton from "components/common/button/delete";
+import { Input } from "components/common/input";
 
 export interface Team {
   id: number;
@@ -76,6 +77,12 @@ function TeamRegist({
   }) => {
     onAddRecruiment({ id: recruimentId, field, skill, count });
     setRecruimentId(recruimentId + 1);
+    setTeamContents({
+      id: recruimentId,
+      field: 0,
+      skill: "",
+      count: 0,
+    });
     setAddActive(false);
   };
 
@@ -98,15 +105,10 @@ function TeamRegist({
           <div>팀 명</div>
           <input name="name" onChange={contentsChange}></input>
         </InputWrapper>
-        <TextEditor>
-          <div>팀 소개</div>
-          <Quill
-            toolbarOff={true}
-            name="description"
-            text={contents.description}
-            onChange={onChange}
-          ></Quill>
-        </TextEditor>
+        <InputWrapper>
+          <div>팀 한줄 소개</div>
+          <Input name="description" onChange={contentsChange} />
+        </InputWrapper>
         <InputWrapper>
           <div>모집 기간</div>
           <StartEndPicker
@@ -120,7 +122,7 @@ function TeamRegist({
           <input name="contact" onChange={contentsChange}></input>
         </InputWrapper>
       </div>
-      <div>
+      <TeamListWrapper>
         <InputWrapper>
           <div>모집 팀원 등록하기</div>
           <button onClick={ClickTeamAdd}>{addActive ? "취소" : "추가"}</button>
@@ -148,7 +150,7 @@ function TeamRegist({
               <input
                 name="count"
                 onChange={teamContentChange}
-                placeholder="숫자만 입력 가능합니다"
+                placeholder="모집하는 인원수 입력"
               ></input>
             </InputWrapper>
             <button onClick={() => teamContents && submitAddTeam(teamContents)}>
@@ -160,15 +162,15 @@ function TeamRegist({
           <TeamRecruitmentCard>
             {recruiment.map(({ id, field, count, skill }) => (
               <div key={id}>
-                <div>분야 - {field && FIELD[field]}</div>
+                <div>분야 - {field ? FIELD[field] : FIELD[0]}</div>
                 <div>기술 - {skill}</div>
                 <div>인원 - {count}</div>
-                <button onClick={() => onDelete(id)}> 삭제 </button>
+                <DeleteButton id={id} onClick={onDelete} />
               </div>
             ))}
           </TeamRecruitmentCard>
         )}
-      </div>
+      </TeamListWrapper>
     </Wrapper>
   );
 }
@@ -177,51 +179,43 @@ export default TeamRegist;
 
 const Wrapper = styled.div`
   position: relative;
-  display: flex;
   margin: 0 auto;
   width: 100%;
 `;
 
+const TeamListWrapper = styled.div``;
+
 const InputWrapper = styled.div`
-  display: flex;
   padding: 1rem;
-  height: 2rem;
   & > div {
     &:first-child {
-      color: white;
-      padding: 0.25rem 1rem 1rem 1rem;
-      margin-right: 1rem;
+      color: ${(props) => props.theme.textColor};
     }
   }
 `;
 
 const AddTeamWrapper = styled.div`
   position: absolute;
-  top: 10;
-  left: 0;
+  bottom: 0;
+  left: 20%;
   background-color: ${(props) => props.theme.menu};
+  color: ${(props) => props.theme.textColor};
   margin-bottom: 1rem;
   padding: 1rem;
 `;
 
 const TeamRecruitmentCard = styled.div`
   display: flex;
-
+  flex-wrap: wrap;
+  max-width: 25rem;
   margin: 1rem;
   & > div {
-    margin: 0.5rem;
-    & > div {
-      padding: 1rem;
-    }
+    padding: 0.3rem;
+    margin: 0 0 0.5rem 0.5rem;
+    background-color: ${(props) => props.theme.menu};
     & > button {
       width: 5rem;
       margin-left: 10rem;
     }
   }
-`;
-
-const TextEditor = styled.div`
-  height: 24rem;
-  width: 90%;
-  margin: 0 auto 4rem auto;
 `;

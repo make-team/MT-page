@@ -91,8 +91,6 @@ function TeamRegist({
     onChange({ name, value });
   };
 
-  console.log(teamContents);
-
   return (
     <Wrapper>
       <div>

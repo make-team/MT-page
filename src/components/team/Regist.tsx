@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import Radio from "components/common/radio/RadioList";
-
 import { FIELD } from "constant/checkItems";
 import StartEndPicker from "components/common/date/stardEnd";
 import Quill from "components/common/editor/Quill";
+import Dropdown from "components/common/dropdown";
 
 export interface Team {
   id: number;
@@ -66,9 +65,6 @@ function TeamRegist({
     setAddActive((prev) => !prev);
   };
 
-  console.log(contents.endTime);
-  console.log(contents.startTime);
-
   const submitAddTeam = ({
     field,
     skill,
@@ -83,7 +79,9 @@ function TeamRegist({
     setAddActive(false);
   };
 
-  const teamContentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const teamContentChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setTeamContents((prev) => ({ ...prev, [name]: value }));
   };
@@ -92,6 +90,8 @@ function TeamRegist({
     const { name, value } = e.target;
     onChange({ name, value });
   };
+
+  console.log(teamContents);
 
   return (
     <Wrapper>
@@ -131,9 +131,9 @@ function TeamRegist({
           <AddTeamWrapper>
             <InputWrapper>
               <div> 모집 분야 </div>
-              <Radio
+              <Dropdown
                 name="field"
-                list={Object.entries(FIELD)}
+                list={FIELD}
                 onChange={teamContentChange}
               />
             </InputWrapper>
@@ -208,6 +208,7 @@ const AddTeamWrapper = styled.div`
 
 const TeamRecruitmentCard = styled.div`
   display: flex;
+
   margin: 1rem;
   & > div {
     margin: 0.5rem;

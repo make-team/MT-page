@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 import styled from "styled-components";
 import { Outlet } from "react-router-dom";
 
@@ -36,6 +36,7 @@ const Wrapepr = styled.div`
     "main"
     "footer";
   height: 100vh;
+  width: 100%;
   color: ${(props) => props.theme.textColor};
 `;
 

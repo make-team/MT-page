@@ -4,7 +4,7 @@
  - CRA를 통한 프로젝트 
  - storybook
 
-URL : www.hongjungwan.com
+URL : 프리티어 기간 종료로 내림
 
 password : a1234
 
